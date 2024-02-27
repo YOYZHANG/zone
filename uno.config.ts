@@ -10,4 +10,10 @@ export default defineConfig({
       },
     }),
   ],
+  theme: {
+    colors: {
+      primary: 'var(--color-primary)',
+      border: 'var(--color-border)',
+    },
+  },
 })
