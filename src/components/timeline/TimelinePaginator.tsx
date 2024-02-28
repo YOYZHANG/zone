@@ -10,7 +10,7 @@ export const TimelinePaginator: React.FC<Props> = ({paginator}) => {
   return (
     <CommonPaginator
       paginator={paginator}
-      Card={StatusCard} 
+      Card={StatusCard}
     >
     </CommonPaginator>
   )

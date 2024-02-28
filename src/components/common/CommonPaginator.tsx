@@ -1,18 +1,43 @@
 import type { Paginator } from 'masto'
+import { usePaginator } from '../../hooks/paginator'
+import { StatusProps } from '../status/StatusCard'
 interface Props {
   paginator: Paginator<any, any[]>,
-  Card: React.FC<any>,
-  keyProp?: string
+  Card: React.FC<StatusProps>,
 }
 
-export const CommonPaginator: React.FC<Props> = ({paginator, keyProp = 'id', Card}) => {
-  const {items} = 
+export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
+  const {list, endAnchor, error, state} = usePaginator(paginator)
+
+  console.log(list, 'list')
   return (
     <div className='border-t'>
-      {items.map(item => (
-        <Card key={item[keyProp]} item={item}></Card>
+      {list.map(item => (
+        <Card key={item['id']} status={item}></Card>
       ))}
-      <div ref="endAnchor"></div>
+      <div ref={endAnchor}></div>
+      {
+        state === 'loading' && (
+          <div className='flex flex-col items-center text-center p5 animate-pulse'>
+            <div className="op50 i-ri:loader-2-fill animate-spin text-2xl"></div>
+            <span className="op50">Loading...</span>
+          </div>
+        )
+      }
+      {
+        state === 'done' && (
+          <div className="p5 op50 italic text-center">
+            End of the list
+          </div>
+        )
+      }
+      {
+        state === 'error' && (
+          <div className='p5 op50'>
+            <span>{String(error)}</span>
+          </div>
+        )
+      }
     </div>
   )
 }

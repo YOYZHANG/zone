@@ -2,6 +2,8 @@ import {Route, Routes} from 'react-router-dom';
 import { RequireAuthRoute } from './components/RequireAuthRoute';
 import { BaseLayout } from './layout';
 import Public from './pages/public';
+import 'virtual:uno.css'
+import './App.css'
 
 function App() {
   // oauth
@@ -10,7 +12,7 @@ function App() {
     <RequireAuthRoute>
       <Routes>
         <Route path='/' element={<BaseLayout/>}>
-          <Route index path='/public' element={<Public />} />
+          <Route index path='/' element={<Public />} />
         </Route>
       </Routes>
     </RequireAuthRoute>

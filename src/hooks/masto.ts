@@ -3,9 +3,14 @@ import { login } from 'masto'
 
 function createMasto() {
   return login({
-    url: `https://mas.to`,
-    accessToken: '',
+    url: `https://mastodon.social`,
+    accessToken: 'JM5-Rh0vu682DroMTNMxUlDO0xSEOolBtMb8Mllh82o',
   })
 }
 
-export const masto = await createMasto()
+
+
+const maston = await createMasto()
+console.log(maston, 'masto')
+
+export const masto = maston

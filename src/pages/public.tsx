@@ -8,7 +8,12 @@ export default function Public() {
 
   return (<>
     <MainContent
-      title={<div className="h-6 mr-1 i-ri:earth-line"><span>Federated Timeline</span></div>}
+      title={
+        <div className="flex items-center">
+          <div className="mr-1 i-ri:earth-line"></div>
+          <span>Federated Timeline</span>
+        </div>
+      }
       actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
       <TimelinePaginator paginator={paginator} />
