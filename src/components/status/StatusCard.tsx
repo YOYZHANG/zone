@@ -3,6 +3,7 @@ import { StatusActions } from './StatusActions'
 import { StatusBody } from './StatusBody'
 import { AccountInfo } from '../accunt/AccountInfo'
 import { useTimeAgo } from '../../hooks/time'
+import { StatusMedia } from './StatusMedia'
 
 export interface StatusProps {
   status: Status,
@@ -16,6 +17,11 @@ export const StatusCard: React.FC<StatusProps> = ({status}) => {
       </AccountInfo>
       <div>
         <StatusBody status={status}></StatusBody>
+        {status.mediaAttachments?.length && (
+          <StatusMedia
+            status={status}
+          />
+        )}
       </div>
       <StatusActions status={status}></StatusActions>
     </div>
