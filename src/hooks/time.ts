@@ -52,11 +52,27 @@ export interface UseTimeAgoUnit<Unit extends string = UseTimeAgoUnitNamesDefault
   value: number
   name: Unit
 }
-// https://github.com/vueuse/vueuse/blob/1f75a26d8fb8073348298c1556b182202076389c/packages/core/useTimeAgo/index.ts
+/**
+ * 
+ * ime | Output
+--- | ---
+ * Less than 1 minute | `just now`
+ * 1-2 minutes | `a minute ago`
+ * 2-46 minutes | # `minutes ago`
+ * 46 minutes - 2 hours | `an hour ago`
+ * 2-20 hours | # `hours ago`
+ * 20-48 hours | `yesterday`
+ * 2-6 days | `last week`
+ * 7-28 days | # `weeks ago`
+ * 28 days - 2 months | `last month`
+ * 2-11 months | # `months ago`
+ * 11-23 months | `last year`
+ * 2+ years | # `years ago`
+
+ */
 export function useTimeAgo(from: Date | number | string) {
-  const now = useState(new Date())
-  const [timeAgo, setTimeAgo] = useState(0)
-  const diff = +now - +from
+  const now = new Date()
+  const diff = +now - +new Date(from)
   const absDiff = Math.abs(diff)
 
   function getValue(diff: number, unit: UseTimeAgoUnit<UseTimeAgoUnitNamesDefault>) {
@@ -75,21 +91,23 @@ export function useTimeAgo(from: Date | number | string) {
     const formatter = DEFAULT_MESSAGES[name]
     if (typeof formatter === 'function')
       return formatter(val as never, isPast)
-    return formatter.replace('{0}', val.toString())
   }
 
   // less than a minute
   if (absDiff < 60000)
     return DEFAULT_MESSAGES.justNow
 
-
   for (const [idx, unit] of DEFAULT_UNITS.entries()) {
     const val = getValue(diff, unit)
-    if (val <= 0 && DEFAULT_UNITS[idx - 1])
-      setTimeAgo(format(diff, DEFAULT_UNITS[idx - 1]))
-    else if (absDiff < unit.max)
-      setTimeAgo(format(diff, unit))
+    if (val <= 0 && DEFAULT_UNITS[idx - 1]) {
+
+      return format(diff, DEFAULT_UNITS[idx - 1])
+    }
+      
+    else if (absDiff < unit.max) {
+      return format(diff, unit)
+    }
   }
 
-  return timeAgo
+  return 0
 }

@@ -9,7 +9,6 @@ interface Props {
 export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
   const {list, endAnchor, error, state} = usePaginator(paginator)
 
-  console.log(list, 'list')
   return (
     <div className='border-t'>
       {list.map(item => (

@@ -1,33 +1,46 @@
 import type { Status } from 'masto'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames';
+import { masto } from '../../hooks/masto';
+import { useState } from 'react';
 
 interface Props {
   status: Status
 }
 export const StatusActions: React.FC<Props> = ({status}) => {
-  const toggleReblog = () => {}
-  const toggleFavourite = () => {}
-  const toggleBookmark = () => {}
+  const [cardStatus, setCardStatus] = useState(status);
+  async function toggleStatusAction(action: 'reblogged' | 'favourited' | 'bookmarked', newcardStatus: Promise<Status>) {
+    setCardStatus({...cardStatus, ...(await newcardStatus)})
+  }
+  const toggleReblog = () => toggleStatusAction(
+    'reblogged',
+    masto.statuses[cardStatus.reblog ? 'unreblog' : 'reblog'](status.id),
+  )
+  const toggleFavourite = () => toggleStatusAction(
+    'favourited',
+    masto.statuses[cardStatus.favourited ? 'unfavourite' : 'favourite'](status.id),
+  )
+  
+  const toggleBookmark = () => toggleStatusAction(
+    'bookmarked',
+    masto.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
+  )
   return (
     <div className="flex gap-8">
       <Link
-        className="rounded op75 hover:op100 hover:text-blue"
-        to="/@${status.account.acct}/${status.id}"
+        className="rounded op75 hover:op100 hover:text-blue group"
+        to="/@${cardStatus.account.acct}/${cardStatus.id}"
       >
         <div className="rounded-full hover:bg-blue/10">
           <div
-            className={classNames('', {
-              'i-ri:chat-3-line': !status.favourited,
-              'i-ri:chat-3-fill': status.favourited
-            })}
+            className="i-ri:chat-3-line"
           ></div>
-          { status.repliesCount && (<span>status.repliesCount</span>) }
+          { cardStatus.repliesCount && (<span>cardStatus.repliesCount</span>) }
         </div>
       </Link>
       <button 
         className={classNames("rounded op75 hover:op100 hover:text-green", {
-          'text-green op100': status.reblogged,
+          'text-green op100': cardStatus.reblogged,
           'pointer-events-none': false
         })}
         onClick={toggleReblog}
@@ -35,17 +48,17 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         <div className="rounded-full hover:bg-green/10">
         <div
             className={classNames('', {
-              'i-ri:repeat-2-line': !status.reblogged,
-              'i-ri:repeat-2-fill': status.reblogged
+              'i-ri:repeat-2-line': !cardStatus.reblogged,
+              'i-ri:repeat-2-fill': cardStatus.reblogged
             })}
           ></div>
-          { status.reblogsCount && (<span>status.reblogsCount</span>) }
+          { cardStatus.reblogsCount && (<span>cardStatus.reblogsCount</span>) }
         </div>
       </button>
 
       <button
         className={classNames("rounded op75 hover:op100 hover:text-rose", {
-          'text-rose op100': status.favourited,
+          'text-rose op100': cardStatus.favourited,
           'pointer-events-none': false
         })}
         onClick={toggleFavourite}
@@ -53,16 +66,16 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         <div className="rounded-full hover:bg-rose/10">
           <div
             className={classNames('', {
-              'i-ri:heart-3-line': !status.favourited,
-              'i-ri:heart-3-fill': status.favourited
+              'i-ri:heart-3-line': !cardStatus.favourited,
+              'i-ri:heart-3-fill': cardStatus.favourited
             })}
           ></div>
-          { status.favouritesCount && (<span>status.favouritesCount</span>) }
+          { cardStatus.favouritesCount && (<span>{cardStatus.favouritesCount}</span>) }
         </div>
       </button>
       <button
         className={classNames("rounded op75 hover:op100 hover:text-rose", {
-          'text-rose op100': status.bookmarked,
+          'text-rose op100': cardStatus.bookmarked,
           'pointer-events-none': false
         })}
         onClick={toggleBookmark}
@@ -70,8 +83,8 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         <div className="rounded-full hover:bg-rose/10">
         <div
             className={classNames('', {
-              'i-ri:bookmark-line': !status.bookmarked,
-              'i-ri:bookmark-fill': status.bookmarked
+              'i-ri:bookmark-line': !cardStatus.bookmarked,
+              'i-ri:bookmark-fill': cardStatus.bookmarked
             })}
           ></div>
         </div>
