@@ -1,6 +1,6 @@
 import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
-import {masto} from "../hooks/masto";
+import {masto} from "../utils/masto";
 
 export default function Public() {
   const paginator = masto.timelines.getPublicIterable()

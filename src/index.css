@@ -2,3 +2,9 @@
   --color-primary: #53b3cb;
   --color-border: #88888820;
 }
+.custom-emoji {
+  display: inline-block;
+  height: 1.2em;
+  width: 1.2em;
+  vertical-align: middle;
+}

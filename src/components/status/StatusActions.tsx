@@ -1,7 +1,7 @@
 import type { Status } from 'masto'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames';
-import { masto } from '../../hooks/masto';
+import { masto } from '../../utils/masto';
 import { useState } from 'react';
 
 interface Props {

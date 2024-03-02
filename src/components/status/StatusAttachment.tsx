@@ -6,7 +6,7 @@ interface Props {
 
 export const StatusAttachment: React.FC<Props> = ({attachment}) => {
   return (
-    <>
+    <div className="w-full h-full">
       attachment.type === 'image' && (
         <img
           src={attachment.previewUrl}
@@ -15,6 +15,6 @@ export const StatusAttachment: React.FC<Props> = ({attachment}) => {
         />
       )
       // todo: other attachment types
-    </>
+    </div>
   )
 }
