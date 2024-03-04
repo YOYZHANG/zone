@@ -8,16 +8,17 @@ import { AccountInlineInfo } from '../accunt/AccountInlineInfo'
 
 export interface StatusProps {
   status: Status,
+  action?: boolean
 }
 
-export const StatusCard: React.FC<StatusProps> = ({status}) => {
+export const StatusCard: React.FC<StatusProps> = ({status, action = true}) => {
   const timeAgo = useTimeAgo(status.createdAt)
   const cardStatus = status.reblog && !status.content ? status.reblog : status
 
   const rebloggedBy = status.reblog ? status.account : ''
 
   return (
-    <div className="flex flex-col gap-2 my-2 px-4">
+    <div className="flex flex-col gap-2 my-2 px-4 border-b">
       {rebloggedBy && (
         <div className='pl8 flex gap-1 items-center text-gray:75 text-sm'>
           <div className="i-ri:repeat-fill mr-1"></div>
@@ -28,7 +29,7 @@ export const StatusCard: React.FC<StatusProps> = ({status}) => {
       <AccountInfo account={cardStatus?.account}>
         <div className="text-sm op50"> {timeAgo} </div>
       </AccountInfo>
-      <div>
+      <div className="pl12">
         <StatusBody status={cardStatus}></StatusBody>
         {cardStatus.mediaAttachments?.length && (
           <StatusMedia
@@ -36,7 +37,11 @@ export const StatusCard: React.FC<StatusProps> = ({status}) => {
           />
         )}
       </div>
-      <StatusActions status={cardStatus}></StatusActions>
+      {
+        cardStatus.reblog && (<StatusCard status={cardStatus.reblog} action={false}/>)
+      }
+      {action && <StatusActions status={cardStatus}></StatusActions>}
     </div>
   )
 }
+

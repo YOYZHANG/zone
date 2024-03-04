@@ -26,7 +26,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
     masto.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
   )
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-8 pl12">
       <Link
         className="rounded op75 hover:op100 hover:text-blue group"
         to="/@${cardStatus.account.acct}/${cardStatus.id}"
@@ -35,7 +35,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
           <div
             className="i-ri:chat-3-line"
           ></div>
-          { cardStatus.repliesCount && (<span>cardStatus.repliesCount</span>) }
+          { cardStatus.repliesCount && (<span>{cardStatus.repliesCount}</span>) }
         </div>
       </Link>
       <button 
@@ -52,7 +52,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
               'i-ri:repeat-2-fill': cardStatus.reblogged
             })}
           ></div>
-          { cardStatus.reblogsCount && (<span>cardStatus.reblogsCount</span>) }
+          { cardStatus.reblogsCount && (<span>{cardStatus.reblogsCount}</span>) }
         </div>
       </button>
 

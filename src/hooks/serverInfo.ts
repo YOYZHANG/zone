@@ -23,7 +23,6 @@ export function useServerInfos(url: string) {
   useEffect(() => {
     (async () =>{
       if ((serverInfos?.[url].timeUpdated || 0) + ServerInfoTTL < Date.now()) {
-        console.log('getUseServerInfos');
         await Promise.allSettled([
           masto.instances.fetch().then((r) => {
             
@@ -33,7 +32,6 @@ export function useServerInfos(url: string) {
             })
           }),
           masto.customEmojis.fetchAll().then((r) => {
-            console.log(r, 'r!!!!!!!')
             setServerInfos({
               ...serverInfos,
               [url]: {...serverInfos![url], customEmojis: Object.fromEntries(r.map(i => [i.shortcode, i]))},
