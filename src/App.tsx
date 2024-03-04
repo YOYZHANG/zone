@@ -11,6 +11,7 @@ import BookMarks from './pages/bookmarks';
 import Explore from './pages/explore';
 import Login from './pages/login';
 import Favorites from './pages/favorites';
+import User from './pages/@user';
 
 
 function App() {
@@ -22,11 +23,12 @@ function App() {
       <Routes>
         <Route path='/' element={<BaseLayout/>}>
           <Route index path='/public' element={<Public />} />
-          <Route index path='/home' element={<Home />} />
-          <Route index path='/bookmarks' element={<BookMarks />} />
-          <Route index path='/explore' element={<Explore />} />
-          <Route index path='/login' element={<Login />} />
-          <Route index path='/favorites' element={<Favorites />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/bookmarks' element={<BookMarks />} />
+          <Route path='/explore' element={<Explore />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/favorites' element={<Favorites />} />
+          <Route path='/:user' element={<User />} />
         </Route>
       </Routes>
     </RequireAuthRoute>

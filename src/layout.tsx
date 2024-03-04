@@ -1,5 +1,5 @@
 import {Outlet} from 'react-router-dom';
-import { AccountMe } from './components/accunt/AccuntMe';
+import { AccountMe } from './components/account/AccuntMe';
 import { NavTitle } from './components/nav/NavTitle';
 import { NavSide } from './components/nav/NavSide';
 import { NavFooter } from './components/nav/NavFooter';

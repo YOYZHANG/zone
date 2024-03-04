@@ -1,17 +1,5 @@
 import { useAppCookies } from "../hooks/cookie";
 
-{/* <script setup lang="ts">
-const { server, token } = useAppCookies()
-
-async function oauth() {
-  const a = document.createElement('a')
-  a.href = `/api/${server.value}/login`
-  a.target = '_blank'
-  a.click()
-}
-</script> */}
-
-
 export default function Login() {
   const { serverURL, token, updateServerURL, updateToken } = useAppCookies();
   function oauth() {
