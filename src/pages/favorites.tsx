@@ -24,7 +24,7 @@ export default function Favorites() {
       }
       actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
-      <TimelinePaginator paginator={paginator!} />
+      {paginator && <TimelinePaginator paginator={paginator!} />}
     </MainContent>
   )
 }

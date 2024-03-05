@@ -15,7 +15,7 @@ export const AccountInfo: React.FC<Props> = ({children, account}) => {
             <img src={account.avatar} alt="profile" className="w-10 h-10 rounded-10 bg-gray:10"/>
           </Link>
         </div>
-        <Link className="flex items-center" to={account.acct}>
+        <Link className="flex items-center" to={`/${account.acct}`}>
           <span className="font-bold mr-1 text-sm">{account.displayName}</span>
           <span className="op35 text-sm">@{account.acct}</span>
         </Link>

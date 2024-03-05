@@ -21,7 +21,7 @@ export const AccountHeader: React.FC<Props> = ({account}) => {
       <div className="p3 flex flex-col gap-6 -mt-12">
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
-            <Link className="p1" to={account.acct}>
+            <Link className="p1" to={`/${account.acct}`}>
               <img src={account.avatar}  className="w-20 h-20 rounded"/>
               <h4 className="font-bold">{ account.displayName }</h4>
               <p className="op50">@{ account.acct }</p>
@@ -67,7 +67,7 @@ export const AccountHeader: React.FC<Props> = ({account}) => {
         </div>
         
         <div className="flex gap-5">
-          <Link to={account.acct}>
+          <Link to={`/${account.acct}`}>
             <span className="font-bold">{ account.statusesCount }</span> Posts
           </Link>
           <Link to={`/${account.acct}/following`}>

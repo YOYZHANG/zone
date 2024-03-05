@@ -52,7 +52,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
               'i-ri:repeat-2-fill': cardStatus.reblogged
             })}
           ></div>
-          { cardStatus.reblogsCount && (<span className="pl2 text-sm">{cardStatus.reblogsCount}</span>) }
+          { !!cardStatus.reblogsCount && (<span className="pl2 text-sm">{cardStatus.reblogsCount}</span>) }
         </div>
       </button>
 
@@ -70,7 +70,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
               'i-ri:heart-3-fill': cardStatus.favourited
             })}
           ></div>
-          { cardStatus.favouritesCount && (<span className="pl1 text-sm">{cardStatus.favouritesCount}</span>) }
+          { !!cardStatus.favouritesCount && (<span className="pl1 text-sm">{cardStatus.favouritesCount}</span>) }
         </div>
       </button>
       <button
