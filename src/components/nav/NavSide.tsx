@@ -6,6 +6,10 @@ export const NavSide: React.FC = () => {
         <div className="i-ri:home-5-line"/>
         <span>Home</span>
       </Link>
+      <Link className="flex gap2 items-center hover:opacity-80" to="/notification">
+        <div className="i-ri:notification-2-fill"/>
+        <span>Notification</span>
+      </Link>
       <Link className="flex gap2 items-center hover:opacity-80" to="/explore">
         <div className="i-ri:hashtag"/>
         <span>Explore</span>
@@ -15,11 +19,11 @@ export const NavSide: React.FC = () => {
         <span>Federated</span>
       </Link>
       <Link className="flex gap2 items-center hover:opacity-80" to="/favorites">
-      <div className="i-ri:heart-3-line"/>
+        <div className="i-ri:heart-3-line"/>
         <span>Favorites</span>
       </Link>
       <Link className="flex gap2 items-center hover:opacity-80" to="/bookmarks">
-      <div className="i-ri:bookmark-line"/>
+        <div className="i-ri:bookmark-line"/>
         <span>Bookmarks</span>
       </Link>
     </div>

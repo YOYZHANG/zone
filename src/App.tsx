@@ -15,7 +15,7 @@ import User from './pages/@user';
 import Following from './pages/@user/following';
 import Follower from './pages/@user/followers';
 import Post from './pages/@user/post';
-
+import Notification from './pages/notification'
 
 function App() {
   // oauth
@@ -35,6 +35,7 @@ function App() {
           <Route path='/:user/following' element={<Following />} />
           <Route path='/:user/followers' element={<Follower />} />
           <Route path='/:user/:post' element={<Post />} />
+          <Route path='/notification' element={<Notification />} />
         </Route>
       </Routes>
     </RequireAuthRoute>

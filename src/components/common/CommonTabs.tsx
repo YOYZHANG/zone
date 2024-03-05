@@ -2,12 +2,11 @@ import classNames from "classnames"
 
 interface props {
   tab: string,
-  setTab: (tab: string) => void
+  setTab: (tab: string) => void,
+  options: string[]
 }
 
-const options = ['Posts', 'Posts and replies']
-
-export const CommonTabs: React.FC<props> = ({tab, setTab}) => {
+export const CommonTabs: React.FC<props> = ({tab, setTab, options = ['Posts', 'Posts and replies']}) => {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setTab(e.target.value)
   }
