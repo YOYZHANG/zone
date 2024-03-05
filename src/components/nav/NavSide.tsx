@@ -14,7 +14,7 @@ export const NavSide: React.FC = () => {
         <div className="i-ri:earth-line"/>
         <span>Federated</span>
       </Link>
-      <Link className="flex gap2 items-center hover:opacity-80" to="/favourites">
+      <Link className="flex gap2 items-center hover:opacity-80" to="/favorites">
       <div className="i-ri:heart-3-line"/>
         <span>Favorites</span>
       </Link>

@@ -26,7 +26,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
     masto.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
   )
   return (
-    <div className="flex gap-8 pl12">
+    <div className="flex gap-8">
       <Link
         className="rounded op75 hover:op100 hover:text-blue group"
         to={`/@${cardStatus.account.acct}/${cardStatus.id}`}

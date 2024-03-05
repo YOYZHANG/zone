@@ -8,10 +8,13 @@ export default function Favorites() {
   const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
 
   useEffect(() => {
-    setPaginator(masto.favourites.getIterator())
+    console.log('in favorites')
+    const favoraites = masto.favourites.getIterator()
+    console.log("Favorites", favoraites)
+    setPaginator(favoraites)
   }, [])
 
-  return (<>
+  return (
     <MainContent
       title={
         <div className="flex items-center">
@@ -23,5 +26,5 @@ export default function Favorites() {
     >
       <TimelinePaginator paginator={paginator!} />
     </MainContent>
-  </>)
+  )
 }
