@@ -12,6 +12,8 @@ import Explore from './pages/explore';
 import Login from './pages/login';
 import Favorites from './pages/favorites';
 import User from './pages/@user';
+import Following from './pages/@user/following';
+import Follower from './pages/@user/followers';
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/favorites' element={<Favorites />} />
           <Route path='/:user' element={<User />} />
+          <Route path='/:user/following' element={<Following />} />
+          <Route path='/:user/followers' element={<Follower />} />
         </Route>
       </Routes>
     </RequireAuthRoute>

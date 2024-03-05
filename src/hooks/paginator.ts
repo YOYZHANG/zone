@@ -23,7 +23,7 @@ export function usePaginator<T>(paginator: Paginator<any, T[]>) {
         try {
           const result = await paginator.next()
 
-          if (result?.value.length) {
+          if (result?.value?.length) {
             setList(items => [
                 ...items,
                 ...result.value.filter(newVal => !items.find(i => i.id === newVal.id))

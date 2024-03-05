@@ -2,23 +2,26 @@ import classNames from "classnames"
 
 interface props {
   tab: string,
+  setTab: (tab: string) => void
 }
 
-export const CommonTabs: React.FC<props> = ({tab}) => {
-  const options = ['Posts', 'Posts and replies']
+const options = ['Posts', 'Posts and replies']
+
+export const CommonTabs: React.FC<props> = ({tab, setTab}) => {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log('change', e)
+    setTab(e.target.value)
   }
 
   function handleKeyPress (e: React.KeyboardEvent<HTMLElement>) {
     if (e.code === 'Enter') {
-      console.log('Enter key pressed! Input value:', e);
+      console.log(e, 'handleKeyPress')
+      // setTab()
     }
   }
   return (
     <div className="flex w-full">
       {options.map((option) => (
-        <div className="flex w-full">
+        <div className="flex w-full" key={option}>
           <input
             key={option}
             id={`tab-${option}`}
