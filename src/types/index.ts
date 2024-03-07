@@ -6,3 +6,4 @@ export interface ServerInfo extends Instance {
   timeUpdated: number
   customEmojis?: Record<string, Emoji>
 }
+
