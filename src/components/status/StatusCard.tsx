@@ -7,15 +7,15 @@ import { StatusMedia } from './StatusMedia'
 import { AccountInlineInfo } from '../account/AccountInlineInfo'
 
 export interface StatusProps {
-  status: Status,
+  item: Status,
   action?: boolean
 }
 
-export const StatusCard: React.FC<StatusProps> = ({status, action = true}) => {
-  const timeAgo = useTimeAgo(status.createdAt)
-  const cardStatus = status.reblog && !status.content ? status.reblog : status
+export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
+  const timeAgo = useTimeAgo(item.createdAt)
+  const cardStatus = item.reblog && !item.content ? item.reblog : item
 
-  const rebloggedBy = status.reblog ? status.account : ''
+  const rebloggedBy = item.reblog ? item.account : ''
 
   return (
     <div className="flex flex-col my-2 px-4">

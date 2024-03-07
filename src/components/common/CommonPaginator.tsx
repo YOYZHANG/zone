@@ -12,7 +12,7 @@ export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
   return (
     <div className='border-t'>
       {list.map(item => (
-        <Card key={item['id']} status={item}></Card>
+        <Card key={item['id']} item={item}></Card>
       ))}
       <div ref={endAnchor}></div>
       {
