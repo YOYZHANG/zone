@@ -5,11 +5,12 @@ import { AccountInfo } from "./AccountInfo"
 
 export const AccountMe: React.FC = () => {
   const {currentUser} = useCurrentUser()
+
   const {serverURL} = useAppCookies()
   return (<>
     {currentUser && (
       <>
-        <AccountInfo account={currentUser.account!} >123</AccountInfo>
+        <AccountInfo account={currentUser.account!} ><div></div></AccountInfo>
         <PublishWidget draftKey="home" />
       </>
     )}

@@ -8,7 +8,7 @@ export const BaseLayout: React.FC = () => {
   return (
     <div className="h-full">
       <main className="w-full h-full flex mxa lg:max-w-80rem">
-        <div className="w-1/4 lg:flex flex-col items-end">
+        <div className="w-1/4 lg:flex flex-col items-end ml-20">
           <AccountMe />
         </div>
         <div className="lg:w-3/4 flex">

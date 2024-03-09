@@ -1,16 +1,14 @@
 import { useLocalStorage } from "@reactuses/core";
 import { UserLogin } from "../types";
 import { login as loginMasto } from 'masto'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppCookies } from "./cookie";
 
 export async function useLogin(user: UserLogin) {
   const [accounts, setAccounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
   const [currentId, setCurrentId] = useLocalStorage<string>('zone-current', '')
   const {updateServerURL, updateToken} = useAppCookies()
-  
-  updateServerURL(user.server)
-  updateToken(user.token)
+
 
   const existing = accounts!.findIndex(u => u.server === user.server && u.token === user.token)
 
@@ -20,23 +18,30 @@ export async function useLogin(user: UserLogin) {
         const masto = await loginMasto({
           url: `https://${user.server}`,
           accessToken: user.token,
-        })
-      
+        }) 
+
         const me = await masto.accounts.verifyCredentials()
         user.account = me
         setCurrentId(me.id)
-        console.log(user, 'user!!!')
         setAccounts([...accounts!, user])
 
+        updateServerURL(user.server)
+        updateToken(user.token)
+        
         return true
       }
     })()
   }, [existing]);
 
   if (existing !== -1) {
-    if (currentId === accounts?.[existing].account?.id)
-        return null
+    if (currentId === accounts?.[existing].account?.id) {
+      return null
+    }
+      
     setCurrentId(user.account!.id)
+    updateServerURL(user.server)
+    updateToken(user.token)
+
     return true
   }
 }
@@ -44,14 +49,12 @@ export async function useLogin(user: UserLogin) {
 export function useCurrentUser() {
   const [accounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
   const [currentId] = useLocalStorage<string>('zone-current', '')
-  const [currentUser, setCurrentUser] = useState<UserLogin | null>(null)
 
-  console.log(accounts, 'accounts')
-  console.log(currentId, 'currentId')
+  let currentUser = null;
 
   if (currentId && accounts?.length) {
-    setCurrentUser(accounts.find(user => user.account?.id === currentId) || accounts?.[0])
+    currentUser = {...accounts.find(user => user.account?.id === currentId)}
   }
 
-  return {currentUser, setCurrentUser}
+  return {currentUser}
 }
