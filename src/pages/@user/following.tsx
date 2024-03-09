@@ -13,8 +13,6 @@ export default function Following() {
   const [paginator, setPaginator] = useState<Paginator<any, any[]>>()
   const {masto} = useMastoStore()
 
-  console.log(params, 'params')
-
   useEffect(() => {
     (async () => {
       const account = await masto?.accounts.lookup({ acct: params.user! })

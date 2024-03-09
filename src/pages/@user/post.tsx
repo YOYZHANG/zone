@@ -20,10 +20,8 @@ export default function Post() {
 
       const status = await masto?.statuses.fetch(id)
       setStatus(status)
-      console.log(status, 'post status')
       const context = await masto?.statuses.fetchContext(id)
       setContext(context)
-      console.log(context, 'post context')
     })()
   }, [id])
   

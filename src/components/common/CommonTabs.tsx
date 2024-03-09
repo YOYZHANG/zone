@@ -13,7 +13,6 @@ export const CommonTabs: React.FC<props> = ({tab, setTab, options = ['Posts', 'P
 
   function handleKeyPress (e: React.KeyboardEvent<HTMLElement>) {
     if (e.code === 'Enter') {
-      console.log(e, 'handleKeyPress')
       // setTab()
     }
   }

@@ -7,7 +7,6 @@ interface Prop {
 
 export const NotificationCard: React.FC<Prop> = ({item}) => {
   const notificationType = item.type
-  console.log(item, 'item')
   return (
     <div className="flex flex-col">
       {notificationType === "follow" && (

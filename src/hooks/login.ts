@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useAppCookies } from "./cookie";
 
 export async function useLogin(user: UserLogin) {
-  console.log('inuseLogin', user)
   const [accounts, setAccounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
   const [currentId, setCurrentId] = useLocalStorage<string>('zone-current', '')
   const {updateServerURL, updateToken} = useAppCookies()

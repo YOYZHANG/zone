@@ -17,6 +17,7 @@ export const useMastoStore = create<State & Action>(set => ({
       url: `https://${serverURL}`,
       accessToken: token ||'',
     })
+
     set({masto});
   },
 }))
