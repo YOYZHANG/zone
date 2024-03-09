@@ -3,7 +3,7 @@ import classNames from "classnames"
 interface props {
   tab: string,
   setTab: (tab: string) => void,
-  options: string[]
+  options?: string[]
 }
 
 export const CommonTabs: React.FC<props> = ({tab, setTab, options = ['Posts', 'Posts and replies']}) => {

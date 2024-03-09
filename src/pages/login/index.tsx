@@ -3,7 +3,7 @@ import { useAppCookies } from "../../hooks/cookie";
 export default function Login() {
   const { serverURL, token, updateServerURL, updateToken } = useAppCookies();
   function oauth() {
-    window.open(`/api/hello?name=me`);
+    window.open(`/api/login?server=${serverURL}`);
   }
 
   const handleServerURLChange = (event: React.ChangeEvent<HTMLInputElement>) => {

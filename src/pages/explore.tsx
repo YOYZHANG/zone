@@ -1,14 +1,15 @@
 import { DefaultPaginationParams, Paginator, Status } from "masto";
 import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
-import {masto} from "../utils/masto";
 import { useEffect, useState } from "react";
+import { useMastoStore } from "../store/masto";
 
 export default function Explore() {
   const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
+  const {masto} = useMastoStore()
 
   useEffect(() => {
-    setPaginator(masto.trends.getStatuses())
+    setPaginator(masto?.trends.getStatuses())
   }, [])
 
   return (<>

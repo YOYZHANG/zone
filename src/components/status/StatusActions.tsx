@@ -1,29 +1,30 @@
 import type { Status } from 'masto'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames';
-import { masto } from '../../utils/masto';
 import { useState } from 'react';
+import { useMastoStore } from '../../store/masto';
 
 interface Props {
   status: Status
 }
 export const StatusActions: React.FC<Props> = ({status}) => {
   const [cardStatus, setCardStatus] = useState(status);
+  const {masto} = useMastoStore()
   async function toggleStatusAction(action: 'reblogged' | 'favourited' | 'bookmarked', newcardStatus: Promise<Status>) {
     setCardStatus({...cardStatus, ...(await newcardStatus)})
   }
   const toggleReblog = () => toggleStatusAction(
     'reblogged',
-    masto.statuses[cardStatus.reblog ? 'unreblog' : 'reblog'](status.id),
+    masto!.statuses[cardStatus.reblog ? 'unreblog' : 'reblog'](status.id),
   )
   const toggleFavourite = () => toggleStatusAction(
     'favourited',
-    masto.statuses[cardStatus.favourited ? 'unfavourite' : 'favourite'](status.id),
+    masto!.statuses[cardStatus.favourited ? 'unfavourite' : 'favourite'](status.id),
   )
   
   const toggleBookmark = () => toggleStatusAction(
     'bookmarked',
-    masto.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
+    masto!.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
   )
   return (
     <div className="flex gap-8">

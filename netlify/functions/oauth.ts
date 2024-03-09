@@ -1,31 +1,31 @@
-import {parseQuery, stringifyQuery} from 'ufo'
+import {stringifyQuery} from 'ufo'
 import { $fetch } from 'ohmyfetch'
-import { getMastoSocial } from './share'
+import { HOST_DOMAIN, REDIRECT_URL, getapp } from './share'
 
-const HOST_DOMAIN = 'http://localhost:64492'
-const SERVER = 'masto.social'
 export async function handler(event: any) {
-  const queryString = event.queryStringParameters
-  const query = parseQuery(queryString)
-  const app = getMastoSocial()
+  const query = event.queryStringParameters
+  const app = await getapp()
 
   const code = query.code;
-  const result: any = await $fetch(`https://${SERVER}/oauth/token`, {
+  const server = query.server;
+  console.log(code, 'code')
+  const result: any = await $fetch(`https://${server}/oauth/token`, {
     method: 'POST',
     body: {
-      client_id: app.client_id,
-      client_secret: app.client_secret,
-      redirect_uri: `${HOST_DOMAIN}/api/oauth`,
+      client_id: app[server].client_id,
+      client_secret: app[server].client_secret,
+      redirect_uri: REDIRECT_URL,
       grant_type: 'authorization_code',
       code,
       scope: 'read write follow push',
     },
   })
 
+
   return {
     statusCode: 302,
     headers: {
-      Location: `${HOST_DOMAIN}/login/callback?${stringifyQuery({ server: SERVER, token: result.access_token })}`,
+      Location: `${HOST_DOMAIN}/login/callback?${stringifyQuery({ server: query.server, token: result.access_token })}`,
     },
     body: '',
   }

@@ -2,7 +2,7 @@ import { useLocalStorage } from "@reactuses/core";
 import classNames from "classnames";
 import { CreateStatusParamsWithStatus } from "masto";
 import { useState } from "react";
-import { masto } from "../../utils/masto";
+import { useMastoStore } from "../../store/masto";
 
 interface Props {
   draftKey: string;
@@ -12,6 +12,7 @@ interface Props {
 
 export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placeholder="what is on your mind ?"},) => {
   const [isSending, setIsSending] = useState(false);
+  const {masto} = useMastoStore()
   const getDefaultDraft = () => ({
     status: '',
     inReplyToId,
@@ -23,7 +24,7 @@ export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placehold
     try {
       setIsSending(true);
       console.log(draft, 'draft publish');
-      await masto.statuses.create(draft)
+      await masto?.statuses.create(draft)
       setDraft(getDefaultDraft());
     }
     finally {

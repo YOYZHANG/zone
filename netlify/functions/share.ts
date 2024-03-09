@@ -1,21 +1,21 @@
-interface AppInfo {
-  id: string
-  name: string
-  website: string | null
-  redirect_uri: string
-  client_id: string
-  client_secret: string
-  vapid_key: string
+import {$fetch} from 'ohmyfetch'
+import { AppInfo } from '../../src/types'
+export const HOST_DOMAIN = 'http://localhost:8888'
+export const DEFAULT_SERVER = 'mastodon.social'
+export const REDIRECT_URL = `${HOST_DOMAIN}/api/oauth`
+const registeredApps: Record<string, AppInfo> = {}
+const registeredAppsUrl = `${HOST_DOMAIN}/registered-apps.json`
+
+const promise = $fetch(registeredAppsUrl, { responseType: 'json' })
+  .then((r: any) => {
+    Object.assign(registeredApps, r)
+  })
+  .catch((e) => {
+    console.error(e)
+  })
+
+export async function getapp() {
+    await promise
+    return registeredApps
 }
-// const registeredApps: Record<string, AppInfo> = {}
-export function getMastoSocial():AppInfo {
-  return {
-    id: '',
-    name: '',
-    website: ''|| null,
-    redirect_uri: '',
-    client_id: '',
-    client_secret: '',
-    vapid_key: '',
-  }
-}
+

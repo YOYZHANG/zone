@@ -1,11 +1,11 @@
-import { login } from 'masto'
+// import { login } from 'masto'
 
 
-function createMasto() {
-  return login({
-    url: `https://mastodon.social`,
-    accessToken: '',
-  })
-}
+// function createMasto() {
+//   return login({
+//     url: `https://mastodon.social`,
+//     accessToken: '',
+//   })
+// }
 
-export const masto = await createMasto()
+// export const masto = await createMasto()
