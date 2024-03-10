@@ -5,7 +5,7 @@ import classNames from 'classnames';
 export const NavSide: React.FC = () => {
   const {isLogin} = useLoginState();
   return (
-    <div className="flex flex-col gap6 text-lg p8 border-y border">
+    <div className="flex flex-col gap6 text-lg p8">
       <Link
         className={classNames("flex gap2 items-center hover:opacity-80", {
           'op-50': !isLogin,
@@ -23,7 +23,7 @@ export const NavSide: React.FC = () => {
         })}
         to="/notification"
       >
-        <div className="i-ri:notification-2-fill"/>
+        <div className="i-ri:notification-2-line"/>
         <span>Notification</span>
       </Link>
       <Link className="flex gap2 items-center hover:opacity-80" to="/explore">

@@ -11,8 +11,8 @@ export const BaseLayout: React.FC = () => {
         <div className="w-1/4 lg:flex flex-col items-end ml-20">
           <AccountMe />
         </div>
-        <div className="lg:w-3/4 flex">
-          <div className="h-full w-full md:w-2/3 border-l border-r border">
+        <div className="w-3/4 flex">
+          <div className="h-full w-full md:w-2/3 border-l border-r">
             <Outlet />
           </div>
           <div className="md:flex md:flex-col w-1/3">

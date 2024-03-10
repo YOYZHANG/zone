@@ -1,5 +1,4 @@
 import {Route, Routes} from 'react-router-dom';
-import { RequireAuthRoute } from './components/RequireAuthRoute';
 import { BaseLayout } from './layout';
 import Public from './pages/public';
 import 'virtual:uno.css'
@@ -31,24 +30,23 @@ function App() {
 
 
   return (
-    <RequireAuthRoute>
-      <Routes>
-        <Route path='/' element={<BaseLayout/>}>
-          <Route index path='/public' element={<Public />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/bookmarks' element={<BookMarks />} />
-          <Route path='/explore' element={<Explore />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/favorites' element={<Favorites />} />
-          <Route path='/:user' element={<User />} />
-          <Route path='/:user/following' element={<Following />} />
-          <Route path='/:user/followers' element={<Follower />} />
-          <Route path='/:user/:post' element={<Post />} />
-          <Route path='/notification' element={<Notification />} />
-          <Route path='/login/callback' element={<CallBack />} />
-        </Route>
-      </Routes>
-    </RequireAuthRoute>
+    <Routes>
+      <Route path='/' element={<BaseLayout/>}>
+        <Route path='/' element={token ? <Home /> : <Public />} />
+        <Route path='/public' element={<Public />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/bookmarks' element={<BookMarks />} />
+        <Route path='/explore' element={<Explore />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/:user' element={<User />} />
+        <Route path='/:user/following' element={<Following />} />
+        <Route path='/:user/followers' element={<Follower />} />
+        <Route path='/:user/:post' element={<Post />} />
+        <Route path='/notification' element={<Notification />} />
+        <Route path='/login/callback' element={<CallBack />} />
+      </Route>
+    </Routes>
   )
 }
 
