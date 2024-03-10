@@ -27,7 +27,7 @@ export function usePaginator<T>(paginator: Paginator<any, T[]>) {
           if (result?.value?.length) {
             setList(items => [
                 ...items,
-                ...result.value.filter(newVal => !items.find(i => i.id === newVal.id))
+                ...result.value.filter((newVal: any) => !items.find(i => (i as {id: string}).id === newVal.id))
             ])
             setState('idle')
           }

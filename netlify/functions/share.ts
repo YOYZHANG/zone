@@ -2,7 +2,7 @@ import {readJSONSync} from 'fs-extra'
 import { AppInfo } from '../../src/types'
 import { resolve } from 'path'
 
-export const HOST_DOMAIN = 'http://localhost:8888'
+export const HOST_DOMAIN = 'http://localhost:8888' || 'https://zone.netlify.app'
 export const DEFAULT_SERVER = 'mastodon.social'
 export const REDIRECT_URL = `${HOST_DOMAIN}/api/oauth`
 

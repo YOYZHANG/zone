@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import {existsSync, mkdir, writeJSON} from 'fs-extra'
 import { $fetch } from 'ohmyfetch'
 import type { AppInfo } from '../src/types'
 
@@ -8,6 +8,7 @@ const KNOWN_SERVERS = [
 
 const KNOWN_DOMAINS = [
   'http://localhost:8888',
+  'https://zone.netlify.app'
 ]
 
 const filename = 'public/registered-apps.json'
@@ -36,7 +37,7 @@ for (const server of KNOWN_SERVERS) {
   console.log(`Registered app for ${server}`)
 }
 
-if (!fs.existsSync('public'))
-  await fs.mkdir('public')
+if (!existsSync('public'))
+  await mkdir('public')
 
-await fs.writeJSON(filename, registeredApps, { spaces: 2})
+await writeJSON(filename, registeredApps, { spaces: 2})

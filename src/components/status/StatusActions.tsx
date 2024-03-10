@@ -11,6 +11,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
   const [cardStatus, setCardStatus] = useState(status);
   const {masto} = useMastoStore()
   async function toggleStatusAction(action: 'reblogged' | 'favourited' | 'bookmarked', newcardStatus: Promise<Status>) {
+    console.log(action, 'action')
     setCardStatus({...cardStatus, ...(await newcardStatus)})
   }
   const toggleReblog = () => toggleStatusAction(

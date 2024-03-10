@@ -38,7 +38,7 @@ export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
         )}
       </div>
       {
-        cardStatus.reblog && (<StatusCard status={cardStatus.reblog} action={false}/>)
+        cardStatus.reblog && (<StatusCard item={cardStatus.reblog} action={false}/>)
       }
       <div className="pl12 pb-3">
         {action && <StatusActions status={cardStatus}></StatusActions>}

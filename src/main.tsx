@@ -6,13 +6,16 @@ import {
 import App from './App'
 import './index.css'
 import 'virtual:uno.css'
+import { ErrorBoundary } from './components/error/ErrorBoundary';
 
 const container = document.getElementById('root') as HTMLElement
 const root = createRoot(container!)
 root.render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ErrorBoundary>
   </StrictMode>,
 )

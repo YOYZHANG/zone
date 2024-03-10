@@ -1,4 +1,3 @@
-import { useState } from "react"
 
 const DEFAULT_UNITS:UseTimeAgoUnit<UseTimeAgoUnitNamesDefault>[] = [
   { max: 60000, value: 1000, name: 'second' },
@@ -19,31 +18,31 @@ interface UseTimeAgoMessagesBuiltIn {
 
 const DEFAULT_MESSAGES = {
   justNow: 'just now',
-  past: n => n.match(/\d/) ? `${n} ago` : n,
-  future: n => n.match(/\d/) ? `in ${n}` : n,
-  month: (n, past) => n === 1
+  past: (n: string) => n.match(/\d/) ? `${n} ago` : n,
+  future: (n: string) => n.match(/\d/) ? `in ${n}` : n,
+  month: (n: number, past:boolean) => n === 1
     ? past
       ? 'last month'
       : 'next month'
     : `${n} month${n > 1 ? 's' : ''}`,
-  year: (n, past) => n === 1
+  year: (n: number, past:boolean) => n === 1
     ? past
       ? 'last year'
       : 'next year'
     : `${n} year${n > 1 ? 's' : ''}`,
-  day: (n, past) => n === 1
+  day: (n: number, past:boolean) => n === 1
     ? past
       ? 'yesterday'
       : 'tomorrow'
     : `${n} day${n > 1 ? 's' : ''}`,
-  week: (n, past) => n === 1
+  week: (n: number, past:boolean) => n === 1
     ? past
       ? 'last week'
       : 'next week'
     : `${n} week${n > 1 ? 's' : ''}`,
-  hour: n => `${n} hour${n > 1 ? 's' : ''}`,
-  minute: n => `${n} minute${n > 1 ? 's' : ''}`,
-  second: n => `${n} second${n > 1 ? 's' : ''}`,
+  hour: (n: number) => `${n} hour${n > 1 ? 's' : ''}`,
+  minute: (n: number) => `${n} minute${n > 1 ? 's' : ''}`,
+  second: (n: number) => `${n} second${n > 1 ? 's' : ''}`,
   invalid: '',
 }
 export type UseTimeAgoUnitNamesDefault = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'
@@ -84,7 +83,7 @@ export function useTimeAgo(from: Date | number | string) {
     const past = diff > 0
 
     const str = applyFormat(unit.name as UseTimeAgoUnitNamesDefault, val, past)
-    return applyFormat(past ? 'past' : 'future', str, past)
+    return applyFormat(past ? 'past' : 'future', str!, past)
   }
 
   function applyFormat(name: UseTimeAgoUnitNamesDefault | keyof UseTimeAgoMessagesBuiltIn, val: number | string, isPast: boolean) {
