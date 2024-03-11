@@ -1,15 +1,16 @@
 import parse from 'html-react-parser';
-import { DEFAULT_SERVER } from '../../constants';
 import { useServerInfos } from '../../hooks/serverInfo';
 import { Emoji } from 'masto';
 import { useRef } from 'react';
+import { useAppCookies } from '../../hooks/cookie';
 
 export const RichContent: React.FC<{content: string}> = ({content}) => {
-  const {serverInfos} = useServerInfos(DEFAULT_SERVER);
+  const {serverURL} = useAppCookies();
+  const {serverInfos} = useServerInfos(serverURL as string);
 
   const emojis = useRef<Record<string, Emoji>>({})
   if (serverInfos && !emojis.current.length) {
-    emojis.current = serverInfos[DEFAULT_SERVER]?.customEmojis || {};
+    emojis.current = serverInfos[serverURL!]?.customEmojis || {};
   }
 
   content = content.replace(/:([\w-]+?):/g, (_, name) => {

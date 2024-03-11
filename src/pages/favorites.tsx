@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
-import {masto} from "../utils/masto";
 import { DefaultPaginationParams, Paginator, Status } from "masto";
+import { useMastoStore } from "../store/masto";
 
 export default function Favorites() {
   const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
-
+  const {masto} = useMastoStore()
   useEffect(() => {
-    console.log('in favorites')
-    const favoraites = masto.favourites.getIterator()
-    console.log("Favorites", favoraites)
+    const favoraites = masto?.favourites.getIterator()
     setPaginator(favoraites)
-  }, [])
+  }, [masto])
 
   return (
     <MainContent

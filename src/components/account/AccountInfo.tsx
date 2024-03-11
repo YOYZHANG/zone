@@ -8,7 +8,7 @@ interface Props {
 
 export const AccountInfo: React.FC<Props> = ({children, account}) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between w-full">
       <div className="flex">
         <div className="p1">
           <Link to={`/${account.acct}`}>
@@ -16,8 +16,8 @@ export const AccountInfo: React.FC<Props> = ({children, account}) => {
           </Link>
         </div>
         <Link className="flex items-center" to={`/${account.acct}`}>
-          <span className="font-bold mr-1 text-sm">{account.displayName}</span>
-          <span className="op35 text-sm">@{account.acct}</span>
+          <span className="font-bold mr-1 text-sm max-w-40 truncate">{account.displayName}</span>
+          <span className="op35 text-sm max-w-40 truncate">@{account.acct}</span>
         </Link>
       </div>
       <div className="flex justify-end items-center">

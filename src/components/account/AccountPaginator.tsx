@@ -10,7 +10,6 @@ export const AccountPaginator: React.FC<Props> = ({paginator, AccountCard}) => {
     <CommonPaginator
       paginator={paginator}
       Card={AccountCard}
-    >
-    </CommonPaginator>
+    />
   )
 }

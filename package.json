@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "netlify dev"
+    "server": "netlify dev",
+    "register": "tsc scripts/registerApp.ts"
   },
   "dependencies": {
     "@reactuses/core": "^5.0.5",
@@ -28,6 +29,7 @@
     "@iconify-json/logos": "^1.1.42",
     "@iconify-json/ri": "^1.1.20",
     "@iconify-json/twemoji": "^1.1.15",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.25",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
@@ -37,6 +39,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "fs-extra": "^11.2.0",
     "netlify-cli": "^17.18.1",
     "typescript": "^5.2.2",
     "unocss": "^0.58.5",

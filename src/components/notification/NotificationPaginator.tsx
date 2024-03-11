@@ -11,7 +11,6 @@ export const NotificationPaginator: React.FC<Props>= ({paginator, NotificationCa
     <CommonPaginator
       paginator={paginator}
       Card={NotificationCard}
-    >
-    </CommonPaginator>
+    />
   )
 }

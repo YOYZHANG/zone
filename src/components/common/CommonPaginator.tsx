@@ -10,9 +10,9 @@ export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
   const {list, endAnchor, error, state} = usePaginator(paginator)
 
   return (
-    <div className='border-t'>
+    <div>
       {list.map(item => (
-        <Card key={item['id']} status={item}></Card>
+        <Card key={item['id']} item={item}></Card>
       ))}
       <div ref={endAnchor}></div>
       {
