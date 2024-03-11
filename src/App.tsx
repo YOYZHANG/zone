@@ -9,7 +9,7 @@ import { DEFAULT_SERVER } from './constants';
 import Home from './pages/home';
 import BookMarks from './pages/bookmarks';
 import Explore from './pages/explore';
-import Login from './pages/login/login';
+import Login from './pages/login';
 import Favorites from './pages/favorites';
 import User from './pages/@user';
 import Following from './pages/@user/following';

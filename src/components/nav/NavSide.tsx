@@ -1,31 +1,14 @@
-import {Link} from 'react-router-dom';
+import { NavSideItem } from './NavSideItem';
 export const NavSide: React.FC = () => {
   return (
-    <div className="flex flex-col gap6 text-lg p8 border-y border">
-      <Link className="flex gap2 items-center hover:opacity-80" to="/home" >
-        <div className="i-ri:home-5-line"/>
-        <span>Home</span>
-      </Link>
-      <Link className="flex gap2 items-center hover:opacity-80" to="/notification">
-        <div className="i-ri:notification-2-fill"/>
-        <span>Notification</span>
-      </Link>
-      <Link className="flex gap2 items-center hover:opacity-80" to="/explore">
-        <div className="i-ri:hashtag"/>
-        <span>Explore</span>
-      </Link>
-      <Link className="flex gap2 items-center hover:opacity-80" to="/public">
-        <div className="i-ri:earth-line"/>
-        <span>Federated</span>
-      </Link>
-      <Link className="flex gap2 items-center hover:opacity-80" to="/favorites">
-        <div className="i-ri:heart-3-line"/>
-        <span>Favorites</span>
-      </Link>
-      <Link className="flex gap2 items-center hover:opacity-80" to="/bookmarks">
-        <div className="i-ri:bookmark-line"/>
-        <span>Bookmarks</span>
-      </Link>
-    </div>
+    <nav className="sm:px3 sm:py4 flex flex-col gap2 text-size-base leading-normal md:text-lg">
+      <NavSideItem text="Home" to="/home" icon="i-ri:home-5-line" />
+      <NavSideItem text="Notification" to="/notification" icon="i-ri:notification-2-line" />
+      <NavSideItem text="Explore" to="/explore" icon="i-ri:hashtag" />
+      <NavSideItem text="Federated" to="/public" icon="i-ri:earth-line" />
+      <NavSideItem text="Favorites" to="/favorites" icon="i-ri:heart-3-line" />
+      <NavSideItem text="Bookmarks" to="/bookmarks" icon="i-ri:bookmark-line" />
+      <NavSideItem text="Settings" to="/settings" icon="i-ri:settings-4-line" />
+    </nav>
   )
 }

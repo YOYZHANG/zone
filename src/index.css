@@ -1,6 +1,6 @@
 :root {
-  --color-primary: #53b3cb;
-  --color-border: #88888820;
+  --c-primary: #EA9E44;
+  --c-primary-active: #C16929;
 }
 .custom-emoji {
   display: inline-block;
@@ -31,3 +31,4 @@
     margin-bottom: 0.5rem;
   }
 }
+
