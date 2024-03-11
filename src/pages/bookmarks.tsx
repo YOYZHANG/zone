@@ -10,7 +10,7 @@ export default function BookMarks() {
 
   useEffect(() => {
     setPaginator(masto!.bookmarks.getIterator())
-  }, [])
+  }, [masto])
 
   return (<>
     <MainContent

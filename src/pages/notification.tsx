@@ -19,7 +19,7 @@ export default function Notification() {
 
     const paginator = masto?.notifications.getIterator(tab === 'All' ? undefined : { types: ['mention'] })
     setPaginator(paginator)
-  }, [tab])
+  }, [tab, masto])
 
   return (
     <MainContent

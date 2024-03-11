@@ -10,7 +10,7 @@ export default function Explore() {
 
   useEffect(() => {
     setPaginator(masto?.trends.getStatuses())
-  }, [])
+  }, [masto])
 
   return (<>
     <MainContent

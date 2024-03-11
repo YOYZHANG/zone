@@ -7,9 +7,11 @@ import { NavFooter } from './components/nav/NavFooter';
 export const BaseLayout: React.FC = () => {
   return (
     <div className="h-full">
-      <main className="w-full h-full flex mxa lg:max-w-80rem">
-        <div className="w-1/4 lg:flex flex-col items-end ml-20">
-          <AccountMe />
+      <main className="w-full h-full flex mxa lg:max-w-90rem">
+        <div className="w-1/4 lg:flex flex-col items-end">
+          <div className="fixed">
+            <AccountMe />
+          </div>
         </div>
         <div className="w-3/4 flex">
           <div className="h-full w-full md:w-2/3 border-l border-r">

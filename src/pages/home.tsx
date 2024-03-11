@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     setPaginator(masto?.timelines.getHomeIterable())
-  }, [])
+  }, [masto])
 
   return (<>
     <MainContent

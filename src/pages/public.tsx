@@ -10,7 +10,7 @@ export default function Public() {
 
   useEffect(() => {
     setPaginator(masto?.timelines.getPublicIterable())
-  }, [])
+  }, [masto])
 
   return (<>
     <MainContent
@@ -23,6 +23,7 @@ export default function Public() {
       actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
     {paginator && <TimelinePaginator paginator={paginator} />}
+    {!paginator && <div>waiting...</div>}
     </MainContent>
   </>)
 }
