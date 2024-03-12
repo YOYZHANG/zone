@@ -24,7 +24,7 @@ export interface AppInfo {
 }
 
 export interface SearchResultType {
-  type: 'account' | 'hashtag' | 'action'
+  type: string
   to: string
   label?: string
   account?: Account

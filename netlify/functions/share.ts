@@ -3,7 +3,7 @@ import { AppInfo } from '../../src/types'
 import { resolve } from 'path'
 
 export const HOST_DOMAIN = 'http://localhost:8888' || 'https://zone.netlify.app'
-export const DEFAULT_SERVER = 'mastodon.social'
+export const DEFAULT_SERVER = 'mas.to'
 export const REDIRECT_URL = `${HOST_DOMAIN}/api/oauth`
 
 
