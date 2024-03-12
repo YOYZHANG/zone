@@ -3,6 +3,7 @@ import { BaseLayout } from './layout';
 import Public from './pages/public';
 import 'virtual:uno.css'
 import './App.css'
+import './styles/var.css'
 import Home from './pages/home';
 import BookMarks from './pages/bookmarks';
 import Explore from './pages/explore';

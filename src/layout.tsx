@@ -4,6 +4,7 @@ import { NavSide } from './components/nav/NavSide';
 import { NavFooter } from './components/nav/NavFooter';
 import { PublishButton } from './components/publish/PublicButton';
 import { SearchWidget } from './components/search/SearchWidgt';
+import { UserSignInEntry } from './components/user/UserSignInEntry';
 
 export const BaseLayout: React.FC = () => {
   return (
@@ -19,7 +20,9 @@ export const BaseLayout: React.FC = () => {
                 <NavSide />
                 <PublishButton />
               </div>
-              <div>user loggin</div>
+              <div className="flex flex-col">
+                <UserSignInEntry />  
+              </div>
             </div>
           </div>
         </aside>

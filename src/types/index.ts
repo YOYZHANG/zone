@@ -1,4 +1,4 @@
-import type { AccountCredentials, Emoji, Instance } from 'masto'
+import type { Account, AccountCredentials, Emoji, Instance } from 'masto'
 export type PaginatorState = 'idle' | 'loading' | 'done' | 'error'
 
 export interface ServerInfo extends Instance {
@@ -21,4 +21,15 @@ export interface AppInfo {
   client_id: string
   client_secret: string
   vapid_key: string
+}
+
+export interface SearchResultType {
+  type: 'account' | 'hashtag' | 'action'
+  to: string
+  label?: string
+  account?: Account
+  hashtag?: any
+  action?: {
+    label: string
+  }
 }
