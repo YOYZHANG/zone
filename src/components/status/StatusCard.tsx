@@ -1,8 +1,11 @@
 import type { Status } from 'masto'
 import { StatusActions } from './StatusActions'
-import { AccountInfo } from '../account/AccountInfo'
 import { useTimeAgo } from '../../hooks/time'
 import {CommonTooltip} from '../common/CommonTooltip'
+import { Link } from 'react-router-dom'
+import {AccountAvator} from '../account/AccountAvator'
+import { StatusAccountDetails } from './StatusAccountDetails'
+import {StatusContent} from './StatusContent'
 export interface StatusProps {
   item: Status,
   action?: boolean
@@ -27,40 +30,31 @@ export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
           )}
         </div> */}
         <div className='flex gap3'>
-            <div className='relative'></div>
+            <div className='relative'>
+                <Link to={cardStatus.account.acct} className="rounded-full">
+                  <AccountAvator account={cardStatus.account} />
+                </Link>
+            </div>
             <div className="flex flex-col flex-1">
-              <div className='flex items-center'>
-                 // AccountInfo
+              <div className='flex items-center mt4'>
+                  <StatusAccountDetails account={cardStatus.account} />
                  <div className='flex-auto' />
                  <div className='text-sm text-secondary flex flex-nowrap hover:underline'>
                     <CommonTooltip content='createAt'>
                       <a>
-                        <time className="text-sm ws-nowrap hover:underline">
+                        <time className="font-size-3 ws-nowrap hover:underline">
                           {timeAgo}
                         </time>
                       </a>
                     </CommonTooltip>
                  </div>
               </div>
-              // content
+              <StatusContent status={cardStatus}/>
               {action && <StatusActions status={cardStatus}></StatusActions>}
             </div>
-
         </div>
-          <AccountInfo account={cardStatus?.account}>
-            <div className="text-sm op50"> {timeAgo} </div>
-          </AccountInfo>
       </div>
-{/* 
-      <div className="pl12">
-        <StatusBody status={cardStatus}></StatusBody>
-        {!!cardStatus.mediaAttachments?.length && (
-          <StatusMedia
-            status={cardStatus}
-          />
-        )}
-      </div> */}
-   
+      <div className='w-auto bg-border mb-1 h-0.3'></div>
     </div>
   )
 }

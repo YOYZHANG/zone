@@ -18,7 +18,7 @@ interface UseTimeAgoMessagesBuiltIn {
 
 const DEFAULT_MESSAGES = {
   justNow: 'just now',
-  past: (n: string) => n.match(/\d/) ? `${n} ago` : n,
+  past: (n: string) => n.match(/\d/) ? `${n}` : n,
   future: (n: string) => n.match(/\d/) ? `in ${n}` : n,
   month: (n: number, past:boolean) => n === 1
     ? past
@@ -40,9 +40,9 @@ const DEFAULT_MESSAGES = {
       ? 'last week'
       : 'next week'
     : `${n} week${n > 1 ? 's' : ''}`,
-  hour: (n: number) => `${n} hour${n > 1 ? 's' : ''}`,
-  minute: (n: number) => `${n} minute${n > 1 ? 's' : ''}`,
-  second: (n: number) => `${n} second${n > 1 ? 's' : ''}`,
+  hour: (n: number) => `${n} hour`,
+  minute: (n: number) => `${n} min`,
+  second: (n: number) => `${n} sec`,
   invalid: '',
 }
 export type UseTimeAgoUnitNamesDefault = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'

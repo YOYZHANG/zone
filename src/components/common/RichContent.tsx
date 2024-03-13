@@ -4,7 +4,8 @@ import { Emoji } from 'masto';
 import { useRef } from 'react';
 import { useAppCookies } from '../../hooks/cookie';
 
-export const RichContent: React.FC<{content: string}> = ({content}) => {
+export const RichContent: React.FC<{content: string}> = ({content = ''}) => {
+  console.log(content, 'content')
   const {serverURL} = useAppCookies();
   const {serverInfos} = useServerInfos(serverURL as string);
 
@@ -13,7 +14,7 @@ export const RichContent: React.FC<{content: string}> = ({content}) => {
     emojis.current = serverInfos[serverURL!]?.customEmojis || {};
   }
 
-  content = content.replace(/:([\w-]+?):/g, (_, name) => {
+  content = content?.replace(/:([\w-]+?):/g, (_, name) => {
     const emoji = emojis.current[name]
     if (emoji)
       return `<img src="${emoji.url}" alt="${name}" class="custom-emoji" />`

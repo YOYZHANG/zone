@@ -28,12 +28,12 @@ export const StatusActions: React.FC<Props> = ({status}) => {
     masto!.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
   )
   return (
-    <div className="flex gap-8">
+    <div className="flex justify-between my-3 text-sm">
       <Link
-        className="rounded op75 hover:op100 hover:text-blue group"
+        className="rounded op75 hover:op100 hover:text-blue group flex-1 items-center"
         to={`/@${cardStatus.account.acct}/${cardStatus.id}`}
       >
-        <div className="rounded-full hover:bg-blue/10">
+        <div className="rounded-full hover:bg-blue/10 ">
           <div
             className="i-ri:chat-3-line"
           ></div>
@@ -41,7 +41,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         </div>
       </Link>
       <button 
-        className={classNames("rounded op75 hover:op100 hover:text-green", {
+        className={classNames("rounded op75 hover:op100 hover:text-green flex-1 items-center", {
           'text-green op100': cardStatus.reblogged,
           'pointer-events-none': false
         })}
@@ -59,7 +59,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
       </button>
 
       <button
-        className={classNames("rounded op75 hover:op100 hover:text-rose", {
+        className={classNames("rounded op75 hover:op100 hover:text-rose flex-1 items-center", {
           'text-rose op100': cardStatus.favourited,
           'pointer-events-none': false
         })}
@@ -76,7 +76,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         </div>
       </button>
       <button
-        className={classNames("rounded op75 hover:op100 hover:text-rose", {
+        className={classNames("rounded op75 hover:op100 hover:text-rose flex-none items-center", {
           'text-rose op100': cardStatus.bookmarked,
           'pointer-events-none': false
         })}
@@ -89,11 +89,6 @@ export const StatusActions: React.FC<Props> = ({status}) => {
               'i-ri:bookmark-fill': cardStatus.bookmarked
             })}
           ></div>
-        </div>
-      </button>
-      <button className="rounded op75 hover:op100 hover:text-purple">
-        <div className="rounded-full hover:bg-purple/10">
-          <div className="i-ri:share-circle-line"></div>
         </div>
       </button>
     </div>
