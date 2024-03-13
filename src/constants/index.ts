@@ -1,2 +1,2 @@
-export const DEFAULT_SERVER = 'mastodon.social'
+export const DEFAULT_SERVER = 'mas.to'
 

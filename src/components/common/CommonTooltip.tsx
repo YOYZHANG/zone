@@ -1,7 +1,7 @@
 interface Props {
   content: string;
-  children: React.FC
+  children: React.ReactNode;
 }
-export const CommonTooltip: React.FC<Props> = ({content}) => {
-  return (<>CommonToolTip {content}</>)
+export const CommonTooltip: React.FC<Props> = ({content, children}) => {
+  return (<>{children}</>)
 }

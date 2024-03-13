@@ -1,16 +1,26 @@
 import {ReactNode, FC} from 'react'
+import { Link } from 'react-router-dom'
 
-export const MainContent: FC<{children: ReactNode, title: ReactNode, actions: ReactNode}> = ({
+export const MainContent: FC<{children: ReactNode, title: ReactNode, actions?: ReactNode}> = ({
   children,
   title,
   actions
 }) => {
   return (
     <>
-      <div className="relative  border-y">
-        <div className="sticky top-0 z10 flex justify-between h-10 items-center pl-2 font-bold bg-white border-b">
-          <div className="">{title}</div>
-          <div className="">{actions}</div>
+      <div className="relative">
+        <div className="sticky top-0 z10 border-b border-base bg-base">
+          <div className="flex justify-between px5 py4">
+            <div className="flex items-center overflow-hidden">
+              <Link to="../" className='flex gap1 items-center btn-text'>
+                <div className='i-ri:arrow-left-line'></div>
+              </Link>
+              <div className="truncate">{title}</div>
+            </div>
+            <div className='flex items-center gap2'>
+              {actions && <div className="">{actions}</div>}
+            </div>
+          </div>
         </div>
         <div>
           {children}

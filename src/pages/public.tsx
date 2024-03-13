@@ -3,6 +3,8 @@ import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
 import { DefaultPaginationParams, Paginator, Status } from "masto";
 import { useEffect, useState } from "react";
 import { useMastoStore } from "../store/masto";
+import { Link } from "react-router-dom";
+import { scrollToTop } from "../utils/scroll-to-top";
 
 export default function Public() {
   const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
@@ -15,12 +17,11 @@ export default function Public() {
   return (<>
     <MainContent
       title={
-        <div className="flex items-center">
-          <div className="mr-1 i-ri:earth-line"></div>
+        <Link to="/public" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
+          <div className=" i-ri:earth-line"></div>
           <span>Federated Timeline</span>
-        </div>
+        </Link>
       }
-      actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
     {paginator && <TimelinePaginator paginator={paginator} />}
     {!paginator && <div>waiting...</div>}

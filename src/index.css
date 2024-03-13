@@ -48,3 +48,15 @@
   }
 }
 
+body {
+  overflow-y: scroll;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html {
+  --at-apply: bg-base text-base;
+}

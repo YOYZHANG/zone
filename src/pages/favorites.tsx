@@ -3,6 +3,7 @@ import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
 import { DefaultPaginationParams, Paginator, Status } from "masto";
 import { useMastoStore } from "../store/masto";
+import { Link } from "react-router-dom";
 
 export default function Favorites() {
   const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
@@ -15,12 +16,11 @@ export default function Favorites() {
   return (
     <MainContent
       title={
-        <div className="flex items-center">
-          <div className="mr-1 i-ri:heart-fill h-6"></div>
+        <Link to="/favorites" className="text-lg font-bold flex items-center gap2">
+          <div className="mr-1 i-ri:heart-line h-6"></div>
           <span>Favourites</span>
-        </div>
+        </Link>
       }
-      actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
       {paginator && <TimelinePaginator paginator={paginator!} />}
     </MainContent>
