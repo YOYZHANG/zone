@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import {FC, useState} from 'react'
-import { $fetch } from 'ohmyfetch'
+import { $fetch } from 'ofetch'
 import { DEFAULT_SERVER } from '../../constants'
 
 export const UserSignIn: FC = () => {
@@ -14,9 +14,13 @@ export const UserSignIn: FC = () => {
     }
 
     try {
-      location.href = await $fetch<string>(`/api/${server || DEFAULT_SERVER}/login`)
+      
+      const url = await $fetch<string>(`/api/login?server=${server || DEFAULT_SERVER}`)
+      console.log(url, 'login url')
+      location.href = url
     }
-    catch {
+    catch (e){
+      console.error(e)
       setError(true)
     }
   }

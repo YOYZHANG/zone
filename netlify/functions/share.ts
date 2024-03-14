@@ -1,26 +1,43 @@
-import {readJSONSync} from 'fs-extra'
+import { $fetch } from 'ofetch'
 import { AppInfo } from '../../src/types'
-import { resolve } from 'path'
+import { APP_NAME } from '../../src/constants'
+import { createStorage } from 'unstorage'
 
-export const HOST_DOMAIN = 'http://localhost:8888' || 'https://zone.netlify.app'
+const storage = createStorage()
+
+export const HOST_DOMAIN = 'http://localhost:8888'
 export const DEFAULT_SERVER = 'mas.to'
-export const REDIRECT_URL = `${HOST_DOMAIN}/api/oauth`
 
-
-const registeredApps: Record<string, AppInfo> = {}
-const registeredAppsUrl = resolve('./public/registered-app.json')
-
-export function getApp(server: string): AppInfo {
-  if (!registeredApps[server]) {
-    try {
-      const json = readJSONSync(registeredAppsUrl)
-      Object.assign(registeredApps, json)
+export function getRedirectURI(server: string) {
+  return `${HOST_DOMAIN}/api/oauth`
+}
+async function fetchAppInfo(server: string): Promise<AppInfo> {
+  const app = await $fetch(`https://${server}/api/v1/apps`, {
+    method: 'POST',
+    body: {
+      client_name: APP_NAME,
+      website: HOST_DOMAIN,
+      redirect_uris: getRedirectURI(server),
+      scopes: 'read write follow push',
     }
-    catch (e) {
-      console.error(e)
-    }
+  })
+
+  return app
+}
+
+export async function getApp(server: string= 'mastodon.social') {
+  const key = `zone:app_${server}`
+
+  const appInfo = await storage.getItem(key)
+
+  if (appInfo) {
+    console.log(appInfo, 'use appInfo cache')
+    return appInfo as AppInfo
   }
 
-  return registeredApps[server]
+  const app = await fetchAppInfo(server)
+  await storage.setItem(key, app)
+  console.log(app, 'use appInfo')
+  return app
 }
 

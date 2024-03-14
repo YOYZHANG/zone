@@ -1,5 +1,5 @@
 import {existsSync, mkdir, writeJSON} from 'fs-extra'
-import { $fetch } from 'ohmyfetch'
+import { $fetch } from 'ofetch'
 import type { AppInfo } from '../src/types'
 
 const KNOWN_SERVERS = [

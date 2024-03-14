@@ -1,5 +1,5 @@
 import { stringifyQuery } from 'ufo'
-import { REDIRECT_URL, getApp } from './share'
+import { getApp, getRedirectURI } from './share'
 
 
 export async function handler(event: any) {
@@ -17,16 +17,15 @@ export async function handler(event: any) {
   const loginQuery = stringifyQuery({
     client_id: app.client_id,
     scope: 'read write follow push',
-    redirect_uri: `${REDIRECT_URL}?server=${server}`,
+    redirect_uri: getRedirectURI(server),
     response_type: 'code',
   })
 
   const url = `https://${server}/oauth/authorize?${loginQuery}`
+
+  console.log('login redirecting to', url)
   return {
-    statusCode: 302,
-    headers: {
-      Location: url,
-    },
-    body: '',
+    statusCode: 200,
+    body: url,
   }
 }
