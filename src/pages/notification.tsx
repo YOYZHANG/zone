@@ -17,7 +17,8 @@ export default function Notification() {
     if (!tab)
         return
 
-    const paginator = masto?.notifications.getIterator(tab === 'All' ? undefined : { types: ['mention'] })
+    const paginator = masto?.notifications.getIterator()
+    // @ts-ignore
     setPaginator(paginator)
   }, [tab, masto])
 

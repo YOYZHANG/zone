@@ -9,6 +9,7 @@ export default function BookMarks() {
   const {masto} = useMastoStore()
 
   useEffect(() => {
+    // @ts-ignore
     setPaginator(masto!.bookmarks.getIterator())
   }, [masto])
 

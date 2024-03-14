@@ -10,6 +10,7 @@ export default function Favorites() {
   const {masto} = useMastoStore()
   useEffect(() => {
     const favoraites = masto?.favourites.getIterator()
+    // @ts-ignore
     setPaginator(favoraites)
   }, [masto])
 
