@@ -9,7 +9,7 @@ export const MainContent: FC<{children: ReactNode, title: ReactNode, actions?: R
   return (
     <>
       <div className="relative">
-        <div className="sticky top-0 z10 border-b border-base bg-base">
+        <div className="sticky top-0 border-b border-base bg-base z-1">
           <div className="flex justify-between px5 py4">
             <div className="flex items-center overflow-hidden">
               <Link to="../" className='flex gap1 items-center btn-text'>

@@ -29,7 +29,7 @@ export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
             </div>
           )}
         </div> */}
-        <div className='flex gap3'>
+        <div className='flex gap3 w-full'>
             <div className='relative'>
                 <Link to={cardStatus.account.acct} className="rounded-full">
                   <AccountAvator account={cardStatus.account} />
@@ -54,7 +54,6 @@ export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
             </div>
         </div>
       </div>
-      <div className='w-auto bg-border mb-1 h-0.3'></div>
     </div>
   )
 }

@@ -12,7 +12,11 @@ export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
   return (
     <div>
       {list.map(item => (
-        <Card key={item['id']} item={item}></Card>
+        <div>
+          <Card key={item['id']} item={item}></Card>
+          <div className='w-auto bg-border h-0.2'></div>
+        </div>
+        
       ))}
       <div ref={endAnchor}></div>
       {
