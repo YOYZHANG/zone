@@ -5,7 +5,7 @@ import { createStorage } from 'unstorage'
 
 const storage = createStorage()
 
-export const HOST_DOMAIN = 'http://localhost:8888'
+export const HOST_DOMAIN = 'http://localhost:64930'
 export const DEFAULT_SERVER = 'mas.to'
 
 export function getRedirectURI(server: string) {
@@ -16,7 +16,7 @@ async function fetchAppInfo(server: string): Promise<AppInfo> {
     method: 'POST',
     body: {
       client_name: APP_NAME,
-      website: HOST_DOMAIN,
+      website: 'https://maston-zone.netlify.com',
       redirect_uris: getRedirectURI(server),
       scopes: 'read write follow push',
     }
