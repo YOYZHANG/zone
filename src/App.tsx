@@ -18,9 +18,11 @@ import CallBack from './pages/login/callback';
 import { useMastoStore } from './store/masto';
 import { useEffect } from 'react';
 import { useAppCookies } from './hooks/cookie';
+import { useCurrentUser } from './hooks/login';
 
 function App() {
   const {createMasto} = useMastoStore()
+  const {currentUser} = useCurrentUser()
   const {token, serverURL} = useAppCookies();
 
   useEffect(() => {
@@ -33,7 +35,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<BaseLayout/>}>
-        <Route path='/' element={token ? <Home /> : <Public />} />
+        <Route path='/' element={currentUser ? <Home /> : <Public />} />
         <Route path='/public' element={<Public />} />
         <Route path='/home' element={<Home />} />
         <Route path='/bookmarks' element={<BookMarks />} />

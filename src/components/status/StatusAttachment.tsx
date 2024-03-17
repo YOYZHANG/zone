@@ -10,6 +10,7 @@ export const StatusAttachment: React.FC<Props> = ({attachment}) => {
       {attachment.type === 'image' && (
         <img
           src={attachment.previewUrl}
+          loading="lazy"
           className="status-attachment-image border object-cover rounded-lg"
           alt={attachment.description!}
         />

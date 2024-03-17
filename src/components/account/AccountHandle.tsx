@@ -6,7 +6,7 @@ interface Props {
 export const AccountHandle: React.FC<Props> = ({account}) => {
   return (<>
     <p className="line-clamp-1 whitespace-pre-wrap break-all text-secondary-light text-sm">
-      <span text-secondary>{ account.acct }</span>
+      <span className="text-secondary">@{ account.acct }</span>
     </p>
   </>)
 }

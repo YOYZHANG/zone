@@ -1,28 +1,25 @@
-import { Link } from "react-router-dom"
 import type { Account } from 'masto'
+import { AccountAvator } from "./AccountAvator"
+import { AccountHandle } from "./AccountHandle"
+import { RichContent } from "../common/RichContent"
 
 interface Props {
   children: React.ReactNode,
   account: Account
 }
 
-export const AccountInfo: React.FC<Props> = ({children, account}) => {
+export const AccountInfo: React.FC<Props> = ({account}) => {
   return (
-    <div className="flex justify-between w-full">
-      <div className="flex">
-        <div className="p1">
-          <Link to={`/${account.acct}`}>
-            <img src={account.avatar} alt="profile" className="w-10 h-10 rounded-10 bg-gray:10"/>
-          </Link>
+    <div className="flex gap-3 items-center">
+        <AccountAvator account={account}/>
+        <div className="flex flex-col shrink overflow-hidden justify-center leading-none">
+          <div className="flex gap2 font-bold line-clamp-1 ws-pre-wrap break-all text-lg">
+              <RichContent content={account.acct}/>
+          </div>
+          <div className="">
+            <AccountHandle account={account} />
+          </div>
         </div>
-        <Link className="flex items-center" to={`/${account.acct}`}>
-          <span className="font-bold mr-1 text-sm max-w-40 truncate">{account.displayName}</span>
-          <span className="op35 text-sm max-w-40 truncate">@{account.acct}</span>
-        </Link>
-      </div>
-      <div className="flex justify-end items-center">
-        {children}
-      </div>
     </div>
   )
 }

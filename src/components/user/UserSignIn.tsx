@@ -16,7 +16,6 @@ export const UserSignIn: FC = () => {
     try {
       
       const url = await $fetch<string>(`/api/login?server=${server || DEFAULT_SERVER}`)
-      console.log(url, 'login url')
       location.href = url
     }
     catch (e){

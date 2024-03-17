@@ -33,11 +33,11 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         className="rounded op75 hover:op100 hover:text-blue group flex-1 items-center"
         to={`/@${cardStatus.account.acct}/${cardStatus.id}`}
       >
-        <div className="rounded-full hover:bg-blue/10 ">
+        <div className="rounded-full  flex items-center">
           <div
             className="i-ri:chat-3-line"
           ></div>
-          { !!cardStatus.repliesCount && (<span className="pl1 text-sm">{cardStatus.repliesCount}</span>) }
+          { !!cardStatus.repliesCount && (<span className="pl1 text-xs">{cardStatus.repliesCount}</span>) }
         </div>
       </Link>
       <button 
@@ -47,14 +47,14 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         })}
         onClick={toggleReblog}
       >
-        <div className="rounded-full hover:bg-green/10">
-        <div
-            className={classNames('', {
-              'i-ri:repeat-2-line': !cardStatus.reblogged,
-              'i-ri:repeat-2-fill': cardStatus.reblogged
-            })}
-          ></div>
-          { !!cardStatus.reblogsCount && (<span className="pl2 text-sm">{cardStatus.reblogsCount}</span>) }
+        <div className="rounded-full flex items-center">
+          <div
+              className={classNames('', {
+                'i-ri:repeat-2-line': !cardStatus.reblogged,
+                'i-ri:repeat-2-fill': cardStatus.reblogged
+              })}
+            ></div>
+          { !!cardStatus.reblogsCount && (<span className="pl2 text-xs">{cardStatus.reblogsCount}</span>) }
         </div>
       </button>
 
@@ -65,24 +65,24 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         })}
         onClick={toggleFavourite}
       >
-        <div className="rounded-full hover:bg-rose/10">
+        <div className="rounded-full flex items-center">
           <div
             className={classNames('', {
               'i-ri:heart-3-line': !cardStatus.favourited,
               'i-ri:heart-3-fill': cardStatus.favourited
             })}
           ></div>
-          { !!cardStatus.favouritesCount && (<span className="pl1 text-sm">{cardStatus.favouritesCount}</span>) }
+          { !!cardStatus.favouritesCount && (<span className="pl1 text-xs">{cardStatus.favouritesCount}</span>) }
         </div>
       </button>
       <button
-        className={classNames("rounded op75 hover:op100 hover:text-rose flex-none items-center", {
+        className={classNames("rounded op75 hover:op100 hover:text-rose flex-none items-center flex", {
           'text-rose op100': cardStatus.bookmarked,
           'pointer-events-none': false
         })}
         onClick={toggleBookmark}
       >
-        <div className="rounded-full hover:bg-rose/10">
+        <div className="rounded-full">
         <div
             className={classNames('', {
               'i-ri:bookmark-line': !cardStatus.bookmarked,

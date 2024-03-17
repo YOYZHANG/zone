@@ -1,12 +1,16 @@
-import {Outlet} from 'react-router-dom';
+import {Link, Outlet} from 'react-router-dom';
 import { NavTitle } from './components/nav/NavTitle';
 import { NavSide } from './components/nav/NavSide';
 import { NavFooter } from './components/nav/NavFooter';
-import { PublishButton } from './components/publish/PublicButton';
 import { SearchWidget } from './components/search/SearchWidgt';
 import { UserSignInEntry } from './components/user/UserSignInEntry';
+import { AccountInfo } from './components/account/AccountInfo';
+import { useCurrentUser } from './hooks/login';
+import { PublishWidgetEntry } from './components/publish/PublishWidgtEntry';
 
 export const BaseLayout: React.FC = () => {
+  const {currentUser} = useCurrentUser()
+
   return (
     <div className="h-full">
       <main className="w-full h-full flex mxa lg:max-w-80rem">
@@ -18,10 +22,22 @@ export const BaseLayout: React.FC = () => {
             <div className="flex flex-col overflow-y-auto justify-between h-full">
               <div className="flex flex-col">
                 <NavSide />
-                <PublishButton />
+                <PublishWidgetEntry />
               </div>
               <div className="flex flex-col">
-                <UserSignInEntry />  
+                { !currentUser && <UserSignInEntry />}
+                {currentUser && (
+                  <div>
+                    <div className="p6 pb8 w-full flex items-center justify-between">
+                      <Link
+                        className="hidden lg:block rounded-full text-start w-full hover:bg-active cursor-pointer transition-100"
+                        to={currentUser.account!.acct}
+                      >
+                        <AccountInfo account={currentUser.account!} > </AccountInfo>
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

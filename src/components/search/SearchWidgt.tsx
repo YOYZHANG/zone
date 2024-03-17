@@ -22,27 +22,28 @@ export const SearchWidget: React.FC<Props> = () => {
     const searchHN = async () => {
       setLoading(true);
       if (debouncedQuery) {
-        console.log(debouncedQuery, 'debouncedQuery')
-        console.log(masto, 'masto')
         const paginator = masto!.search({q: debouncedQuery, type: "accounts"})
-        console.log(paginator, 'paginator')
         const nextResults = await paginator.next()
-
-        console.log(nextResults, 'nextResults')
 
         setAccounts(nextResults.value.accounts || [])
         setLoading(false);
       }
+      else {
+        setAccounts([])
+      }
     };
-    if (query) {
-      searchHN();
-    }
+    searchHN();
+
   }, [debouncedQuery]);
 
   function active() {}
   function handleChange(e: any) {
     setQuery(e.target.value)
   }
+
+  // if (query.length) {
+  //   setAccounts([])
+  // }
   return (
     <div className="relative px4 py2 group">
       <div className="h10 flex flex-row relative bg-base border border-base rounded-full items-center outline-1 focus-within:outline">

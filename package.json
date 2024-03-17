@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "netlify dev",
+    "server": "netlify dev -p 55632",
     "register": "tsc scripts/registerApp.ts"
   },
   "dependencies": {
@@ -21,8 +21,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1",
     "react-use": "^17.5.0",
+    "redis": "^4.6.13",
     "ufo": "^1.4.0",
-    "unstorage": "^1.10.1",
     "zustand": "^4.5.1"
   },
   "devDependencies": {
@@ -36,6 +36,7 @@
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
+    "@unocss/transformer-directives": "^0.58.6",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",

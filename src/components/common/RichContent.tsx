@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { useAppCookies } from '../../hooks/cookie';
 
 export const RichContent: React.FC<{content: string}> = ({content = ''}) => {
-  console.log(content, 'content')
   const {serverURL} = useAppCookies();
   const {serverInfos} = useServerInfos(serverURL as string);
 

@@ -12,7 +12,7 @@ export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
   return (
     <div>
       {list.map(item => (
-        <div>
+        <div key={item['id']}>
           <Card key={item['id']} item={item}></Card>
           <div className='w-auto bg-border h-0.2'></div>
         </div>

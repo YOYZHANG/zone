@@ -1,7 +1,10 @@
-interface Props {}
-export const PublishButton: React.FC<Props> = () => {
+interface Props {
+  handleClick: () => void,
+}
+export const PublishButton: React.FC<Props> = ({handleClick}) => {
   return (
     <button
+      onClick={handleClick}
       className="
         color-primary rounded-full ml-7 flex flex-gap2 flex-center text-primary border-1 border-primary w-9 font-bold py-2
         lg:mx-3 lg:w-auto lg:py-4

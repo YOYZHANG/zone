@@ -6,6 +6,8 @@ import { Paginator } from "masto";
 import { NotificationPaginator } from "../components/notification/NotificationPaginator";
 import { NotificationCard } from "../components/notification/NotificationCard";
 import { useMastoStore } from "../store/masto";
+import { Link } from "react-router-dom";
+import { scrollToTop } from "../utils/scroll-to-top";
 
 export default function Notification() {
   const tabNames = ['All', 'Mentions']
@@ -17,20 +19,18 @@ export default function Notification() {
     if (!tab)
         return
 
-    const paginator = masto?.notifications.getIterator()
-    // @ts-ignore
+    const paginator = masto?.notifications.iterate()
     setPaginator(paginator)
   }, [tab, masto])
 
   return (
     <MainContent
       title={
-        <div className="flex items-center">
-          <div className="mr-1 i-ri:notification-2-fill"></div>
+        <Link to="/notification" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
+          <div className=" i-ri:notification-2-fill"></div>
           <span>Notifications</span>
-        </div>
+        </Link>
       }
-      actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
       <CommonTabs tab={tab!} setTab={setTab} options={tabNames} />
       {paginator && <NotificationPaginator paginator={paginator} NotificationCard={NotificationCard}/>}

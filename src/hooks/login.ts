@@ -20,41 +20,53 @@ export async function useLogin(user: UserLogin) {
           accessToken: user.token,
         }) 
 
+        console.log(masto, 'masto login')
+
         const me = await masto.accounts.verifyCredentials()
         user.account = me
         setCurrentId(me.id)
         setAccounts([...accounts!, user])
+        console.log('setAccounts!!', user)
 
         updateServerURL(user.server)
         updateToken(user.token)
+        location.href="/"
         
         return true
       }
     })()
-  }, [existing]);
+  }, [existing, user]);
 
   if (existing !== -1) {
     if (currentId === accounts?.[existing].account?.id) {
-      return null
+      console.log('reuse login cookie')
+    }
+    else {
+      setCurrentId(user.account!.id)
+      updateServerURL(user.server)
+      updateToken(user.token)
     }
       
-    setCurrentId(user.account!.id)
-    updateServerURL(user.server)
-    updateToken(user.token)
+    location.href="/"
 
     return true
   }
 }
 
 export function useCurrentUser() {
+  console.log('useCurrentUser exec')
   const [accounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
+  console.log(accounts, 'accounts when currentUser')
   const [currentId] = useLocalStorage<string>('zone-current', '')
+  console.log(currentId, 'currentId when currentUser')
 
   let currentUser = null;
 
   if (currentId && accounts?.length) {
     currentUser = {...accounts.find(user => user.account?.id === currentId)}
   }
+
+  console.log(currentUser, 'currentUser in userCurrentUser')
 
   return {currentUser}
 }

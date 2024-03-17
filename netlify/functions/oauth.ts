@@ -1,6 +1,6 @@
 import {stringifyQuery} from 'ufo'
-import { $fetch } from 'ofetch'
 import { HOST_DOMAIN, getApp, getRedirectURI } from './share'
+import {ofetch} from 'ofetch'
 
 export async function handler(event: any) {
   const query = event.queryStringParameters
@@ -13,8 +13,7 @@ export async function handler(event: any) {
       body: `App not registered for server: ${server}`,
     }
   }
-
-  const result: any = await $fetch(`https://${server}/oauth/token`, {
+  const result: any = await ofetch(`https://${server}/oauth/token`, {
     method: 'POST',
     body: {
       client_id: app.client_id,

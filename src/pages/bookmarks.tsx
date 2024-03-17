@@ -3,25 +3,25 @@ import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
 import { useEffect, useState } from "react";
 import { DefaultPaginationParams, Paginator, Status } from "masto";
 import { useMastoStore } from "../store/masto";
+import { Link } from "react-router-dom";
+import { scrollToTop } from "../utils/scroll-to-top";
 
 export default function BookMarks() {
   const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
   const {masto} = useMastoStore()
 
   useEffect(() => {
-    // @ts-ignore
-    setPaginator(masto!.bookmarks.getIterator())
+    setPaginator(masto!.bookmarks.iterate())
   }, [masto])
 
   return (<>
     <MainContent
       title={
-        <div className="flex items-center">
-          <div className="mr-1 i-ri:bookmark-fill h-6"></div>
+        <Link to="/bookmarks" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
+          <div className=" i-ri:bookmark-line"></div>
           <span>Bookmarks</span>
-        </div>
+        </Link>
       }
-      actions={<div className="color-gray i-ri:equalizer-fill mr-1 h-6"></div>}
     >
       {paginator && <TimelinePaginator paginator={paginator!} />}
     </MainContent>

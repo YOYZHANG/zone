@@ -8,7 +8,7 @@ interface Props {
 export const AccountAvator: React.FC<Props> = ({account}) => {
   const [loaded, setLoaded] = useState(true)
   const [error, setError] = useState(false)
-  return (<div className="account-avatar-normal mt3 rounded-full">
+  return (<div className="account-avatar-normal rounded-full">
     <img
       className={classNames("rounded-full", {
         'bg-base': loaded,

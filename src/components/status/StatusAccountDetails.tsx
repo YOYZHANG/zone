@@ -7,7 +7,6 @@ interface Props {
   account: Account
 }
 export const StatusAccountDetails: React.FC<Props> = ({account}) => {
-  console.log(account, 'account')
 
   return (<div>
     <Link to={account.acct} className="flex flex-col min-w-0 md:flex-row md:gap2 md:items-center text-link-rounded">

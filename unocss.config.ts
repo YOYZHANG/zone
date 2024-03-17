@@ -1,4 +1,4 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
 export default defineConfig({
   shortcuts: [{
     'border-base': 'border-$c-border',
@@ -56,6 +56,9 @@ export default defineConfig({
         'min-width': '1.2em',
       },
     }),
+  ],
+  transformers: [
+    transformerDirectives(),
   ],
   theme: {
     colors: {

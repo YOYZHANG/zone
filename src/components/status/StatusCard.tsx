@@ -30,7 +30,7 @@ export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
           )}
         </div> */}
         <div className='flex gap3 w-full'>
-            <div className='relative'>
+            <div className='relative  mt3'>
                 <Link to={cardStatus.account.acct} className="rounded-full">
                   <AccountAvator account={cardStatus.account} />
                 </Link>

@@ -1,11 +1,10 @@
 import { $fetch } from 'ofetch'
 import { AppInfo } from '../../src/types'
 import { APP_NAME } from '../../src/constants'
-import { createStorage } from 'unstorage'
+import { createClient } from 'redis';
 
-const storage = createStorage()
 
-export const HOST_DOMAIN = 'http://localhost:61712'
+export const HOST_DOMAIN = 'http://localhost:55632'
 export const DEFAULT_SERVER = 'mas.to'
 
 export function getRedirectURI(server: string) {
@@ -26,18 +25,38 @@ async function fetchAppInfo(server: string): Promise<AppInfo> {
 }
 
 export async function getApp(server: string= 'mastodon.social') {
-  const key = `zone:app_${server}`
 
-  const appInfo = await storage.getItem(key)
+  const client = await createClient({
+      password: process.env.pswd,
+      socket: {
+          host: process.env.host,
+          port: process.env.port
+      }
+  })
+    .on('error', err => console.log('Redis Client Error!!!!!!!!!!!', err))
+    .connect();
 
-  if (appInfo) {
-    console.log(appInfo, 'use appInfo cache')
-    return appInfo as AppInfo
+  const key = `zone:app_${HOST_DOMAIN.replace(/[^\w\d]/g, '-')}_${server}`
+
+
+  try {
+    const appInfo = await client.get(key)
+
+
+    if (appInfo) {
+      console.log(appInfo, 'use appInfo cache')
+      client.disconnect()
+      return JSON.parse(appInfo) as AppInfo
+    }
+  }
+  catch(e) {
+    console.error(e, 'get appInfo cache error')
   }
 
+  
   const app = await fetchAppInfo(server)
-  await storage.setItem(key, app)
-  console.log(app, 'use appInfo')
+  await  client.set(key, JSON.stringify(app))
+  client.disconnect()
   return app
 }
 
