@@ -44,6 +44,12 @@
 }
 
 
+.content-editor {
+  --at-apply: outline-none flex-1;
+  max-width: 100%;
+}
+
+
 .skeleton-loading-bg {
   background: linear-gradient(
     90deg,

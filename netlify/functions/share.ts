@@ -30,7 +30,7 @@ export async function getApp(server: string= 'mastodon.social') {
       password: process.env.pswd,
       socket: {
           host: process.env.host,
-          port: process.env.port
+          port: +process.env.port!
       }
   })
     .on('error', err => console.log('Redis Client Error!!!!!!!!!!!', err))

@@ -6,8 +6,15 @@ import { DEFAULT_SERVER } from '../../constants'
 export const UserSignIn: FC = () => {
   const [error, setError] = useState<boolean>(false)
   const [server, setServer] = useState<string>('')
+  const [busy, setBusy] = useState(false)
   const oauth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (busy) {
+      return
+    }
+
+    setBusy(true)
 
     if (server) {
       setServer(server.split('/')[0])
@@ -16,12 +23,15 @@ export const UserSignIn: FC = () => {
     try {
       
       const url = await $fetch<string>(`/api/login?server=${server || DEFAULT_SERVER}`)
+      setBusy(false)
       location.href = url
     }
     catch (e){
       console.error(e)
       setError(true)
+      setBusy(false)
     }
+
   }
 
 
@@ -69,8 +79,11 @@ export const UserSignIn: FC = () => {
               <a href='https://joinmastodon.org/servers' target='_blank' className='hover:underline text-primary'>pick your server and register one.</a>
             </span>
         </div>
-        <button className="flex flex-row gap2 items-center btn-solid mt2" disabled={!server}>
-          <span className='inline-block i-ri:login-circle-line'></span>
+        <button className="flex flex-row gap2 items-center btn-solid mt2" disabled={!server || busy}>
+          <span className={classNames({
+              'inline-block i-ri:login-circle-line': !busy,
+              'i-ri:loader-2-fill animate animate-spin': busy
+          })}></span>
           Sign in
         </button>
       </form>

@@ -1,8 +1,12 @@
 import { useLocalStorage } from "@reactuses/core";
-import classNames from "classnames";
 import { CreateStatusParamsWithStatus } from "masto";
 import { useState } from "react";
 import { useMastoStore } from "../../store/masto";
+import { Link } from "react-router-dom";
+import { useCurrentUser } from "../../hooks/login";
+import { AccountAvator } from "../account/AccountAvator";
+import { EditorProvider} from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
 
 interface Props {
   draftKey: string;
@@ -11,13 +15,22 @@ interface Props {
 }
 
 export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placeholder="what is on your mind ?"},) => {
-  const [isSending, setIsSending] = useState(false);
+  const [isSending, setIsSending] = useState(false)
+  const {currentUser} = useCurrentUser()
   const {masto} = useMastoStore()
+  const extensions = [
+    StarterKit,
+  ]
+
+  const { editor, content } = useTiptap({
+
+  })
+  
   const getDefaultDraft = () => ({
     status: '',
     inReplyToId,
   })
-  const [draft, setDraft] = useLocalStorage<CreateStatusParamsWithStatus>(`zone-draft-${draftKey}`, getDefaultDraft());
+  
 
   const handlePublish = async() => {
     if (!draft) return;
@@ -32,26 +45,38 @@ export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placehold
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDraft({...draft, status: e.target.value});
-  }
+  // const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   setDraft({...draft, status: e.target.value});
+  // }
   return (<>
-    <div className={classNames("flex flex-col gap-4 w-full", {
-      'pointer-events-none': isSending
-    })}>
-      <textarea
-        value={draft?.status}
-        placeholder={placeholder}
-        className="p2 border-rounded w-full h-40 bg-gray:10 outline-none border" 
-        onChange={handleChange}
-      />
-      <div className="flex justify-end cursor-pointer">
-        <button
-          className="h-7 w-22 bg-gray border-rounded hover:bg-gray:60 text-white"
-          disabled={draft?.status === ''}
-          onClick={handlePublish}
-        >Publish!</button>
+    {currentUser && <div className="flex flex-col gap4 py3 px2 sm:px4">
+      <div className="flex gap-4 flex-1">
+        <Link to={currentUser.account!.acct}>
+          <AccountAvator account={currentUser.account!} />
+        </Link>
+        <div className="flex flex-col gap-3 flex-1 border-2 border-dashed border-transparent">
+            <div className="
+                relative flex-1 flex flex-col max-w-full min-h-30
+                md:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-400px)] max-h-35 of-y-auto overscroll-contain"
+            >
+              <EditorProvider  extensions={extensions} content={content}><div></div>
+              </EditorProvider>
+            </div>
+        </div>
       </div>
-    </div>
+      <div className="flex gap-4">
+        <div className="w-12 h-full sm:block hidden" />
+        <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
+          <div className="flex-auto" />
+          <button
+            className="btn-solid rounded-full text-sm"
+            // disabled={isEmpty || isUploading}
+            onClick={handlePublish}
+          >
+            Publish
+          </button>
+        </div>
+      </div>
+    </div>}
   </>)
 }
