@@ -1,12 +1,17 @@
-import { useLocalStorage } from "@reactuses/core";
-import { CreateStatusParamsWithStatus } from "masto";
 import { useState } from "react";
 import { useMastoStore } from "../../store/masto";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/login";
 import { AccountAvator } from "../account/AccountAvator";
-import { EditorProvider} from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { EditorContent, useEditor, Extension} from '@tiptap/react'
+import { getDefaultDraft, useDraft } from "../../hooks/draft";
+import classNames from "classnames";
+import CharacterCount from '@tiptap/extension-character-count'
+import Placeholder from '@tiptap/extension-placeholder'
+import Document from '@tiptap/extension-document'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+
 
 interface Props {
   draftKey: string;
@@ -15,58 +20,89 @@ interface Props {
 }
 
 export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placeholder="what is on your mind ?"},) => {
-  const [isSending, setIsSending] = useState(false)
+  const {draft, setDraft, isEmpty} = useDraft(draftKey)
+  const [isExpand, setExpand] = useState(false)
+  const shouldExpand = isExpand || !isEmpty
+
   const {currentUser} = useCurrentUser()
   const {masto} = useMastoStore()
-  const extensions = [
-    StarterKit,
-  ]
 
-  const { editor, content } = useTiptap({
+  const [isSending, setIsSending] = useState(false)
 
-  })
+  const editor = useEditor({
+    content: draft.params.status || 'hello world',
+    extensions: [
+      Document,
+      Paragraph,
+      Text,
+      Placeholder.configure({
+        placeholder,
+      }),
+      CharacterCount.configure({
+        limit: 500,
+      }),
+      Extension.create({
+        name: 'api',
+        onFocus() {
+          setExpand(true)
+        },
+      }),
+    ],
+    onUpdate({ editor }: any) {
+      setDraft({...draft, params: {status: editor.getHTML()}})
+    },
+    editorProps: {
+      attributes: {
+        class: 'content-editor rich-content',
+      },
+    },
+    autofocus: shouldExpand,
+    editable: true,
+  }, [draft])
+
   
-  const getDefaultDraft = () => ({
-    status: '',
-    inReplyToId,
-  })
-  
-
   const handlePublish = async() => {
     if (!draft) return;
+
     try {
-      setIsSending(true);
-      console.log(draft, 'draft publish');
-      await masto?.statuses.create(draft)
-      setDraft(getDefaultDraft());
+      setIsSending(true)
+
+      if (draft) {
+        await masto?.statuses.create(draft.params)
+        setDraft(getDefaultDraft());
+      }
+
+      // 关闭模态框
+      
     }
     finally {
       setIsSending(false);
     }
   }
-
-  // const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   setDraft({...draft, status: e.target.value});
-  // }
   return (<>
     {currentUser && <div className="flex flex-col gap4 py3 px2 sm:px4">
       <div className="flex gap-4 flex-1">
         <Link to={currentUser.account!.acct}>
           <AccountAvator account={currentUser.account!} />
         </Link>
-        <div className="flex flex-col gap-3 flex-1 border-2 border-dashed border-transparent">
-            <div className="
-                relative flex-1 flex flex-col max-w-full min-h-30
-                md:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-400px)] max-h-35 of-y-auto overscroll-contain"
-            >
-              <EditorProvider  extensions={extensions} content={content}><div></div>
-              </EditorProvider>
+        <div className={
+          classNames("flex flex-col gap-3 flex-1 border-2 border-dashed border-transparent max-w-120 relative", {
+          'pointer-events-none': isSending
+        })}>
+            <div className={classNames(
+                "relative flex-1 flex flex-col max-w-full", {
+                  "min-h-30 md:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-400px)] max-h-35 of-y-auto overscroll-contain": shouldExpand
+                })}>
+              <EditorContent editor={editor} />
             </div>
+            {shouldExpand && (<div className="absolute right-0 bottom-0 pointer-events-none text-sm text-secondary-light">
+            500 / { editor?.storage.characterCount.characters() }
+            </div>)}
         </div>
       </div>
       <div className="flex gap-4">
         <div className="w-12 h-full sm:block hidden" />
-        <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
+        {shouldExpand && <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
           <div className="flex-auto" />
           <button
             className="btn-solid rounded-full text-sm"
@@ -75,7 +111,7 @@ export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placehold
           >
             Publish
           </button>
-        </div>
+        </div>}
       </div>
     </div>}
   </>)

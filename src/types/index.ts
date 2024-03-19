@@ -1,4 +1,4 @@
-import type { Account, AccountCredentials, Emoji, Instance } from 'masto'
+import type { Account, AccountCredentials, CreateStatusParams, Emoji, Instance } from 'masto'
 export type PaginatorState = 'idle' | 'loading' | 'done' | 'error'
 
 export interface ServerInfo extends Instance {
@@ -33,3 +33,10 @@ export interface SearchResultType {
     label: string
   }
 }
+
+
+export interface Draft {
+  params: CreateStatusParams
+}
+
+export type DraftMap = Record<string, Draft>

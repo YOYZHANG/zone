@@ -54,19 +54,14 @@ export async function useLogin(user: UserLogin) {
 }
 
 export function useCurrentUser() {
-  console.log('useCurrentUser exec')
   const [accounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
-  console.log(accounts, 'accounts when currentUser')
   const [currentId] = useLocalStorage<string>('zone-current', '')
-  console.log(currentId, 'currentId when currentUser')
 
   let currentUser = null;
 
   if (currentId && accounts?.length) {
     currentUser = {...accounts.find(user => user.account?.id === currentId)}
   }
-
-  console.log(currentUser, 'currentUser in userCurrentUser')
 
   return {currentUser}
 }
