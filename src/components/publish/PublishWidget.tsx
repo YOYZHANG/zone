@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMastoStore } from "../../store/masto";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/login";
@@ -17,12 +17,20 @@ interface Props {
   draftKey: string;
   inReplyToId?: string;
   placeholder?: string;
+  _expand?: boolean;
+  closeModal?: () => void
 }
 
-export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placeholder="what is on your mind ?"},) => {
+export const PublishWidget: React.FC<Props> = ({
+  draftKey,
+  inReplyToId,
+  placeholder="what is on your mind ?",
+  _expand=false,
+  closeModal
+}) => {
   const {draft, setDraft, isEmpty} = useDraft(draftKey)
   const [isExpand, setExpand] = useState(false)
-  const shouldExpand = isExpand || !isEmpty
+  const shouldExpand = isExpand || !isEmpty || _expand
 
   const {currentUser} = useCurrentUser()
   const {masto} = useMastoStore()
@@ -30,7 +38,7 @@ export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placehold
   const [isSending, setIsSending] = useState(false)
 
   const editor = useEditor({
-    content: draft.params.status || 'hello world',
+    content: draft.params.status,
     extensions: [
       Document,
       Paragraph,
@@ -58,6 +66,10 @@ export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placehold
     },
     autofocus: shouldExpand,
     editable: true,
+  }, [])
+
+  useEffect(() => {
+    editor?.commands.setContent(draft.params.status || '', false)
   }, [draft])
 
   
@@ -73,7 +85,7 @@ export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placehold
       }
 
       // 关闭模态框
-      
+      closeModal?.()
     }
     finally {
       setIsSending(false);

@@ -27,6 +27,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
+        console.log(serverURL, 'serverURL createMasto')
         await createMasto(serverURL, token);
     })();
   }, [createMasto, serverURL, token]);

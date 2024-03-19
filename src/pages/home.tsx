@@ -12,6 +12,7 @@ export default function Home() {
   const {masto} = useMastoStore()
 
   useEffect(() => {
+    console.log('home get timeline update')
     setPaginator(masto?.timelines.iterateHome())
   }, [masto])
 

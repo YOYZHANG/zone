@@ -13,6 +13,7 @@ interface Action {
 export const useMastoStore = create<State & Action>(set => ({
   masto: undefined,
   createMasto: async (serverURL: UseCookieState, token: UseCookieState) => {
+    console.log('createMasto', serverURL)
     const masto = await login({
       url: `https://${serverURL}`,
       accessToken: token ||'',

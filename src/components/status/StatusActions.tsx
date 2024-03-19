@@ -76,8 +76,8 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         </div>
       </button>
       <button
-        className={classNames("rounded op75 hover:op100 hover:text-rose flex-none items-center flex", {
-          'text-rose op100': cardStatus.bookmarked,
+        className={classNames("rounded op75 hover:op100 hover:text-yellow flex-none items-center flex", {
+          'text-yellow op100': cardStatus.bookmarked,
           'pointer-events-none': false
         })}
         onClick={toggleBookmark}
