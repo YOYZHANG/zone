@@ -7,7 +7,6 @@ import './styles/var.css'
 import Home from './pages/home';
 import BookMarks from './pages/bookmarks';
 import Explore from './pages/explore';
-import Login from './pages/login';
 import Favorites from './pages/favorites';
 import User from './pages/@user';
 import Following from './pages/@user/following';
@@ -17,20 +16,17 @@ import Notification from './pages/notification'
 import CallBack from './pages/login/callback';
 import { useMastoStore } from './store/masto';
 import { useEffect } from 'react';
-import { useAppCookies } from './hooks/cookie';
 import { useCurrentUser } from './hooks/login';
 
 function App() {
   const {createMasto} = useMastoStore()
   const {currentUser} = useCurrentUser()
-  const {token, serverURL} = useAppCookies();
 
   useEffect(() => {
     (async () => {
-        console.log(serverURL, 'serverURL createMasto')
-        await createMasto(serverURL, token);
+      await createMasto(currentUser?.server, currentUser?.token);
     })();
-  }, [createMasto, serverURL, token]);
+  }, [currentUser?.server, currentUser?.token]);
 
 
   return (
@@ -41,7 +37,6 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/bookmarks' element={<BookMarks />} />
         <Route path='/explore' element={<Explore />} />
-        <Route path='/login' element={<Login />} />
         <Route path='/favorites' element={<Favorites />} />
         <Route path='/:user' element={<User />} />
         <Route path='/:user/following' element={<Following />} />

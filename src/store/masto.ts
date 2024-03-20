@@ -1,21 +1,26 @@
-import { UseCookieState } from '@reactuses/core'
 import { MastoClient, login } from 'masto'
 import { create } from 'zustand'
+import { DEFAULT_SERVER } from '../constants';
 
 interface State {
-  masto: MastoClient | undefined
+  masto: MastoClient
 }
 
 interface Action {
-  createMasto: (serverURL: UseCookieState, token: UseCookieState) => void
+  createMasto: (server: string | undefined, token: string | undefined) => void
 }
 
+const masto = await login({
+  url: `https://${DEFAULT_SERVER}`,
+  accessToken: '',
+})
+
 export const useMastoStore = create<State & Action>(set => ({
-  masto: undefined,
-  createMasto: async (serverURL: UseCookieState, token: UseCookieState) => {
-    console.log('createMasto', serverURL)
+  masto,
+  createMasto: async (server, token) => {
+
     const masto = await login({
-      url: `https://${serverURL}`,
+      url: `https://${server || DEFAULT_SERVER}`,
       accessToken: token ||'',
     })
 

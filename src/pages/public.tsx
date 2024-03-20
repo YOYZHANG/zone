@@ -11,7 +11,7 @@ export default function Public() {
   const {masto} = useMastoStore()
 
   useEffect(() => {
-    setPaginator(masto?.timelines.getPublicIterable())
+    setPaginator(masto?.timelines.iteratePublic())
   }, [masto])
 
   return (<>
@@ -23,7 +23,7 @@ export default function Public() {
         </Link>
       }
     >
-    {paginator && <TimelinePaginator paginator={paginator} />}
+     {paginator && <TimelinePaginator paginator={paginator} />}
     {!paginator && <div>waiting...</div>}
     </MainContent>
   </>)

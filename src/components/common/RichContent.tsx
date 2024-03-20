@@ -2,10 +2,12 @@ import parse from 'html-react-parser';
 import { useServerInfos } from '../../hooks/serverInfo';
 import { Emoji } from 'masto';
 import { useRef } from 'react';
-import { useAppCookies } from '../../hooks/cookie';
+import { useCurrentUser } from '../../hooks/login';
+import { DEFAULT_SERVER } from '../../constants';
 
 export const RichContent: React.FC<{content: string}> = ({content = ''}) => {
-  const {serverURL} = useAppCookies();
+  const {currentUser} = useCurrentUser();
+  const serverURL = currentUser?.server || DEFAULT_SERVER
   const {serverInfos} = useServerInfos(serverURL as string);
 
   const emojis = useRef<Record<string, Emoji>>({})

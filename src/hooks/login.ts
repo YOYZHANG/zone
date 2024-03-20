@@ -1,35 +1,24 @@
 import { useLocalStorage } from "@reactuses/core";
 import { UserLogin } from "../types";
-import { login as loginMasto } from 'masto'
 import { useEffect } from "react";
-import { useAppCookies } from "./cookie";
+import {useMastoStore} from '../store/masto'
 
 export async function useLogin(user: UserLogin) {
   const [accounts, setAccounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
   const [currentId, setCurrentId] = useLocalStorage<string>('zone-current', '')
-  const {updateServerURL, updateToken} = useAppCookies()
-
+  const {masto, createMasto} = useMastoStore()
 
   const existing = accounts!.findIndex(u => u.server === user.server && u.token === user.token)
 
   useEffect(() => {
     (async () => {
       if (existing === -1) {
-        const masto = await loginMasto({
-          url: `https://${user.server}`,
-          accessToken: user.token,
-        }) 
+        await createMasto(user.server, user.token)
 
-        console.log(masto, 'masto login')
-
-        const me = await masto.accounts.verifyCredentials()
+        const me = await masto!.accounts.verifyCredentials()
         user.account = me
         setCurrentId(me.id)
         setAccounts([...accounts!, user])
-        console.log('setAccounts!!', user)
-
-        updateServerURL(user.server)
-        updateToken(user.token)
         location.href="/"
         
         return true
@@ -43,10 +32,8 @@ export async function useLogin(user: UserLogin) {
     }
     else {
       setCurrentId(user.account!.id)
-      updateServerURL(user.server)
-      updateToken(user.token)
     }
-      
+    
     location.href="/"
 
     return true
