@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useCurrentUser, useLogin } from "../../hooks/login"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLogin } from "../../hooks/login"
+import { useLocation } from "react-router-dom"
 import { parseQuery } from "ufo"
 
 export default function CallBack() {

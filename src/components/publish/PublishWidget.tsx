@@ -20,6 +20,7 @@ interface Props {
 }
 
 export const PublishWidget: React.FC<Props> = ({draftKey, inReplyToId, placeholder="what is on your mind ?"},) => {
+  inReplyToId
   const {draft, setDraft, isEmpty} = useDraft(draftKey)
   const [isExpand, setExpand] = useState(false)
   const shouldExpand = isExpand || !isEmpty

@@ -22,7 +22,7 @@ export const PublishWidgetEntry: React.FC<Props> = () => {
       <PublishButton handleClick={openPublishDialog}/>
       
       <ModalDialog showModal={showModal} setShowModal={setShowModal}>
-        <PublishWidget draftKey="dialog" />
+        <PublishWidget draftKey="dialog"/>
       </ModalDialog>
       
    </div>
