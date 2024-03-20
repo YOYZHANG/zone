@@ -21,7 +21,6 @@ export function usePaginator<T>(paginator: Paginator<any, T[]>) {
         setState('loading')
 
         try {
-
           const result = await paginator?.next()
 
           if (result?.value?.length) {

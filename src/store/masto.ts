@@ -3,27 +3,26 @@ import { create } from 'zustand'
 import { DEFAULT_SERVER } from '../constants';
 
 interface State {
-  masto: MastoClient
+  masto: MastoClient | null,
+  mastoLogged: boolean
 }
 
 interface Action {
   createMasto: (server: string | undefined, token: string | undefined) => void
 }
 
-const masto = await login({
-  url: `https://${DEFAULT_SERVER}`,
-  accessToken: '',
-})
-
 export const useMastoStore = create<State & Action>(set => ({
-  masto,
+  masto: null,
+  mastoLogged: false,
   createMasto: async (server, token) => {
-
-    const masto = await login({
+    if (!token) {
+      return
+    }
+    const newmasto = await login({
       url: `https://${server || DEFAULT_SERVER}`,
       accessToken: token ||'',
     })
 
-    set({masto});
+    set({masto: newmasto, mastoLogged: true});
   },
 }))

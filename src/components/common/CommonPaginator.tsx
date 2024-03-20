@@ -1,6 +1,7 @@
 import type { Paginator } from 'masto'
 import { usePaginator } from '../../hooks/paginator'
 import { StatusProps } from '../status/StatusCard'
+import { StatusCardSkeleton } from '../status/StatusCardSkeleton'
 interface Props {
   paginator: Paginator<any, any[]>,
   Card: React.FC<StatusProps>,
@@ -20,12 +21,11 @@ export const CommonPaginator: React.FC<Props> = ({paginator, Card}) => {
       ))}
       <div ref={endAnchor}></div>
       {
-        state === 'loading' && (
-          <div className='flex flex-col items-center text-center p5 animate-pulse'>
-            <div className="op50 i-ri:loader-2-fill animate-spin text-2xl"></div>
-            <span className="op50">Loading...</span>
-          </div>
-        )
+        state === 'loading' && (<>
+          <StatusCardSkeleton></StatusCardSkeleton>
+          <StatusCardSkeleton></StatusCardSkeleton>
+          <StatusCardSkeleton></StatusCardSkeleton>
+        </>)
       }
       {
         state === 'done' && (

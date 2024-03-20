@@ -19,15 +19,25 @@ import { useEffect } from 'react';
 import { useCurrentUser } from './hooks/login';
 
 function App() {
-  const {createMasto} = useMastoStore()
+  const {createMasto, mastoLogged} = useMastoStore()
   const {currentUser} = useCurrentUser()
 
   useEffect(() => {
     (async () => {
-      await createMasto(currentUser?.server, currentUser?.token);
+      if (currentUser) {
+        await createMasto(currentUser?.server, currentUser?.token);
+      }
     })();
   }, [currentUser?.server, currentUser?.token]);
-
+  
+  if (!currentUser || !mastoLogged) {
+    return (<>
+      <div className='flex flex-col items-center text-center p5 animate-pulse'>
+        <div className="op50 i-ri:loader-2-fill animate-spin text-2xl"></div>
+        <span className="op50">Loading...</span>
+      </div>
+    </>);
+  }
 
   return (
     <Routes>
