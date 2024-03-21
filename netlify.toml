@@ -9,14 +9,39 @@
 
 
 [[redirects]]
-  from = "/*"
+  from = "/public"
   to = "/"
   status = 200
 
 [[redirects]]
-    from = "/api/*"
-    to = "/.netlify/functions/:splat"
-    status = 200
+  from = "/home"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/notification"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/favorites"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/explore"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/bookmarks"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 [[redirects]]
   from = "/user/:splat"

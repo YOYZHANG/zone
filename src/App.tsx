@@ -56,10 +56,10 @@ function App() {
         <Route path='/bookmarks' element={<BookMarks />} />
         <Route path='/explore' element={<Explore />} />
         <Route path='/favorites' element={<Favorites />} />
-        <Route path='/:user' element={<User />} />
-        <Route path='/:user/following' element={<Following />} />
-        <Route path='/:user/followers' element={<Follower />} />
-        <Route path='/:user/:post' element={<Post />} />
+        <Route path='/user/:user' element={<User />} />
+        <Route path='/user/:user/following' element={<Following />} />
+        <Route path='/user/:user/followers' element={<Follower />} />
+        <Route path='/user/:user/:post' element={<Post />} />
         <Route path='/notification' element={<Notification />} />
         <Route path='/login/callback' element={<CallBack />} />
       </Route>

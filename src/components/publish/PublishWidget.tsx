@@ -92,7 +92,7 @@ export const PublishWidget: React.FC<Props> = ({
   return (<>
     {currentUser && <div className="flex flex-col gap4 py3 px2 sm:px4">
       <div className="flex gap-4 flex-1">
-        <Link to={currentUser.account!.acct}>
+        <Link to={`/user/${currentUser.account!.acct}`}>
           <AccountAvator account={currentUser.account!} />
         </Link>
         <div className={

@@ -31,7 +31,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
     <div className="flex justify-between my-3 text-sm">
       <Link
         className="rounded op75 hover:op100 hover:text-blue group flex-1 items-center"
-        to={`/@${cardStatus.account.acct}/${cardStatus.id}`}
+        to={`/user/@${cardStatus.account.acct}/${cardStatus.id}`}
       >
         <div className="rounded-full  flex items-center">
           <div
