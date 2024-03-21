@@ -6,7 +6,7 @@ import {useMastoStore} from '../store/masto'
 export async function useLogin(user: UserLogin) {
   const [accounts, setAccounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
   const [currentId, setCurrentId] = useLocalStorage<string>('zone-current', '')
-  const {masto, createMasto} = useMastoStore()
+  const {masto, createMasto, setMastoLogin} = useMastoStore()
 
   const existing = accounts!.findIndex(u => u.server === user.server && u.token === user.token)
 
@@ -19,7 +19,8 @@ export async function useLogin(user: UserLogin) {
         user.account = me
         setCurrentId(me.id)
         setAccounts([...accounts!, user])
-        console.log('login success: redirect')
+
+        setMastoLogin(true)
         location.href="/"
       
         return true

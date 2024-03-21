@@ -31,7 +31,7 @@ export const BaseLayout: React.FC = () => {
                     <div className="p6 pb8 w-full flex items-center justify-between">
                       <Link
                         className="hidden lg:block rounded-full text-start w-full hover:bg-active cursor-pointer transition-100"
-                        to={currentUser.account!.acct}
+                        to={`/user/${currentUser.account!.acct}`}
                       >
                         <AccountInfo account={currentUser.account!} > </AccountInfo>
                       </Link>

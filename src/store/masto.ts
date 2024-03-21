@@ -10,7 +10,8 @@ interface State {
 }
 
 interface Action {
-  createMasto: (server: string | undefined, token: string | undefined) => void
+  createMasto: (server: string | undefined, token: string | undefined) => void,
+  setMastoLogin: (loggin: boolean) => void
 }
 
 export const useMastoStore = create<State & Action>(set => ({
@@ -26,12 +27,12 @@ export const useMastoStore = create<State & Action>(set => ({
         })
     
         set({masto: newmasto, mastoLogged: true})
-        if (server && token) {
-          set({mastoLoggin: true})
-        }
      }
      catch (e) {
         set({mastoError: e as Error})
      }
   },
+  setMastoLogin: (loggin: boolean) => {
+    set({mastoLoggin: loggin})
+  }
 }))
