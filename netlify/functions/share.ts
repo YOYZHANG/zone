@@ -4,8 +4,7 @@ import { APP_NAME } from '../../src/constants'
 import { createClient } from 'redis';
 
 
-export const HOST_DOMAIN = 'http://localhost:55632'
-export const DEFAULT_SERVER = 'mas.to'
+export const HOST_DOMAIN = process.env.dev ? 'http://localhost:55632' : 'https://mastodon-zone.netlify.app'
 
 export function getRedirectURI(server: string) {
   return `${HOST_DOMAIN}/api/oauth?server=${server}`
