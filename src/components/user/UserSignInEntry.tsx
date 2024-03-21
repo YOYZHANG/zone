@@ -6,7 +6,7 @@ import { DEFAULT_SERVER } from "../../constants"
 export const UserSignInEntry: React.FC = () => {
   const [showModal, setShowModal] = useState(false)
   const openSignInDialog = () => {
-    setShowModal(true)
+      setShowModal(true)
   }
   return (<>
     <div className="hidden lg:block">

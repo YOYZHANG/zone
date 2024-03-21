@@ -12,7 +12,7 @@ export const PublishWidgetEntry: React.FC<Props> = () => {
   const [showModal, setShowModal] = useState(false)
   const {currentUser} = useCurrentUser()
   const openPublishDialog = useCallback(() => {
-    setShowModal(true)
+      setShowModal(true)
   }, [setShowModal])
 
   const closeModal = useCallback(() => {setShowModal(false)}, [])

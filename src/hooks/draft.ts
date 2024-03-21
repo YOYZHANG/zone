@@ -32,7 +32,6 @@ export function useDraft(draftKey: string) {
     setCurrentDraft({...currentDraft})
   }
 
-  console.log(draft, 'draft')
   const isEmpty = isEmptyDraft(draft)
 
 

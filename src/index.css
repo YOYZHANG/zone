@@ -122,3 +122,18 @@ html {
   height: 0;
   pointer-events: none;
 }
+
+.modal-animated {
+  animation: fadeUp 400ms forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: .5;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

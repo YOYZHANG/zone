@@ -14,6 +14,7 @@ export default function Favorites() {
     setPaginator(favoraites)
   }, [masto])
 
+
   return (
     <MainContent
       title={

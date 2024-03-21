@@ -33,7 +33,7 @@ export async function getApp(server: string= 'mastodon.social') {
           port: +process.env.port!
       }
   })
-    .on('error', err => console.log('Redis Client Error!!!!!!!!!!!', err))
+    .on('error', err => console.log('Redis Client Error', err))
     .connect();
 
   const key = `zone:app_${HOST_DOMAIN.replace(/[^\w\d]/g, '-')}_${server}`

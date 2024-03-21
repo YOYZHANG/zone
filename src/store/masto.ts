@@ -4,7 +4,9 @@ import { DEFAULT_SERVER } from '../constants';
 
 interface State {
   masto: MastoClient | null,
-  mastoLogged: boolean
+  mastoLogged: boolean,
+  mastoLoggin: boolean,
+  mastoError: Error | null
 }
 
 interface Action {
@@ -14,15 +16,22 @@ interface Action {
 export const useMastoStore = create<State & Action>(set => ({
   masto: null,
   mastoLogged: false,
+  mastoLoggin: false,
+  mastoError: null,
   createMasto: async (server, token) => {
-    if (!token) {
-      return
-    }
-    const newmasto = await login({
-      url: `https://${server || DEFAULT_SERVER}`,
-      accessToken: token ||'',
-    })
-
-    set({masto: newmasto, mastoLogged: true});
+     try {
+        const newmasto = await login({
+          url: `https://${server || DEFAULT_SERVER}`,
+          accessToken: token ||'',
+        })
+    
+        set({masto: newmasto, mastoLogged: true})
+        if (server && token) {
+          set({mastoLoggin: true})
+        }
+     }
+     catch (e) {
+        set({mastoError: e as Error})
+     }
   },
 }))

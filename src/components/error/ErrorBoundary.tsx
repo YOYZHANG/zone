@@ -1,18 +1,26 @@
-import {ReactNode, FC, useState} from 'react'
+import {Component, ReactNode} from 'react';
 
-export const ErrorBoundary: FC<{children: ReactNode}> = ({
-  children,
-}) => {
-  const [hasError] = useState(false)
-  return (
-    <>
-    {hasError && (
-      <div>
-        <h1>Something went wrong.</h1>
-        <p>Please try again later.</p>
-      </div>
-    )}
-    {!hasError && children}
-    </>
-  )
+interface ChildrenComponent {
+    // 定义你的 props 类型
+    children: ReactNode;
+}
+
+export class ErrorBoundary extends Component<ChildrenComponent> {
+    state: {
+        hasError: boolean;
+    };
+    constructor(props: ChildrenComponent | Readonly<ChildrenComponent>) {
+        super(props);
+        this.state = {hasError: false};
+    }
+
+    static getDerivedStateFromError() {
+        return {hasError: true};
+    }
+    render() {
+        if (this.state.hasError) {
+            return <div className="h-screen p-10 text-center">Oops! Something went wrong, please try again.</div>;
+        }
+        return this.props.children;
+    }
 }

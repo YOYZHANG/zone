@@ -4,10 +4,15 @@ import { useMastoStore } from "../store/masto";
 import { scrollToTop } from "../utils/scroll-to-top";
 import { Link } from "react-router-dom";
 import { PublishWidget } from "../components/publish/PublishWidget";
+import { Loading } from "../components/loading/Loading";
 
 export default function Home() {
-  const {masto} = useMastoStore()
+  const {masto, mastoLoggin} = useMastoStore()
   const paginator = masto!.timelines.iterateHome()
+
+  if (!mastoLoggin) {
+    return <Loading />
+  }
 
   return (<>
     <MainContent

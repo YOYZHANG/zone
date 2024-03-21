@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import {FC, useState} from 'react'
 import { $fetch } from 'ofetch'
-import { DEFAULT_SERVER } from '../../constants'
 
 export const UserSignIn: FC = () => {
   const [error, setError] = useState<boolean>(false)
@@ -10,7 +9,7 @@ export const UserSignIn: FC = () => {
   const oauth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (busy) {
+    if (busy || !server) {
       return
     }
 
@@ -22,16 +21,14 @@ export const UserSignIn: FC = () => {
 
     try {
       
-      const url = await $fetch<string>(`/api/login?server=${server || DEFAULT_SERVER}`)
-      setBusy(false)
+      const url = await $fetch<string>(`/api/login?server=${server}`)
       location.href = url
     }
     catch (e){
       console.error(e)
       setError(true)
-      setBusy(false)
+     
     }
-
   }
 
 

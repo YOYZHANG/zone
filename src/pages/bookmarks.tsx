@@ -14,6 +14,7 @@ export default function BookMarks() {
     setPaginator(masto!.bookmarks.iterate())
   }, [masto])
 
+
   return (<>
     <MainContent
       title={
