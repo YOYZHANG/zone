@@ -1,18 +1,16 @@
-import { DefaultPaginationParams, Paginator, Status } from "masto";
 import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
-import { useEffect, useState } from "react";
 import { useMastoStore } from "../store/masto";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../utils/scroll-to-top";
 
 export default function Explore() {
-  const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
-  const {masto} = useMastoStore()
+  const {masto, mastoLogged} = useMastoStore()
 
-  useEffect(() => {
-    setPaginator(masto?.trends.iterateStatuses())
-  }, [masto])
+  if (!mastoLogged)
+    return (<></>)
+
+  const paginator = masto?.trends.iterateStatuses()
 
   return (<>
     <MainContent

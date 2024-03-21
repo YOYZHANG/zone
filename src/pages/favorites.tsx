@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
 import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
-import { DefaultPaginationParams, Paginator, Status } from "masto";
 import { useMastoStore } from "../store/masto";
 import { Link } from "react-router-dom";
 
 export default function Favorites() {
-  const [paginator, setPaginator] = useState<Paginator<DefaultPaginationParams, Status[]>>()
-  const {masto} = useMastoStore()
-  useEffect(() => {
-    const favoraites = masto?.favourites.iterate()
-    // @ts-ignore
-    setPaginator(favoraites)
-  }, [masto])
+  const {masto, mastoLogged} = useMastoStore()
 
+
+  if (!mastoLogged)
+    return (<></>)
+
+  const paginator = masto?.favourites.iterate()
 
   return (
     <MainContent
@@ -24,7 +21,7 @@ export default function Favorites() {
         </Link>
       }
     >
-      {paginator && <TimelinePaginator paginator={paginator!} />}
+      {paginator && <TimelinePaginator paginator={paginator} />}
     </MainContent>
   )
 }

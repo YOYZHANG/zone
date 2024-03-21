@@ -36,29 +36,31 @@ function App() {
     </>);
   }
 
-  {!mastoLogged && (
-    <div className='flex flex-col items-center text-center p5 animate-pulse'>
-      <div className="op50 i-ri:loader-2-fill animate-spin text-2xl"></div>
-      <span className="op50">Maston Server Loading...</span>
-    </div>
-  )}
+  if (!mastoLogged) {
+    return (
+      <div className='flex flex-col items-center text-center p5 animate-pulse'>
+        <div className="op50 i-ri:loader-2-fill animate-spin text-2xl"></div>
+        <span className="op50">Maston Server Loading...</span>
+      </div>
+    )
+  }
+
+  console.log(mastoLogged, 'mastoLogged in app')
 
   return (
     <Routes>
       <Route path='/' element={<BaseLayout/>}>
-        {mastoLogged && (<>
-          <Route path='/' element={currentUser ? <Home /> : <Public />} />
-          <Route path='/public' element={<Public />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/bookmarks' element={<BookMarks />} />
-          <Route path='/explore' element={<Explore />} />
-          <Route path='/favorites' element={<Favorites />} />
-          <Route path='/:user' element={<User />} />
-          <Route path='/:user/following' element={<Following />} />
-          <Route path='/:user/followers' element={<Follower />} />
-          <Route path='/:user/:post' element={<Post />} />
-          <Route path='/notification' element={<Notification />} />
-        </>)}
+        <Route path='/' element={currentUser ? <Home /> : <Public />} />
+        <Route path='/public' element={<Public />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/bookmarks' element={<BookMarks />} />
+        <Route path='/explore' element={<Explore />} />
+        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/:user' element={<User />} />
+        <Route path='/:user/following' element={<Following />} />
+        <Route path='/:user/followers' element={<Follower />} />
+        <Route path='/:user/:post' element={<Post />} />
+        <Route path='/notification' element={<Notification />} />
         <Route path='/login/callback' element={<CallBack />} />
       </Route>
     </Routes>

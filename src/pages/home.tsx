@@ -7,12 +7,18 @@ import { PublishWidget } from "../components/publish/PublishWidget";
 import { Loading } from "../components/loading/Loading";
 
 export default function Home() {
-  const {masto, mastoLoggin} = useMastoStore()
-  const paginator = masto!.timelines.iterateHome()
+  const {masto, mastoLoggin, mastoLogged} = useMastoStore()
+
+  if (!mastoLogged) {
+    return <></>
+  }
 
   if (!mastoLoggin) {
     return <Loading />
   }
+  const paginator = masto!.timelines.iterateHome()
+
+  
 
   return (<>
     <MainContent

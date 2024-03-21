@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { CommonTabs } from "../components/common/CommonTabs"
 import { MainContent } from "../components/main/MainContent"
 import { useLocalStorage } from "@reactuses/core";
-import { Paginator } from "masto";
 import { NotificationPaginator } from "../components/notification/NotificationPaginator";
 import { NotificationCard } from "../components/notification/NotificationCard";
 import { useMastoStore } from "../store/masto";
@@ -10,18 +8,16 @@ import { Link } from "react-router-dom";
 import { scrollToTop } from "../utils/scroll-to-top";
 
 export default function Notification() {
+  const {masto, mastoLogged} = useMastoStore()
+
   const tabNames = ['All', 'Mentions']
   const [tab, setTab] = useLocalStorage('zone-notifications-tab', 'All')
-  const [paginator, setPaginator] = useState<Paginator<any, any[]>>()
-  const {masto} = useMastoStore()
 
-  useEffect(() => {
-    if (!tab)
-        return
+  if (!mastoLogged) {
+    return <></>
+  }
 
-    const paginator = masto?.notifications.iterate()
-    setPaginator(paginator)
-  }, [tab, masto])
+  const paginator = masto?.notifications.iterate()
 
   return (
     <MainContent

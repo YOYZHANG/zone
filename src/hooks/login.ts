@@ -19,12 +19,13 @@ export async function useLogin(user: UserLogin) {
         user.account = me
         setCurrentId(me.id)
         setAccounts([...accounts!, user])
+        console.log('login success: redirect')
         location.href="/"
       
         return true
       }
     })()
-  }, [existing, user]);
+  }, [user]);
 
   if (existing !== -1) {
     if (currentId === accounts?.[existing].account?.id) {
@@ -34,6 +35,7 @@ export async function useLogin(user: UserLogin) {
       setCurrentId(user.account!.id)
     }
     
+    console.log('login success: redirect cache')
     location.href="/"
 
     return true

@@ -1,14 +1,16 @@
 import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
-import { DefaultPaginationParams, Paginator, Status } from "masto";
-import { useState } from "react";
 import { useMastoStore } from "../store/masto";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../utils/scroll-to-top";
 
 export default function Public() {
-  const {masto} = useMastoStore()
-  const [paginator] = useState<Paginator<DefaultPaginationParams, Status[]>>(masto!.timelines.iteratePublic())
+  const {masto, mastoLogged} = useMastoStore()
+
+  if (!mastoLogged)
+    return (<></>)
+
+  const paginator = masto!.timelines.iteratePublic()
 
   return (<>
     <MainContent
@@ -19,7 +21,7 @@ export default function Public() {
         </Link>
       }
     >
-     <TimelinePaginator paginator={paginator} />
+    {paginator && <TimelinePaginator paginator={paginator} />}
     </MainContent>
   </>)
 }
