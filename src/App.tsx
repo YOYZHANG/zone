@@ -58,8 +58,8 @@ function App() {
           <Route path='/:user/followers' element={<Follower />} />
           <Route path='/:user/:post' element={<Post />} />
           <Route path='/notification' element={<Notification />} />
-          <Route path='/login/callback' element={<CallBack />} />
         </>)}
+        <Route path='/login/callback' element={<CallBack />} />
       </Route>
     </Routes>
   )
