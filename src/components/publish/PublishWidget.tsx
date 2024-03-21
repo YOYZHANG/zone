@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMastoStore } from "../../store/masto";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../hooks/login";
