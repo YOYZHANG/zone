@@ -59,6 +59,9 @@ dependencies:
   ufo:
     specifier: ^1.4.0
     version: 1.4.0
+  ultrahtml:
+    specifier: ^1.5.3
+    version: 1.5.3
   zustand:
     specifier: ^4.5.1
     version: 4.5.1(@types/react@18.2.58)(react@18.2.0)
@@ -10102,6 +10105,10 @@ packages:
     resolution: {integrity: sha512-keqHubrlpvT6G2wH0OEfSW4mquYRcbe/J8NMmveoQOjUqmo+hXtO+ORCpWhdbZ7k72UtY61BL7haGxW6enBnjw==}
     hasBin: true
     dev: true
+
+  /ultrahtml@1.5.3:
+    resolution: {integrity: sha512-GykOvZwgDWZlTQMtp5jrD4BVL+gNn2NVlVafjcFUJ7taY20tqYdwdoWBFy6GBJsNTZe1GkGPkSl5knQAjtgceg==}
+    dev: false
 
   /unbzip2-stream@1.4.3:
     resolution: {integrity: sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==}

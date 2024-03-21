@@ -18,6 +18,7 @@ export const SearchWidget: React.FC<Props> = () => {
   const normalizedResults = [
     ...accounts.map(account => ({ type: 'account', account, to: `/@${account.acct}` })),
   ]
+
   useEffect(() => {
     const searchHN = async () => {
       setLoading(true);

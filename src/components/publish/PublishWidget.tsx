@@ -11,6 +11,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
+import { htmlToText } from "../../utils/parse";
 
 
 interface Props {
@@ -69,11 +70,6 @@ export const PublishWidget: React.FC<Props> = ({
     editable: true,
   }, [])
 
-  useEffect(() => {
-    editor?.commands.setContent(draft.params.status || '', false)
-  }, [draft])
-
-  
   const handlePublish = async() => {
     if (!draft) return;
 
@@ -81,7 +77,8 @@ export const PublishWidget: React.FC<Props> = ({
       setIsSending(true)
 
       if (draft) {
-        await masto?.statuses.create(draft.params)
+        const payload = {...draft.params, status: htmlToText(draft.params.status)}
+        await masto?.statuses.create(payload)
         setDraft(getDefaultDraft());
       }
 
@@ -119,7 +116,7 @@ export const PublishWidget: React.FC<Props> = ({
           <div className="flex-auto" />
           <button
             className="btn-solid rounded-full text-sm"
-            // disabled={isEmpty || isUploading}
+            disabled={isEmpty}
             onClick={handlePublish}
           >
             Publish

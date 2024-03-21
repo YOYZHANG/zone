@@ -1,6 +1,13 @@
 import { useLocalStorage } from "@reactuses/core";
 import { Draft, DraftMap } from "../types";
 
+const isEmptyDraft = (draft: Draft) => {
+  if (!draft || !draft.params.status?.length)
+    return true
+
+  return draft.params.status === '<p></p>'
+}
+
 export const getDefaultDraft = (options: Partial<Draft['params']> = {}):Draft  => {
   const {
     status,
@@ -25,7 +32,8 @@ export function useDraft(draftKey: string) {
     setCurrentDraft({...currentDraft})
   }
 
-  const isEmpty = !draft || !draft.params.status?.length
+  console.log(draft, 'draft')
+  const isEmpty = isEmptyDraft(draft)
 
 
   return { draft, isEmpty, setDraft}
