@@ -7,7 +7,7 @@ interface Props {
 }
 export const SearchResult: React.FC<Props> = ({result}) => {
   return (
-    <Link to={`/user/${result.to}`} className="py2 block px2 hover:bg-active">
+    <Link to={`/user${result.to}`} className="py2 block px2 hover:bg-active">
       {result.type === 'account' && <AccountInfo account={result.account!} >1</AccountInfo>}
     </Link>
   )

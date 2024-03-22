@@ -31,13 +31,15 @@ export default function Post() {
 
       {status && <StatusDetail status={status}></StatusDetail>}
 
-      <div className="border-t p6 flex gap-4">
+      <div className="border-t p6 flex">
         <img src={status?.account.avatar} className="rounded w-10 h-10 bg-gray:10"/>
-        <PublishWidget
-          draftKey={`reply-${id}`}
-          inReplyToId={id}
-          placeholder={`Reply to ${status?.account.displayName || status?.account.acct || 'thead'}...`}
-        />
+        <div className="flex-1">
+          <PublishWidget
+            draftKey={`reply-${id}`}
+            inReplyToId={id}
+            placeholder={`Reply to ${status?.account.displayName || status?.account.acct || 'thead'}...`}
+          />
+        </div>
       </div>
       <div className="pt-4">
         {context?.descendants.map(comment => (<div className="pt4 border-t" key={comment.id}><StatusCard item={comment} /></div>))}

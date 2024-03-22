@@ -10,22 +10,37 @@ interface Props {
 export const StatusActions: React.FC<Props> = ({status}) => {
   const [cardStatus, setCardStatus] = useState(status);
   const {masto} = useMastoStore()
-  async function toggleStatusAction(action: 'reblogged' | 'favourited' | 'bookmarked', newcardStatus: Promise<Status>) {
-    console.log(action, 'action')
-    setCardStatus({...cardStatus, ...(await newcardStatus)})
+  async function toggleStatusAction(
+    action: 'reblogged' | 'favourited' | 'bookmarked',
+    newcardStatus: (cur: boolean) => Promise<Status>
+  ) {
+    const currentAction = cardStatus[action]
+
+    await newcardStatus(!!currentAction)
   }
   const toggleReblog = () => toggleStatusAction(
     'reblogged',
-    masto!.statuses[cardStatus.reblog ? 'unreblog' : 'reblog'](status.id),
+    (cur) => {
+      const count = cur ? cardStatus.reblogsCount - 1 : cardStatus.reblogsCount + 1
+      setCardStatus({...cardStatus, 'reblogsCount': count < 0 ? 0 : count, 'reblogged': !cur})
+      return masto!.statuses[cur ? 'unreblog' : 'reblog'](status.id)
+    },
   )
   const toggleFavourite = () => toggleStatusAction(
     'favourited',
-    masto!.statuses[cardStatus.favourited ? 'unfavourite' : 'favourite'](status.id),
+    (cur) => {
+      const count = cur ? cardStatus.favouritesCount - 1 : cardStatus.favouritesCount + 1
+      setCardStatus({...cardStatus, 'favouritesCount': count < 0 ? 0 : count, 'favourited': !cur})
+      return masto!.statuses[cur ? 'unfavourite' : 'favourite'](status.id)
+    },
   )
   
   const toggleBookmark = () => toggleStatusAction(
     'bookmarked',
-    masto!.statuses[cardStatus.bookmarked ? 'unbookmark' : 'bookmark'](status.id),
+    (cur) => {
+      setCardStatus({...cardStatus, 'bookmarked': !cur})
+      return masto!.statuses[cur ? 'unbookmark' : 'bookmark'](status.id)
+    },
   )
   return (
     <div className="flex justify-between my-3 text-sm">
