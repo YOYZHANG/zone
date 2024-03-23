@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import {AccountAvator} from '../account/AccountAvator'
 import { StatusAccountDetails } from './StatusAccountDetails'
 import {StatusContent} from './StatusContent'
+import { AccountInlineInfo } from '../account/AccountInlineInfo'
 export interface StatusProps {
   item: Status,
   action?: boolean
@@ -15,20 +16,19 @@ export const StatusCard: React.FC<StatusProps> = ({item, action = true}) => {
   const timeAgo = useTimeAgo(item.createdAt)
   const cardStatus = item.reblog && !item.content ? item.reblog : item
 
-  // const rebloggedBy = item.reblog ? item.account : ''
+  const rebloggedBy = item.reblog ? item.account : ''
 
   return (
     <div className="flex flex-col gap1 px-4 pt-1 pb-1 transition-100 hover:bg-active focus-visible:ring-2 focus-visible:ring-primary min-w-0">
-      <div className="flex gap3">
-        {/* <div>
+      <div className="relative flex flex-col px-1 pt-1">
+        <div>
           {rebloggedBy && (
-            <div className='pl8 flex gap-1 items-center text-gray:75 text-sm'>
+            <div className='text-secondary text-sm ws-nowrap flex gap-1 items-center py1'>
               <div className="i-ri:repeat-fill mr-1"></div>
-              <AccountInlineInfo account={rebloggedBy} />
-              reblogged
+              <AccountInlineInfo font-bold account={rebloggedBy} />
             </div>
           )}
-        </div> */}
+        </div>
         <div className='flex gap3 w-full'>
             <div className='relative  mt3'>
                 <Link to={`/user/${cardStatus.account.acct}`} className="rounded-full">

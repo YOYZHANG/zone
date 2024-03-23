@@ -5,6 +5,7 @@ import { StatusCard } from "../../components/status/StatusCard"
 import { StatusDetail } from "../../components/status/StatusDetail"
 import { PublishWidget } from "../../components/publish/PublishWidget"
 import { useMastoStore } from "../../store/masto"
+import { getReplyDraft } from "../../hooks/draft"
 
 export default function Post() {
   const params = useParams()
@@ -23,8 +24,19 @@ export default function Post() {
       const context = await masto?.statuses.fetchContext(id)
       setContext(context)
     })()
-  }, [id])
-  
+  }, [id, masto])
+
+  const handlePublish = async () => {
+    if (id) {
+      const context = await masto?.statuses.fetchContext(id)
+      setContext(context)
+    }
+    
+  }
+  const replyDraft = status && getReplyDraft(status)
+
+  const descendants = context?.descendants.sort((a,b) =>(+b.id - +a.id))
+
   return (<>
     <div>
       {context?.ancestors.map(comment => (<div className="border-t" key={comment.id}><StatusCard item={comment} /></div>))}
@@ -37,12 +49,14 @@ export default function Post() {
           <PublishWidget
             draftKey={`reply-${id}`}
             inReplyToId={id}
+            initDraft={replyDraft?.draft()}
+            handlePublishFn={handlePublish}
             placeholder={`Reply to ${status?.account.displayName || status?.account.acct || 'thead'}...`}
           />
         </div>
       </div>
       <div className="pt-4">
-        {context?.descendants.map(comment => (<div className="pt4 border-t" key={comment.id}><StatusCard item={comment} /></div>))}
+        {descendants?.map(comment => (<div className="pt4 border-t" key={comment.id}><StatusCard item={comment} /></div>))}
       </div>
     </div>
   </>)

@@ -36,7 +36,8 @@ export interface SearchResultType {
 
 
 export interface Draft {
-  params: CreateStatusParams
+  params: CreateStatusParams,
+  initialText?: string
 }
 
 export type DraftMap = Record<string, Draft>

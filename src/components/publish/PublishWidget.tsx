@@ -12,30 +12,34 @@ import Document from '@tiptap/extension-document'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { htmlToText } from "../../utils/parse";
+import { Draft } from "../../types";
 
 
 interface Props {
   draftKey: string;
   inReplyToId?: string;
   placeholder?: string;
+  initDraft?: Draft;
   _expand?: boolean;
-  closeModal?: () => void
+  closeModal?: () => void;
+  handlePublishFn?: () => void
 }
 
 export const PublishWidget: React.FC<Props> = ({
   draftKey,
   inReplyToId,
+  handlePublishFn,
   placeholder="what is on your mind ?",
   _expand=false,
+  initDraft = getDefaultDraft({}),
   closeModal
 }) => {
   inReplyToId
-  const {draft, setDraft, isEmpty} = useDraft(draftKey)
+  const {draft, setDraft, isEmpty} = useDraft(draftKey, initDraft)
   const [isExpand, setExpand] = useState(false)
   const shouldExpand = isExpand || !isEmpty || _expand
 
   const {currentUser} = useCurrentUser()
-  const {masto} = useMastoStore()
 
   const [isSending, setIsSending] = useState(false)
 
@@ -59,7 +63,7 @@ export const PublishWidget: React.FC<Props> = ({
       }),
     ],
     onUpdate({ editor }: any) {
-      setDraft({...draft, params: {status: editor.getHTML()}})
+      setDraft({...draft, params: {...draft.params, status: editor.getHTML()}})
     },
     editorProps: {
       attributes: {
@@ -70,6 +74,8 @@ export const PublishWidget: React.FC<Props> = ({
     editable: true,
   }, [])
 
+  const {masto} = useMastoStore()
+
   const handlePublish = async() => {
     if (!draft) return;
 
@@ -79,14 +85,16 @@ export const PublishWidget: React.FC<Props> = ({
       if (draft) {
         const payload = {...draft.params, status: htmlToText(draft.params.status)}
         await masto?.statuses.create(payload)
-        setDraft(getDefaultDraft());
+        setDraft(initDraft);
       }
 
       // 关闭模态框
       closeModal?.()
     }
     finally {
-      setIsSending(false);
+      handlePublishFn && handlePublishFn()
+      editor?.chain().clearContent().run()
+      setIsSending(false)
     }
   }
   return (<>
@@ -115,10 +123,13 @@ export const PublishWidget: React.FC<Props> = ({
         {shouldExpand && <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
           <div className="flex-auto" />
           <button
-            className="btn-solid rounded-full text-sm"
+            className="btn-solid rounded-full text-sm flex gap2 text-center items-center"
             disabled={isEmpty}
             onClick={handlePublish}
           >
+            <div className={classNames({
+              'i-ri-loader-4-line animate animate-spin': isSending
+            })}></div>
             Publish
           </button>
         </div>}

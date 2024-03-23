@@ -20,7 +20,7 @@ import { useCurrentUser } from './hooks/login';
 import { Loading } from './components/loading/Loading';
 
 function App() {
-  const {createMasto, mastoLogged, mastoError, setMastoLogin} = useMastoStore()
+  const {createMasto, mastoLogged, mastoError, setMastoLogin, mastoLoggin} = useMastoStore()
   const {currentUser} = useCurrentUser()
 
   useEffect(() => {
@@ -38,16 +38,19 @@ function App() {
         {mastoLogged && (<>
           <Route path='/' element={currentUser ? <Home /> : <Public />} />
           <Route path='/public' element={<Public />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/bookmarks' element={<BookMarks />} />
-          <Route path='/explore' element={<Explore />} />
-          <Route path='/favorites' element={<Favorites />} />
-          <Route path='/user/:user' element={<User />} />
-          <Route path='/user/:user/following' element={<Following />} />
-          <Route path='/user/:user/followers' element={<Follower />} />
-          <Route path='/user/:user/:post' element={<Post />} />
-          <Route path='/notification' element={<Notification />} />
           <Route path='/login/callback' element={<CallBack />} />
+          <Route path='/explore' element={<Explore />} />
+          {mastoLoggin && (<>
+            <Route path='/home' element={<Home />} />
+            <Route path='/bookmarks' element={<BookMarks />} />
+            <Route path='/favorites' element={<Favorites />} />
+            <Route path='/user/:user' element={<User />} />
+            <Route path='/user/:user/following' element={<Following />} />
+            <Route path='/user/:user/followers' element={<Follower />} />
+            <Route path='/user/:user/:post' element={<Post />} />
+            <Route path='/notification' element={<Notification />} />
+          </>)}
+          
         </>)}
         {
           !mastoLogged && (<>
