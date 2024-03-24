@@ -1,19 +1,29 @@
 import type { Status } from 'masto'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useMastoStore } from '../../store/masto';
+import { useCurrentUser } from '../../hooks/login';
+import { ModalDialog } from '../modal/ModalDialog';
+import { UserSignIn } from '../user/UserSignIn';
 
 interface Props {
   status: Status
 }
 export const StatusActions: React.FC<Props> = ({status}) => {
-  const [cardStatus, setCardStatus] = useState(status);
+  const [cardStatus, setCardStatus] = useState(status)
+  const {currentUser} = useCurrentUser()
   const {masto} = useMastoStore()
+  const [showModal, setShowModal] = useState(false)
+  const navigate = useNavigate()
   async function toggleStatusAction(
     action: 'reblogged' | 'favourited' | 'bookmarked',
     newcardStatus: (cur: boolean) => Promise<Status>
   ) {
+    if (!currentUser) {
+      setShowModal(true)
+      return
+    }
     const currentAction = cardStatus[action]
 
     await newcardStatus(!!currentAction)
@@ -42,11 +52,21 @@ export const StatusActions: React.FC<Props> = ({status}) => {
       return masto!.statuses[cur ? 'unbookmark' : 'bookmark'](status.id)
     },
   )
+
+  const reply = (url: string) => {
+    if (!currentUser) {
+      setShowModal(true)
+      return
+    }
+
+    navigate(url)
+  }
   return (
-    <div className="flex justify-between my-3 text-sm">
-      <Link
+    <>
+      <div className="flex justify-between my-3 text-sm">
+      <div
         className="rounded op75 hover:op100 hover:text-blue group flex-1 items-center"
-        to={`/user/@${cardStatus.account.acct}/${cardStatus.id}`}
+        onClick={() => reply(`/user/@${cardStatus.account.acct}/${cardStatus.id}`)}
       >
         <div className="rounded-full  flex items-center">
           <div
@@ -54,7 +74,7 @@ export const StatusActions: React.FC<Props> = ({status}) => {
           ></div>
           { !!cardStatus.repliesCount && (<span className="pl1 text-xs">{cardStatus.repliesCount}</span>) }
         </div>
-      </Link>
+      </div>
       <button 
         className={classNames("rounded op75 hover:op100 hover:text-green flex-1 items-center", {
           'text-green op100': cardStatus.reblogged,
@@ -107,5 +127,10 @@ export const StatusActions: React.FC<Props> = ({status}) => {
         </div>
       </button>
     </div>
+    <ModalDialog showModal={showModal} setShowModal={setShowModal}>
+      <UserSignIn />
+    </ModalDialog>
+    </>
+    
   )
 }

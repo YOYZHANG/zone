@@ -8,6 +8,8 @@ import { AccountInfo } from './components/account/AccountInfo';
 import { useCurrentUser } from './hooks/login';
 import { PublishWidgetEntry } from './components/publish/PublishWidgtEntry';
 
+import { UserSwitcher } from './components/user/UserSwitcher';
+
 export const BaseLayout: React.FC = () => {
   const {currentUser} = useCurrentUser()
 
@@ -35,6 +37,7 @@ export const BaseLayout: React.FC = () => {
                       >
                         <AccountInfo account={currentUser.account!} > </AccountInfo>
                       </Link>
+                      <UserSwitcher />
                     </div>
                   </div>
                 )}

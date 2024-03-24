@@ -8,6 +8,7 @@
 .rich-content {
   line-height: calc(4 / 3 * 1em);
   overflow-wrap: break-word;
+  word-break: break-all;
 
   a {
     --at-apply: 'text-primary hover:underline hover:text-primary-active';
@@ -136,4 +137,8 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+button {
+  outline: none;
 }
