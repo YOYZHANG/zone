@@ -12,6 +12,7 @@
     "register": "tsc scripts/registerApp.ts"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@reactuses/core": "^5.0.5",
     "@tiptap/extension-character-count": "^2.2.4",
@@ -21,7 +22,9 @@
     "@tiptap/extension-text": "^2.2.4",
     "@tiptap/pm": "^2.2.4",
     "@tiptap/react": "^2.2.4",
+    "blurhash": "^2.0.5",
     "classnames": "^2.5.1",
+    "emoji-mart": "^5.5.2",
     "html-react-parser": "^5.1.8",
     "lucide-react": "^0.363.0",
     "masto": "^4.11.1",

@@ -125,7 +125,7 @@ html {
 }
 
 .modal-animated {
-  animation: fadeUp 400ms forwards;
+  animation: fadeUp 100ms forwards;
 }
 
 @keyframes fadeUp {

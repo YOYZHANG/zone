@@ -2,6 +2,7 @@ import type { Status } from 'masto'
 import { StatusBody } from './StatusBody'
 import { StatusMedia } from './StatusMedia'
 import { StatusCard } from './StatusCard'
+import { StatusPreviewCard } from './StatusPreviewCard'
 
 interface Props {
   status: Status
@@ -15,7 +16,7 @@ export const StatusContent: React.FC<Props> = ({status}) => {
     >
       <StatusBody status={status} />
       {!!status.mediaAttachments?.length && <StatusMedia status={status}/>}
-      {/* StatusPreviewCard */}
+      {!!status.card && <StatusPreviewCard card={status.card}/>}
       { !!status.reblog && <StatusCard item={status.reblog} action={false}/>}
     </div>
   )

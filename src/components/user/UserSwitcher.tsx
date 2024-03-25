@@ -18,10 +18,10 @@ export const UserSwitcher: React.FC = () => {
           <div className='flex gap4 items-center text-center w-full'>
             <AccountInfo account={currentUser.account!} > </AccountInfo>
             <div className='flex-auto' />
-            <div className="i-ri:check-line text-2xl text-primary"/>
+            <div className="i-ri:check-line text-xl text-primary"/>
           </div>
         </DropdownMenuItem>
-        <div className="border-base border-t px2">
+        <div className="border-base border-t px2 hover:bg-active">
           <DropdownMenuItem>
             <UserLogout />
           </DropdownMenuItem>

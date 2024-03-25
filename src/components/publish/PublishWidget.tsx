@@ -13,6 +13,7 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { htmlToText } from "../../utils/parse";
 import { Draft } from "../../types";
+import { PublishEmojiPicker } from "./PublishEmojiPicker";
 
 
 interface Props {
@@ -121,6 +122,7 @@ export const PublishWidget: React.FC<Props> = ({
       <div className="flex gap-4">
         <div className="w-12 h-full sm:block hidden" />
         {shouldExpand && <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
+          <PublishEmojiPicker/>
           <div className="flex-auto" />
           <button
             className="btn-solid rounded-full text-sm flex gap2 text-center items-center"
