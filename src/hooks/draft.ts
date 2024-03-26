@@ -22,7 +22,8 @@ export const getDefaultDraft = (options: Partial<Draft['params'] & Omit<Draft, '
       inReplyToId,
       mediaIds: []
     },
-    initialText
+    initialText,
+    attachments: [],
   }
 }
 

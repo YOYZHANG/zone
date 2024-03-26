@@ -12,7 +12,6 @@
     "register": "tsc scripts/registerApp.ts"
   },
   "dependencies": {
-    "@emoji-mart/data": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@reactuses/core": "^5.0.5",
     "@tiptap/extension-character-count": "^2.2.4",
@@ -23,8 +22,8 @@
     "@tiptap/pm": "^2.2.4",
     "@tiptap/react": "^2.2.4",
     "blurhash": "^2.0.5",
+    "browser-fs-access": "^0.35.0",
     "classnames": "^2.5.1",
-    "emoji-mart": "^5.5.2",
     "html-react-parser": "^5.1.8",
     "lucide-react": "^0.363.0",
     "masto": "^4.11.1",
@@ -39,6 +38,8 @@
     "zustand": "^4.5.1"
   },
   "devDependencies": {
+    "@emoji-mart/data": "^1.0.0",
+    "@emoji-mart/react": "^1.1.1",
     "@iconify-json/carbon": "^1.1.30",
     "@iconify-json/logos": "^1.1.42",
     "@iconify-json/ri": "^1.1.20",
@@ -51,6 +52,7 @@
     "@typescript-eslint/parser": "^7.0.2",
     "@unocss/transformer-directives": "^0.58.6",
     "@vitejs/plugin-react": "^4.2.1",
+    "emoji-mart": "^5.5.2",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

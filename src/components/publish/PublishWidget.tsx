@@ -13,7 +13,10 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { htmlToText } from "../../utils/parse";
 import { Draft } from "../../types";
-import { PublishEmojiPicker } from "./PublishEmojiPicker";
+// import { PublishEmojiPicker } from "./PublishEmojiPicker";
+import {fileOpen} from 'browser-fs-access'
+import { Attachment } from "masto";
+import { PublishAttachment } from "./PublishAttachment";
 
 
 interface Props {
@@ -37,6 +40,8 @@ export const PublishWidget: React.FC<Props> = ({
 }) => {
   inReplyToId
   const {draft, setDraft, isEmpty} = useDraft(draftKey, initDraft)
+
+  console.log(draft, 'draft')
   const [isExpand, setExpand] = useState(false)
   const shouldExpand = isExpand || !isEmpty || _expand
 
@@ -98,6 +103,58 @@ export const PublishWidget: React.FC<Props> = ({
       setIsSending(false)
     }
   }
+
+  const selectEmoji = (emoji: string) => {
+    editor?.chain().insertContent(emoji).focus().run()
+  }
+
+  const [isUploading, setIsUploading] = useState(false)
+  const [failed, setFailed] = useState<File[]>([])
+
+  const uploadAttachments = async (files: File[]) => {
+    setIsUploading(true)
+    console.log(files)
+    for (const f of files) {
+      try {
+        const attachment = await masto?.mediaAttachments.create({file: f}) as Attachment
+        setDraft({...draft, attachments: [...draft.attachments, attachment]})
+      }
+      catch (e) {
+        console.error(e)
+        setFailed([...failed, f])
+      }
+    }
+
+    setIsUploading(false)
+  }
+
+  const pickAttachments = async () => {
+    const files = await fileOpen([
+      {
+        description: 'Attachments',
+        multiple: true,
+        mimeTypes: ['image/*'],
+        extensions: ['.png', '.gif', '.jpeg', '.jpg', '.webp', '.avif', '.heic', '.heif'],
+      },
+      {
+        description: 'Attachments',
+        mimeTypes: ['video/*'],
+        extensions: ['.webm', '.mp4', '.m4v', '.mov', '.ogv', '.3gp'],
+      },
+      {
+        description: 'Attachments',
+        mimeTypes: ['audio/*'],
+        extensions: ['.mp3', '.ogg', '.oga', '.wav', '.flac', '.opus', '.aac', '.m4a', '.3gp', '.wma'],
+      },
+    ])
+
+    await uploadAttachments(files)
+  }
+
+  const removeAttachment = (attachment: Attachment) => {
+    setDraft({...draft, attachments: draft.attachments.filter((a) => a.id !== attachment.id)})
+  }
+
   return (<>
     {currentUser && <div className="flex flex-col gap4 py3 px2 sm:px4">
       <div className="flex gap-4 flex-1">
@@ -117,12 +174,44 @@ export const PublishWidget: React.FC<Props> = ({
             {shouldExpand && (<div className="absolute right-0 bottom-0 pointer-events-none text-sm text-secondary-light">
             500 / { editor?.storage.characterCount.characters() }
             </div>)}
+
+            {isUploading &&
+              <div className="flex gap1 items-center text-sm text-primary p1">
+                <div className="i-ri-loader-2-fill animate animate-spin"></div>
+                <div>Uploading...</div>
+              </div>
+            }
+            {
+              failed.length > 0 &&
+              <div className="flex flex-col gap1 text-sm p2 text-red:600 dark:text-red:400 border border-base border-rounded border-red:600 dark:border-red:400">
+                  <head className="flex justify-between">
+                    <div className="flex items-center gap-x-2 font-bold">
+                      <div i-ri:error-warning-fill />
+                      <p>Upload Fail</p>
+                    </div>
+                  </head>
+                  <ol className="pl2">
+                    {failed.map((f) => <li key={f.name}>{f.name}</li>)}
+                  </ol>
+              </div>
+            }
+            {
+              draft?.attachments?.length > 0 &&
+              <div>
+                  {draft.attachments.map((attachment) => (
+                    <PublishAttachment attachment={attachment} remove={() => removeAttachment(attachment)}></PublishAttachment>)
+                  )}
+              </div>
+            }
         </div>
       </div>
       <div className="flex gap-4">
         <div className="w-12 h-full sm:block hidden" />
         {shouldExpand && <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
-          <PublishEmojiPicker/>
+          {/* <PublishEmojiPicker selectEmoji={selectEmoji}/> */}
+          <button className="btn-action-icon" onClick={pickAttachments}>
+            <div className="i-ri:image-add-line"></div>
+          </button>
           <div className="flex-auto" />
           <button
             className="btn-solid rounded-full text-sm flex gap2 text-center items-center"

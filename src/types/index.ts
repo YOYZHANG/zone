@@ -1,4 +1,4 @@
-import type { Account, AccountCredentials, CreateStatusParams, Emoji, Instance } from 'masto'
+import type { Account, AccountCredentials, Attachment, CreateStatusParams, Emoji, Instance } from 'masto'
 export type PaginatorState = 'idle' | 'loading' | 'done' | 'error'
 
 export interface ServerInfo extends Instance {
@@ -38,6 +38,7 @@ export interface SearchResultType {
 export interface Draft {
   params: CreateStatusParams,
   initialText?: string
+  attachments: Attachment[]
 }
 
 export type DraftMap = Record<string, Draft>

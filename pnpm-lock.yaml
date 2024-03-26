@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@emoji-mart/data':
-    specifier: ^1.1.2
-    version: 1.1.2
   '@radix-ui/react-dropdown-menu':
     specifier: ^2.0.6
     version: 2.0.6(@types/react-dom@18.2.19)(@types/react@18.2.58)(react-dom@18.2.0)(react@18.2.0)
@@ -38,12 +35,12 @@ dependencies:
   blurhash:
     specifier: ^2.0.5
     version: 2.0.5
+  browser-fs-access:
+    specifier: ^0.35.0
+    version: 0.35.0
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
-  emoji-mart:
-    specifier: ^5.5.2
-    version: 5.5.2
   html-react-parser:
     specifier: ^5.1.8
     version: 5.1.8(@types/react@18.2.58)(react@18.2.0)
@@ -82,6 +79,12 @@ dependencies:
     version: 4.5.1(@types/react@18.2.58)(react@18.2.0)
 
 devDependencies:
+  '@emoji-mart/data':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@emoji-mart/react':
+    specifier: ^1.1.1
+    version: 1.1.1(emoji-mart@5.5.2)(react@18.2.0)
   '@iconify-json/carbon':
     specifier: ^1.1.30
     version: 1.1.30
@@ -118,6 +121,9 @@ devDependencies:
   '@vitejs/plugin-react':
     specifier: ^4.2.1
     version: 4.2.1(vite@5.1.4)
+  emoji-mart:
+    specifier: ^5.5.2
+    version: 5.5.2
   eslint:
     specifier: ^8.56.0
     version: 8.57.0
@@ -588,9 +594,19 @@ packages:
       node-source-walk: 6.0.2
     dev: true
 
-  /@emoji-mart/data@1.1.2:
-    resolution: {integrity: sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==}
-    dev: false
+  /@emoji-mart/data@1.0.0:
+    resolution: {integrity: sha512-u3Q7son4HtZud84TYMmRhPuZBMroIe6nM50Pu2dlCw7sFr2GMi3RZZElNfGPLrI+hd9nigvngSGUyGfoZLxC/g==}
+    dev: true
+
+  /@emoji-mart/react@1.1.1(emoji-mart@5.5.2)(react@18.2.0):
+    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      emoji-mart: 5.5.2
+      react: 18.2.0
+    dev: true
 
   /@esbuild/aix-ppc64@0.19.11:
     resolution: {integrity: sha512-FnzU0LyE3ySQk7UntJO4+qIiQgI7KoODnZg5xzXIrFJlKd2P2gwHsHY4927xj9y5PJmJSzULiUCWmv7iWnNa7g==}
@@ -4139,6 +4155,10 @@ packages:
       fill-range: 7.0.1
     dev: true
 
+  /browser-fs-access@0.35.0:
+    resolution: {integrity: sha512-sLoadumpRfsjprP8XzVjpQc0jK8yqHBx0PtUTGYj2fftT+P/t+uyDAQdMgGAPKD011in/O+YYGh7fIs0oG/viw==}
+    dev: false
+
   /browserslist@4.23.0:
     resolution: {integrity: sha512-QW8HiM1shhT2GuzkvklfjcKDiWFXHOeFCIA/huJPwHsslwcydgk7X+z2zXpEijP98UCY7HbubZt5J2Zgvf0CaQ==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
@@ -5229,7 +5249,7 @@ packages:
 
   /emoji-mart@5.5.2:
     resolution: {integrity: sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==}
-    dev: false
+    dev: true
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -7538,7 +7558,6 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
-    dev: false
 
   /lower-case@2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
@@ -9368,7 +9387,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /read-pkg-up@9.1.0:
     resolution: {integrity: sha512-vaMRR1AC1nrd5CQM0PhlRsO5oc2AAigqr7cCrZ/MW/Rsaflz4RlgzkpL4qoU/z1F6wrbd85iFv1OQj/y5RdGvg==}
