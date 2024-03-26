@@ -13,7 +13,7 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import { htmlToText } from "../../utils/parse";
 import { Draft } from "../../types";
-// import { PublishEmojiPicker } from "./PublishEmojiPicker";
+import { PublishEmojiPicker } from "./PublishEmojiPicker";
 import {fileOpen} from 'browser-fs-access'
 import { Attachment } from "masto";
 import { PublishAttachment } from "./PublishAttachment";
@@ -41,7 +41,6 @@ export const PublishWidget: React.FC<Props> = ({
   inReplyToId
   const {draft, setDraft, isEmpty} = useDraft(draftKey, initDraft)
 
-  console.log(draft, 'draft')
   const [isExpand, setExpand] = useState(false)
   const shouldExpand = isExpand || !isEmpty || _expand
 
@@ -113,17 +112,20 @@ export const PublishWidget: React.FC<Props> = ({
 
   const uploadAttachments = async (files: File[]) => {
     setIsUploading(true)
-    console.log(files)
+    
+    const attachments: Attachment[] = draft.attachments
     for (const f of files) {
       try {
         const attachment = await masto?.mediaAttachments.create({file: f}) as Attachment
-        setDraft({...draft, attachments: [...draft.attachments, attachment]})
+        attachments.push(attachment)
       }
       catch (e) {
         console.error(e)
         setFailed([...failed, f])
       }
     }
+
+    setDraft({...draft, attachments})
 
     setIsUploading(false)
   }
@@ -183,13 +185,19 @@ export const PublishWidget: React.FC<Props> = ({
             }
             {
               failed.length > 0 &&
-              <div className="flex flex-col gap1 text-sm p2 text-red:600 dark:text-red:400 border border-base border-rounded border-red:600 dark:border-red:400">
-                  <head className="flex justify-between">
+              <div className="flex flex-col gap1 text-sm p2 text-red:600 dark:text-red:400 border border-base border-rounded border-red:600 dark:border-red:400 mb8">
+                  <div className="flex justify-between">
                     <div className="flex items-center gap-x-2 font-bold">
-                      <div i-ri:error-warning-fill />
+                      <div className="i-ri:error-warning-fill" />
                       <p>Upload Fail</p>
                     </div>
-                  </head>
+                    <button
+                      className="flex rounded-4 p1 hover:bg-active cursor-pointer transition-100"
+                      onClick={() => {setFailed([])}}
+                    >
+                      <span className="w-1.75em h-1.75em i-ri:close-line"/>
+                    </button>
+                  </div>
                   <ol className="pl2">
                     {failed.map((f) => <li key={f.name}>{f.name}</li>)}
                   </ol>
@@ -197,10 +205,12 @@ export const PublishWidget: React.FC<Props> = ({
             }
             {
               draft?.attachments?.length > 0 &&
-              <div>
+              <div className="pb8">
                   {draft.attachments.map((attachment) => (
-                    <PublishAttachment attachment={attachment} remove={() => removeAttachment(attachment)}></PublishAttachment>)
-                  )}
+                    <div key={attachment.id}>
+                        <PublishAttachment attachment={attachment} remove={() => removeAttachment(attachment)}></PublishAttachment>
+                    </div>
+                  ))}
               </div>
             }
         </div>
@@ -208,7 +218,7 @@ export const PublishWidget: React.FC<Props> = ({
       <div className="flex gap-4">
         <div className="w-12 h-full sm:block hidden" />
         {shouldExpand && <div className="flex gap2 flex-1 pt2 justify-between max-full border-t border-base">
-          {/* <PublishEmojiPicker selectEmoji={selectEmoji}/> */}
+          <PublishEmojiPicker selectEmoji={selectEmoji}/>
           <button className="btn-action-icon" onClick={pickAttachments}>
             <div className="i-ri:image-add-line"></div>
           </button>

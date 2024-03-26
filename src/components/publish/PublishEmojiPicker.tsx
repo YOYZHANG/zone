@@ -1,5 +1,4 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../drop-down/DropDown"
-import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
 
@@ -21,7 +20,7 @@ export const PublishEmojiPicker: React.FC<Props> = ({selectEmoji}) => {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent >
-          <Picker data={data} onEmojiSelect={onEmojiSelect} theme='light'/>
+          <Picker onEmojiSelect={onEmojiSelect} theme='light'/>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
