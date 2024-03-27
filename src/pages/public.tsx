@@ -3,9 +3,11 @@ import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
 import { useMastoStore } from "../store/masto";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../utils/scroll-to-top";
+import { useTranslation } from 'react-i18next'
 
 export default function Public() {
   const {masto, mastoLogged} = useMastoStore()
+  const { t } = useTranslation()
 
   if (!mastoLogged)
     return (<></>)
@@ -17,7 +19,7 @@ export default function Public() {
       title={
         <Link to="/public" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
           <div className=" i-ri:earth-line"></div>
-          <span>Federated Timeline</span>
+          <span>{t('title.federated_timeline')}</span>
         </Link>
       }
     >

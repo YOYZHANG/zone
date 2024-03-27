@@ -5,10 +5,14 @@ import { scrollToTop } from "../utils/scroll-to-top";
 import { Link } from "react-router-dom";
 import { PublishWidget } from "../components/publish/PublishWidget";
 import { Loading } from "../components/loading/Loading";
+import { useTranslation } from 'react-i18next'
 
 export default function Home() {
   const {masto, mastoLoggin, mastoLogged} = useMastoStore()
-
+  const {t} = useTranslation()
+  console.log(mastoLoggin, 'mastoLoggin home')
+  console.log(mastoLogged, 'mastoLogged home')
+  console.log(masto, 'masto')
   if (!mastoLogged) {
     return <></>
   }
@@ -18,14 +22,13 @@ export default function Home() {
   }
   const paginator = masto!.timelines.iterateHome()
 
-  
 
   return (<>
     <MainContent
       title={
         <Link to="/home" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
           <div className=" i-ri:home-line"></div>
-          <span>Home</span>
+          <span>{t('nav_side.home')}</span>
         </Link>
       }
     >

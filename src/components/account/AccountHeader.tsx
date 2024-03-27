@@ -1,11 +1,13 @@
 import type { Account } from 'masto'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   account: Account
 }
 export const AccountHeader: React.FC<Props> = ({account}) => {
   const date = new Date(account.createdAt)
+  const { t } = useTranslation()
   const createdAt = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
@@ -68,13 +70,13 @@ export const AccountHeader: React.FC<Props> = ({account}) => {
         
         <div className="flex gap-5">
           <Link to={`/user/${account.acct}`}>
-            <span className="font-bold">{ account.statusesCount }</span> Posts
+            <span className="font-bold">{ account.statusesCount }</span> {t('account.posts')}
           </Link>
           <Link to={`/user/${account.acct}/following`}>
-            <span className="font-bold">{ account.followingCount }</span> Following
+            <span className="font-bold">{ account.followingCount }</span> {t('account.following')}
           </Link>
           <Link to={`/user/${account.acct}/followers`}>
-            <span className="font-bold">{ account.followersCount }</span> Followers
+            <span className="font-bold">{ account.followersCount }</span> {t('account.followers')}
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-
+import { useTranslation } from 'react-i18next'
 const DEFAULT_UNITS:UseTimeAgoUnit<UseTimeAgoUnitNamesDefault>[] = [
   { max: 60000, value: 1000, name: 'second' },
   { max: 2760000, value: 60000, name: 'minute' },
@@ -16,35 +16,6 @@ interface UseTimeAgoMessagesBuiltIn {
   invalid: string
 }
 
-const DEFAULT_MESSAGES = {
-  justNow: 'just now',
-  past: (n: string) => n.match(/\d/) ? `${n}` : n,
-  future: (n: string) => n.match(/\d/) ? `in ${n}` : n,
-  month: (n: number, past:boolean) => n === 1
-    ? past
-      ? 'last month'
-      : 'next month'
-    : `${n} month${n > 1 ? 's' : ''}`,
-  year: (n: number, past:boolean) => n === 1
-    ? past
-      ? 'last year'
-      : 'next year'
-    : `${n} year${n > 1 ? 's' : ''}`,
-  day: (n: number, past:boolean) => n === 1
-    ? past
-      ? 'yesterday'
-      : 'tomorrow'
-    : `${n} day${n > 1 ? 's' : ''}`,
-  week: (n: number, past:boolean) => n === 1
-    ? past
-      ? 'last week'
-      : 'next week'
-    : `${n} week${n > 1 ? 's' : ''}`,
-  hour: (n: number) => `${n} hour`,
-  minute: (n: number) => `${n} min`,
-  second: (n: number) => `${n} sec`,
-  invalid: '',
-}
 export type UseTimeAgoUnitNamesDefault = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'
 export interface UseTimeAgoUnit<Unit extends string = UseTimeAgoUnitNamesDefault> {
   max: number
@@ -70,9 +41,40 @@ export interface UseTimeAgoUnit<Unit extends string = UseTimeAgoUnitNamesDefault
 
  */
 export function useTimeAgo(from: Date | number | string) {
+  const { t } = useTranslation()
   const now = new Date()
   const diff = +now - +new Date(from)
   const absDiff = Math.abs(diff)
+
+  const DEFAULT_MESSAGES = {
+    justNow: t('time_ago_options.just_now'),
+    past: (n: string) => n.match(/\d/) ? `${n}` : n,
+    future: (n: string) => n.match(/\d/) ? `in ${n}` : n,
+    month: (n: number, past:boolean) => n === 1
+      ? past
+        ? t('time_ago_options.last_month')
+        : t('time_ago_options.next_month')
+      : `${n} month${n > 1 ? 's' : ''}`,
+    year: (n: number, past:boolean) => n === 1
+      ? past
+        ? t('time_ago_options.last_year')
+        : t('time_ago_options.next_year')
+      : `${n} year${n > 1 ? 's' : ''}`,
+    day: (n: number, past:boolean) => n === 1
+      ? past
+        ? t('time_ago_options.yesterday')
+        : t('time_ago_options.tomorrow')
+      : `${n} ${t('time_ago_options.day')}`,
+    week: (n: number, past:boolean) => n === 1
+      ? past
+        ? t('time_ago_options.last_weak')
+        : t('time_ago_options.next_weak')
+      : `${n} week${n > 1 ? 's' : ''}`,
+    hour: (n: number) => `${n} ${t('time_ago_options.hour')}`,
+    minute: (n: number) => `${n} ${t('time_ago_options.minute')}`,
+    second: (n: number) => `${n} ${t('time_ago_options.second')}`,
+    invalid: '',
+  }
 
   function getValue(diff: number, unit: UseTimeAgoUnit<UseTimeAgoUnitNamesDefault>) {
     return Math.round(Math.abs(diff) / unit.value)

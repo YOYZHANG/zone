@@ -27,6 +27,10 @@ export const useMastoStore = create<State & Action>(set => ({
         })
     
         set({masto: newmasto, mastoLogged: true})
+
+        if (!token) {
+          set({mastoLoggin: false})
+        }
      }
      catch (e) {
         set({mastoError: e as Error})

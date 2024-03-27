@@ -6,9 +6,11 @@ import { NotificationCard } from "../components/notification/NotificationCard";
 import { useMastoStore } from "../store/masto";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../utils/scroll-to-top";
+import { useTranslation } from 'react-i18next'
 
 export default function Notification() {
   const {masto, mastoLogged} = useMastoStore()
+  const {t} = useTranslation()
 
   const tabNames = ['All', 'Mentions']
   const [tab, setTab] = useLocalStorage('zone-notifications-tab', 'All')
@@ -24,7 +26,7 @@ export default function Notification() {
       title={
         <Link to="/notification" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
           <div className=" i-ri:notification-2-fill"></div>
-          <span>Notifications</span>
+          <span>{t('nav_side.notification')}</span>
         </Link>
       }
     >

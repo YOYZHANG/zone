@@ -18,19 +18,26 @@ import { useMastoStore } from './store/masto';
 import { useEffect } from 'react';
 import { useCurrentUser } from './hooks/login';
 import { Loading } from './components/loading/Loading';
+import './i18n/config';
 
 function App() {
-  const {createMasto, mastoLogged, mastoError, setMastoLogin, mastoLoggin} = useMastoStore()
+  const {createMasto, mastoLogged, mastoError, setMastoLogin, mastoLoggin, masto} = useMastoStore()
   const {currentUser} = useCurrentUser()
 
   useEffect(() => {
     (async () => {
+        console.log(currentUser, 'currentUser')
         await createMasto(currentUser?.server, currentUser?.token);
+        console.log(masto, 'masto done')
         if (currentUser?.token) {
+          console.log('setMastoLogin true')
           setMastoLogin(true);
         }
     })();
   }, [currentUser?.server, currentUser?.token]);
+
+  console.log(mastoLogged, 'mastoLogged')
+  console.log(mastoLoggin, 'mastoLoggin')
 
   return (
     <Routes>
@@ -40,14 +47,14 @@ function App() {
           <Route path='/public' element={<Public />} />
           <Route path='/login/callback' element={<CallBack />} />
           <Route path='/explore' element={<Explore />} />
+          <Route path='/user/:user' element={<User />} />
+          <Route path='/user/:user/following' element={<Following />} />
+          <Route path='/user/:user/followers' element={<Follower />} />
+          <Route path='/user/:user/:post' element={<Post />} />
           {mastoLoggin && (<>
             <Route path='/home' element={<Home />} />
             <Route path='/bookmarks' element={<BookMarks />} />
             <Route path='/favorites' element={<Favorites />} />
-            <Route path='/user/:user' element={<User />} />
-            <Route path='/user/:user/following' element={<Following />} />
-            <Route path='/user/:user/followers' element={<Follower />} />
-            <Route path='/user/:user/:post' element={<Post />} />
             <Route path='/notification' element={<Notification />} />
           </>)}
           

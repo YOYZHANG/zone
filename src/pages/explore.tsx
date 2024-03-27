@@ -3,9 +3,10 @@ import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
 import { useMastoStore } from "../store/masto";
 import { Link } from "react-router-dom";
 import { scrollToTop } from "../utils/scroll-to-top";
-
+import { useTranslation } from 'react-i18next'
 export default function Explore() {
   const {masto, mastoLogged} = useMastoStore()
+  const {t} = useTranslation()
 
   if (!mastoLogged)
     return (<></>)
@@ -17,7 +18,7 @@ export default function Explore() {
       title={
         <Link to="/explore" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
           <div className=" i-ri:hashtag"></div>
-          <span>Explore</span>
+          <span>{t('nav_side.explore')}</span>
         </Link>
       }
     >

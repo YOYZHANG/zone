@@ -19,7 +19,7 @@ export async function useLogin(user: UserLogin) {
         user.account = me
         setCurrentId(me.id)
         setAccounts([...accounts!, user])
-
+        console.log('setMastoLogin true in login')
         setMastoLogin(true)
         location.href="/"
       

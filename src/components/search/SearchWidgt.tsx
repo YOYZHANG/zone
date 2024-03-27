@@ -4,6 +4,7 @@ import { SearchResult } from "./SearchResult"
 import {useDebounce} from '@reactuses/core'
 import { useMastoStore } from "../../store/masto"
 import { Account } from "masto"
+import { useTranslation } from 'react-i18next'
 
 interface Props {}
 
@@ -12,6 +13,7 @@ export const SearchWidget: React.FC<Props> = () => {
   const [loading, setLoading] = useState(true)
   const {masto} = useMastoStore()
   const debouncedQuery = useDebounce(query, 500)
+  const { t } = useTranslation()
 
 
   const [accounts, setAccounts] = useState<Account[]>([])
@@ -51,7 +53,7 @@ export const SearchWidget: React.FC<Props> = () => {
         <div className="i-ri-search-2-line mx4 absolute text-secondary"></div>
         <input
           className="h-full w-full pl-10 rounded-full bg-transparent outline-none focus:outline-none pr-4"
-          placeholder="Search"
+          placeholder={t('nav_side.search')}
           value={query}
           onKeyDown={active}
           onChange={handleChange}
@@ -60,7 +62,7 @@ export const SearchWidget: React.FC<Props> = () => {
       </div>
       <div className="p4 absolute left-0 top-10 z-10 w-full group-focus-within:visible invisible">
         <div className="w-full bg-base border border-base rounded max-h-100 overflow-auto py2">
-          {query.length === 0 && (<span className="text-center text-secondary text-sm block"> search for people</span>)}
+          {query.length === 0 && (<span className="text-center text-secondary text-sm block"> {t('search.search_desc')}</span>)}
           {loading && query && (
           <>
             <SearchResultSkeleton/>

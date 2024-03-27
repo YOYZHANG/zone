@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next'
 interface Props {
   handleClick: () => void,
 }
 export const PublishButton: React.FC<Props> = ({handleClick}) => {
+  const { t } = useTranslation()
   return (
     <button
       onClick={handleClick}
@@ -11,8 +13,8 @@ export const PublishButton: React.FC<Props> = ({handleClick}) => {
         cursor-pointer disabled:pointer-events-none
       "
     >
-      <div className="i-ri:quill-pen-line"></div>
-      <span className="hidden lg:block">compose</span>
+      <div className="i-ri:pen"></div>
+      <span className="hidden lg:block">{t('action.compose')}</span>
     </button>
   )
 }

@@ -17,6 +17,7 @@ import { PublishEmojiPicker } from "./PublishEmojiPicker";
 import {fileOpen} from 'browser-fs-access'
 import { Attachment } from "masto";
 import { PublishAttachment } from "./PublishAttachment";
+import { useTranslation } from 'react-i18next'
 
 
 interface Props {
@@ -33,13 +34,14 @@ export const PublishWidget: React.FC<Props> = ({
   draftKey,
   inReplyToId,
   handlePublishFn,
-  placeholder="what is on your mind ?",
+  placeholder,
   _expand=false,
   initDraft = getDefaultDraft({}),
   closeModal
 }) => {
   inReplyToId
   const {draft, setDraft, isEmpty} = useDraft(draftKey, initDraft)
+  const {t} = useTranslation()
 
   const [isExpand, setExpand] = useState(false)
   const shouldExpand = isExpand || !isEmpty || _expand
@@ -55,7 +57,7 @@ export const PublishWidget: React.FC<Props> = ({
       Paragraph,
       Text,
       Placeholder.configure({
-        placeholder,
+        placeholder: placeholder || t('placeholders.default'),
       }),
       CharacterCount.configure({
         limit: 500,
@@ -231,7 +233,7 @@ export const PublishWidget: React.FC<Props> = ({
             <div className={classNames({
               'i-ri-loader-4-line animate animate-spin': isSending
             })}></div>
-            Publish
+            {t('action.publish')}
           </button>
         </div>}
       </div>

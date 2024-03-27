@@ -1,11 +1,13 @@
 import classNames from 'classnames'
 import {FC, useState} from 'react'
 import { $fetch } from 'ofetch'
+import { useTranslation } from 'react-i18next'
 
 export const UserSignIn: FC = () => {
   const [error, setError] = useState<boolean>(false)
   const [server, setServer] = useState<string>('')
   const [busy, setBusy] = useState(false)
+  const { t } = useTranslation()
   const oauth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -49,7 +51,7 @@ export const UserSignIn: FC = () => {
           <div className='text-3xl ml2'>Sign in</div>
         </div>
         <div>
-          Maston Server Address
+          {t('user.server_address_label')}
         </div>
         <div>
           <div className={classNames('flex bg-gray:10 px4 py2 mxa rounded border border-base focus: outline-none', {
@@ -64,7 +66,7 @@ export const UserSignIn: FC = () => {
           </div>
           <div className='min-h-4 '>
             {error && <p className='p-0 m-0 text-xs text-red-600 dark:text-red-400'>
-                'Cannot connect to the server'
+                {t('error.sign_in_error')}
               </p>
             }
           </div>
@@ -72,8 +74,8 @@ export const UserSignIn: FC = () => {
         <div className='text-secondary text-sm flex'>
             <div className='i-ri:lightbulb-line mr-1'></div>
             <span>
-              If you don't have a Mastodon account yet， 
-              <a href='https://joinmastodon.org/servers' target='_blank' className='hover:underline text-primary'>pick your server and register one.</a>
+            { t('user.tip_no_account') }
+              <a href='https://joinmastodon.org/servers' target='_blank' className='hover:underline text-primary'>{ t('user.tip_register_account') }</a>
             </span>
         </div>
         <button className="flex flex-row gap2 items-center btn-solid mt2" disabled={!server || busy}>
@@ -81,7 +83,7 @@ export const UserSignIn: FC = () => {
               'inline-block i-ri:login-circle-line': !busy,
               'i-ri:loader-2-fill animate animate-spin': busy
           })}></span>
-          Sign in
+          { t('action.sign_in') }
         </button>
       </form>
     </div>
