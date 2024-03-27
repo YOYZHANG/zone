@@ -1,0 +1,49 @@
+{
+  "nav_side": {
+    "bookmarks": "Lesezeichen",
+    "conversations": "Gespräche",
+    "explore": "Erkunden",
+    "favourites": "Favoriten",
+    "federated": "Föderiert",
+    "home": "Startseite",
+    "local": "Lokal",
+    "notifications": "Benachrichtigungen",
+    "profile": "Profil",
+    "search": "Suche",
+    "settings": "Einstellungen"
+  },
+  "app_name": "Zone",
+  "title": {
+    "federated_timeline": "Föderierte Zeitleiste",
+    "local_timeline": "Lokale Zeitleiste"
+  },
+  "user": {
+    "sign_out_account": "{{name}} Abmelden",
+    "server_address_label": "Mastodon Serveradresse",
+    "tip_no_account": "Wenn Sie noch kein Mastodon-Konto haben,",
+    "tip_register_account": "wählen Sie Ihren Server und registrieren Sie ein Konto",
+    "sign_in_desc": "Melden Sie sich an, um Profile oder Hashtags zu folgen, Beiträge zu favorisieren, zu teilen und zu beantworten"
+  },
+  "action": {
+    "sign_in": "Anmelden",
+    "compose": "Verfassen",
+    "publish": "Veröffentlichen"
+  },
+  "status": {
+    "load": "Wird geladen..."
+  },
+  "error": {
+    "sign_in_error": "Kann keine Verbindung zum Server herstellen."
+  },
+  "search": {
+    "search_desc": "Benutzer suchen"
+  },
+  "account": {
+    "posts": "Beiträge",
+    "following": "Folge ich",
+    "followers": "Follower"
+  },
+  "placeholders": {
+    "default": "Was geht dir gerade durch den Kopf?"
+  }
+}

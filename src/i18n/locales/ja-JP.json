@@ -1,0 +1,49 @@
+{
+  "nav_side": {
+    "bookmarks": "ブックマーク",
+    "conversations": "会話",
+    "explore": "探検",
+    "favourites": "お気に入り",
+    "federated": "連邦",
+    "home": "ホーム",
+    "local": "地元",
+    "notifications": "通知",
+    "profile": "プロフィール",
+    "search": "検索",
+    "settings": "設定"
+  },
+  "app_name": "ゾーン",
+  "title": {
+    "federated_timeline": "連邦タイムライン",
+    "local_timeline": "地元タイムライン"
+  },
+  "user": {
+    "sign_out_account": "{{name}} をサインアウト",
+    "server_address_label": "Mastodonサーバーアドレス",
+    "tip_no_account": "まだMastodonアカウントを持っていない場合、",
+    "tip_register_account": "サーバーを選択して登録してください",
+    "sign_in_desc": "プロフィールやハッシュタグをフォローしたり、お気に入りにしたり、投稿に返信したり共有したりするには、サインインしてください"
+  },
+  "action": {
+    "sign_in": "サインイン",
+    "compose": "作成",
+    "publish": "公開"
+  },
+  "status": {
+    "load": "読み込み中..."
+  },
+  "error": {
+    "sign_in_error": "サーバーに接続できません。"
+  },
+  "search": {
+    "search_desc": "ユーザーを検索"
+  },
+  "account": {
+    "posts": "投稿",
+    "following": "フォロー中",
+    "followers": "フォロワー"
+  },
+  "placeholders": {
+    "default": "考えていることは何ですか？"
+  }
+}

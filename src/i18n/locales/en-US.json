@@ -1,0 +1,64 @@
+{
+  "nav_side": {
+    "bookmarks": "Bookmarks",
+    "conversations": "Conversations",
+    "explore": "Explore",
+    "favourites": "Favourites",
+    "federated": "Federated",
+    "home": "Home",
+    "local": "Local",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "search": "Search",
+    "settings": "Settings"
+  },
+  "app_name": "Zone",
+  "title": {
+    "federated_timeline": "Federated Timeline",
+    "local_timeline": "Local Timeline"
+  },
+  "user": {
+    "sign_out_account": "Sign out {{name}}",
+    "server_address_label": "Mastodon Server Address",
+    "tip_no_account": "If you don't have a Mastodon account yet,",
+    "tip_register_account": "pick your server and register one",
+    "sign_in_desc": "Sign in to follow profiles or hashtags, favourite, share and reply to posts"
+  },
+  "action": {
+    "sign_in": "Sign in",
+    "compose": "Compose",
+    "publish": "Publish"
+  },
+  "status": {
+    "load": "Loading..."
+  },
+  "error": {
+    "sign_in_error": "Cannot connect to the server."
+  },
+  "search": {
+    "search_desc": "Search for users"
+  },
+  "account": {
+    "posts": "Posts",
+    "following": "Following",
+    "followers": "Followers"
+  },
+  "placeholders": {
+    "default": "What is on your mind?"
+  },
+  "time_ago_options": {
+    "minute": "minute",
+    "hour": "hour",
+    "day": "day",
+    "last_week": "last weak",
+    "last_month": "last month",
+    "last_year": "1y",
+    "next_week": "1w",
+    "next_month": "1m",
+    "next_year": "1y",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "just_now": "Just now",
+    "second": "{{count}}s"
+  }
+}

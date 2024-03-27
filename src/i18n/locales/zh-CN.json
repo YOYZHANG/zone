@@ -1,0 +1,47 @@
+{
+  "nav_side": {
+    "bookmarks": "书签",
+    "explore": "探索",
+    "favourites": "喜欢",
+    "federated": "跨站",
+    "home": "主页",
+    "local": "本地",
+    "notifications": "通知",
+    "profile": "个人资料",
+    "search": "搜索"
+  },
+  "app_name": "药丸",
+  "title": {
+    "federated_timeline": "跨站时间线",
+    "local_timeline": "本地时间线"
+  },
+  "user": {
+    "sign_out_account": "登出 {{name}}",
+    "server_address_label": "Mastodon 服务器地址",
+    "tip_no_account": "如果还没有 Mastodon 帐户，",
+    "tip_register_account": "选择您的服务器并注册一个",
+    "sign_in_desc": "添加现有帐户"
+  },
+  "action": {
+    "sign_in": "登录",
+    "compose": "编写",
+    "publish": "发布"
+  },
+  "status": {
+    "load": "请稍等..."
+  },
+  "error": {
+    "sign_in_error": "无法连接服务器"
+  },
+  "search": {
+    "search_desc": "搜索用户"
+  },
+  "account": {
+    "posts": "帖文",
+    "following": "正在关注",
+    "followers": "关注者"
+  },
+  "placeholders": {
+    "default": "在想些什么？"
+  }
+}
