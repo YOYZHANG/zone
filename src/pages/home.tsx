@@ -20,6 +20,9 @@ export default function Home() {
   }
   const paginator = masto!.timelines.iterateHome()
 
+  const handlePublish = async () => {
+      location.href ='/'
+  }
 
   return (<>
     <MainContent
@@ -31,7 +34,7 @@ export default function Home() {
       }
     >
       <div className="border-b border-base">
-        <PublishWidget draftKey="home"/>
+        <PublishWidget draftKey="home" handlePublishFn={handlePublish}/>
       </div>
       <TimelinePaginator paginator={paginator} />
     </MainContent>

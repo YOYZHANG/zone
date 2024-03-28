@@ -30,7 +30,6 @@ export default function Post() {
     if (id) {
       const context = await masto?.statuses.fetchContext(id)
       setContext(context)
-      location.href ='/'
     }
   }
   const replyDraft = status && getReplyDraft(status)

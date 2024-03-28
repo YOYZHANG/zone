@@ -15,8 +15,6 @@ export const PublishWidgetEntry: React.FC<Props> = () => {
       setShowModal(true)
   }, [setShowModal])
 
-  const closeModal = useCallback(() => {setShowModal(false)}, [])
-
   return (
    <div className={classNames('flex flex-col', {
     'pointer-events-none op50': !currentUser
@@ -24,7 +22,7 @@ export const PublishWidgetEntry: React.FC<Props> = () => {
       <PublishButton handleClick={openPublishDialog}/>
       
       <ModalDialog showModal={showModal} setShowModal={setShowModal}>
-        <PublishWidget draftKey="dialog" _expand={true} closeModal={closeModal}/>
+        <PublishWidget draftKey="dialog" _expand={true}/>
       </ModalDialog>
       
    </div>

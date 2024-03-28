@@ -26,7 +26,7 @@ export default function Notification() {
       title={
         <Link to="/notification" className="text-lg font-bold flex items-center gap2" onClick={scrollToTop}>
           <div className=" i-ri:notification-2-fill"></div>
-          <span>{t('nav_side.notification')}</span>
+          <span>{t('nav_side.notifications')}</span>
         </Link>
       }
     >

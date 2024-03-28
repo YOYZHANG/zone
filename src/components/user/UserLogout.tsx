@@ -4,12 +4,14 @@ import { UserLogin } from '../../types'
 import { useEffect, useState } from 'react'
 import { useCurrentUser } from '../../hooks/login'
 import { useTranslation } from 'react-i18next'
+import { useMastoStore } from '../../store/masto'
 
 export const UserLogout: React.FC = () => {
   const [accounts, setAccounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
   const [currentId, setCurrentId] = useLocalStorage<string>('zone-current', '')
   const {currentUser} = useCurrentUser()
   const [isLogout, setIsLogout] = useState(false)
+  const {setMastoLogin} = useMastoStore()
   const { t } = useTranslation()
 
 
@@ -24,6 +26,7 @@ export const UserLogout: React.FC = () => {
 
     accounts && setAccounts([])
     currentId && setCurrentId('')
+    setMastoLogin(false)
     setIsLogout(true)
   }
   return (<>

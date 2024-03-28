@@ -21,7 +21,7 @@ import { Loading } from './components/loading/Loading';
 import './i18n/config';
 
 function App() {
-  const {createMasto, mastoLogged, mastoError, setMastoLogin, mastoLoggin, masto} = useMastoStore()
+  const {createMasto, mastoLogged, mastoError, setMastoLogin, mastoLoggin} = useMastoStore()
   const {currentUser} = useCurrentUser()
 
   useEffect(() => {
@@ -32,6 +32,7 @@ function App() {
         }
     })();
   }, [currentUser?.server, currentUser?.token]);
+
 
   return (
     <Routes>
