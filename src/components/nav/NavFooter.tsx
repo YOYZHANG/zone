@@ -1,9 +1,11 @@
 import { useSettingStore } from "../../store/setting"
 import { CommonTooltip } from "../common/CommonTooltip"
 import { SelectLanguage } from "./SelectLanguage"
+import { useTranslation } from "react-i18next"
 
 export const NavFooter: React.FC = () => {
   const {setTheme} = useSettingStore()
+  const {t} = useTranslation()
 
   const toggleDark = () => {
     const root = document.documentElement
@@ -20,7 +22,7 @@ export const NavFooter: React.FC = () => {
           <SelectLanguage />
         </CommonTooltip>
       </div>
-      <div> A nimble Mastodon web client </div>
+      <div> {t('app_desc_short')} </div>
       <div>
         <a href="" target="_blank">Mastodon</a> &middot; <a href="https://github.com/YOYZHANG/zone" target="_blank">GitHub</a>
       </div>

@@ -19,7 +19,7 @@ export default function Favorites() {
       title={
         <Link to="/favorites" className="text-lg font-bold flex items-center gap2">
           <div className="mr-1 i-ri:heart-line h-6"></div>
-          <span>{t('nav_side.favoriates')}</span>
+          <span>{t('nav_side.favourites')}</span>
         </Link>
       }
     >

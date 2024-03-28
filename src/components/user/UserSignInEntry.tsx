@@ -20,7 +20,7 @@ export const UserSignInEntry: React.FC = () => {
           {t('user.sign_in_desc')}
         </p>
         <button className="btn-solid text-center" onClick={openSignInDialog}>
-          {t('actions.sign_in')}
+          {t('action.sign_in')}
         </button>
       </div>
       <ModalDialog showModal={showModal} setShowModal={setShowModal}>

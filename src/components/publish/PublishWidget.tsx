@@ -15,7 +15,7 @@ import { htmlToText } from "../../utils/parse";
 import { Draft } from "../../types";
 import { PublishEmojiPicker } from "./PublishEmojiPicker";
 import {fileOpen} from 'browser-fs-access'
-import { Attachment } from "masto";
+import { Attachment, CreateStatusParams } from "masto";
 import { PublishAttachment } from "./PublishAttachment";
 import { useTranslation } from 'react-i18next'
 
@@ -26,7 +26,6 @@ interface Props {
   placeholder?: string;
   initDraft?: Draft;
   _expand?: boolean;
-  closeModal?: () => void;
   handlePublishFn?: () => void
 }
 
@@ -37,7 +36,6 @@ export const PublishWidget: React.FC<Props> = ({
   placeholder,
   _expand=false,
   initDraft = getDefaultDraft({}),
-  closeModal
 }) => {
   inReplyToId
   const {draft, setDraft, isEmpty} = useDraft(draftKey, initDraft)
@@ -90,13 +88,15 @@ export const PublishWidget: React.FC<Props> = ({
       setIsSending(true)
 
       if (draft) {
-        const payload = {...draft.params, status: htmlToText(draft.params.status)}
+        const payload = {
+          ...draft.params,
+          status: htmlToText(draft.params.status),
+          mediaIds: draft.attachments?.map(a => a.id) || [],
+        } as CreateStatusParams
+
         await masto?.statuses.create(payload)
         setDraft(initDraft);
       }
-
-      // 关闭模态框
-      closeModal?.()
     }
     finally {
       handlePublishFn && handlePublishFn()
@@ -171,11 +171,11 @@ export const PublishWidget: React.FC<Props> = ({
         })}>
             <div className={classNames(
                 "relative flex-1 flex flex-col max-w-full", {
-                  "min-h-30 md:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-400px)] max-h-35 of-y-auto overscroll-contain": shouldExpand
+                  "min-h-20 md:max-h-[calc(100vh-200px)] sm:max-h-[calc(100vh-400px)] max-h-35 of-y-auto overscroll-contain": shouldExpand
                 })}>
               <EditorContent editor={editor} />
             </div>
-            {shouldExpand && (<div className="absolute right-0 bottom-0 pointer-events-none text-sm text-secondary-light">
+            {shouldExpand && (<div className="absolute right-0 bottom-0 mt-8 pointer-events-none text-sm text-secondary-light">
             500 / { editor?.storage.characterCount.characters() }
             </div>)}
 

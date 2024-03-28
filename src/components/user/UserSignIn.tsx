@@ -48,7 +48,7 @@ export const UserSignIn: FC = () => {
       <form className='text-center justify-center items-center max-w-150 py6 flex flex-col gap3' onSubmit={oauth}>
         <div className='flex items-center mb2'>
           <img src='/vite.svg' className='w12 h12 mxa' width='48' height='48' alt='logo'/>
-          <div className='text-3xl ml2'>Sign in</div>
+          <div className='text-3xl ml2'>{t('action.sign_in')}</div>
         </div>
         <div>
           {t('user.server_address_label')}

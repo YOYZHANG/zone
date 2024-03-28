@@ -13,6 +13,7 @@
     "settings": "Einstellungen"
   },
   "app_name": "Zone",
+  "app_desc_short": "Mastodon-Client, ich hoffe, es gefällt dir.",
   "title": {
     "federated_timeline": "Föderierte Zeitleiste",
     "local_timeline": "Lokale Zeitleiste"

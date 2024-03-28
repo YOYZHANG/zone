@@ -11,6 +11,7 @@
     "search": "搜索"
   },
   "app_name": "药丸",
+  "app_desc_short": "Mastodon 客户端, 希望你喜欢",
   "title": {
     "federated_timeline": "跨站时间线",
     "local_timeline": "本地时间线"

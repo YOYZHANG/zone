@@ -20,6 +20,9 @@ export const useMastoStore = create<State & Action>(set => ({
   mastoLoggin: false,
   mastoError: null,
   createMasto: async (server, token) => {
+    // if (!token) {
+    //   return
+    // }
      try {
         const newmasto = await login({
           url: `https://${server || DEFAULT_SERVER}`,

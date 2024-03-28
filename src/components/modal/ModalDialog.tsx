@@ -21,9 +21,7 @@ export const ModalDialog: FC<Prop> = ({
           <div className="dialog-mask absolute inset-0 z-0 bg-black opacity-48 touch-none h-full" onClick={clickMask} />
           <div className="p-safe-area absolute inset-0 z-1 pointer-events-none opacity-100 flex">
             <div className="flex-1 flex items-center justify-center p-4">
-              <div>
-                {children}
-              </div>
+             {children}
             </div>
           </div>
        </div>,

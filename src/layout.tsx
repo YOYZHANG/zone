@@ -6,7 +6,7 @@ import { SearchWidget } from './components/search/SearchWidgt';
 import { UserSignInEntry } from './components/user/UserSignInEntry';
 import { AccountInfo } from './components/account/AccountInfo';
 import { useCurrentUser } from './hooks/login';
-import { PublishWidgetEntry } from './components/publish/PublishWidgtEntry';
+// import { PublishWidgetEntry } from './components/publish/PublishWidgtEntry';
 
 import { UserSwitcher } from './components/user/UserSwitcher';
 
@@ -24,7 +24,7 @@ export const BaseLayout: React.FC = () => {
             <div className="flex flex-col overflow-y-auto justify-between h-full">
               <div className="flex flex-col">
                 <NavSide />
-                <PublishWidgetEntry />
+                {/* <PublishWidgetEntry /> */}
               </div>
               <div className="flex flex-col">
                 { !currentUser && <UserSignInEntry />}

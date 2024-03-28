@@ -27,9 +27,7 @@ function App() {
   useEffect(() => {
     (async () => {
         await createMasto(currentUser?.server, currentUser?.token);
-        console.log(masto, 'masto done')
         if (currentUser?.token) {
-          console.log('setMastoLogin true')
           setMastoLogin(true);
         }
     })();

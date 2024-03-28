@@ -7,11 +7,11 @@ interface Prop {
 export const ModalMediaPreview: FC<Prop> = ({attachment}) => {
 
   return (
-  <div className="relative max-h-80vh max-w-80vw ma">
+  <div className="relative max-h-full max-w-full">
     <img
       src={attachment.url || attachment.previewUrl}
       alt={attachment.description || ''}
-      className="h-full ma"
+      className="max-h-[80vh] max-w-[80vw]"
     />
   </div>
   )

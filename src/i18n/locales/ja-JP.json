@@ -13,6 +13,7 @@
     "settings": "設定"
   },
   "app_name": "ゾーン",
+  "app_desc_short": "Mastodon クライアント、あなたが気に入ることを願っています",
   "title": {
     "federated_timeline": "連邦タイムライン",
     "local_timeline": "地元タイムライン"

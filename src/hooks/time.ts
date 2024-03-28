@@ -67,8 +67,8 @@ export function useTimeAgo(from: Date | number | string) {
       : `${n} ${t('time_ago_options.day')}`,
     week: (n: number, past:boolean) => n === 1
       ? past
-        ? t('time_ago_options.last_weak')
-        : t('time_ago_options.next_weak')
+        ? t('time_ago_options.last_week')
+        : t('time_ago_options.next_week')
       : `${n} week${n > 1 ? 's' : ''}`,
     hour: (n: number) => `${n} ${t('time_ago_options.hour')}`,
     minute: (n: number) => `${n} ${t('time_ago_options.minute')}`,

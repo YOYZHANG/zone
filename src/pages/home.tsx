@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 export default function Home() {
   const {masto, mastoLoggin, mastoLogged} = useMastoStore()
   const {t} = useTranslation()
+
   if (!mastoLogged) {
     return <></>
   }

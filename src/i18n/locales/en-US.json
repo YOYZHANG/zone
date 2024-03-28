@@ -13,6 +13,7 @@
     "settings": "Settings"
   },
   "app_name": "Zone",
+  "app_desc_short": "A nimble Mastodon web client",
   "title": {
     "federated_timeline": "Federated Timeline",
     "local_timeline": "Local Timeline"
