@@ -45,5 +45,20 @@
   },
   "placeholders": {
     "default": "考えていることは何ですか？"
-  }
+  },
+  "time_ago_options": {
+    "minute": "分",
+    "hour": "時間",
+    "day": "日",
+    "last_week": "先週",
+    "last_month": "先月",
+    "last_year": "昨年",
+    "next_week": "来週",
+    "next_month": "来月",
+    "next_year": "来年",
+    "yesterday": "昨日",
+    "tomorrow": "明日",
+    "just_now": "たった今",
+    "second": "秒"
+}
 }

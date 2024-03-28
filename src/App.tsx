@@ -26,7 +26,6 @@ function App() {
 
   useEffect(() => {
     (async () => {
-        console.log(currentUser, 'currentUser')
         await createMasto(currentUser?.server, currentUser?.token);
         console.log(masto, 'masto done')
         if (currentUser?.token) {
@@ -35,9 +34,6 @@ function App() {
         }
     })();
   }, [currentUser?.server, currentUser?.token]);
-
-  console.log(mastoLogged, 'mastoLogged')
-  console.log(mastoLoggin, 'mastoLoggin')
 
   return (
     <Routes>

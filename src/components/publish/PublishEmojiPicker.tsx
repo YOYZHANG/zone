@@ -6,9 +6,7 @@ interface Props {
   selectEmoji: (emoji: string) => void
 }
 export const PublishEmojiPicker: React.FC<Props> = ({selectEmoji}) => {
-  // console.log(data)
   const onEmojiSelect = (e: any) => {
-    console.log(e)
     selectEmoji(e.native || e.shortcodes)
   }
   return (

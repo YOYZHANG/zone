@@ -23,7 +23,6 @@ export async function handler(event: any) {
 
   const url = `https://${server}/oauth/authorize?${loginQuery}`
 
-  console.log('login redirecting to', url)
   return {
     statusCode: 200,
     body: url,

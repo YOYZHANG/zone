@@ -52,13 +52,13 @@
     "day": "day",
     "last_week": "last weak",
     "last_month": "last month",
-    "last_year": "1y",
-    "next_week": "1w",
-    "next_month": "1m",
-    "next_year": "1y",
+    "last_year": "last year",
+    "next_week": "next weak",
+    "next_month": "next month",
+    "next_year": "next year",
     "yesterday": "Yesterday",
     "tomorrow": "Tomorrow",
     "just_now": "Just now",
-    "second": "{{count}}s"
+    "second": "second"
   }
 }

@@ -43,7 +43,6 @@ export async function getApp(server: string= 'mastodon.social') {
 
 
     if (appInfo) {
-      console.log(appInfo, 'use appInfo cache')
       client.disconnect()
       return JSON.parse(appInfo) as AppInfo
     }

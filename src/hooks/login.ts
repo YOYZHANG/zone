@@ -19,7 +19,6 @@ export async function useLogin(user: UserLogin) {
         user.account = me
         setCurrentId(me.id)
         setAccounts([...accounts!, user])
-        console.log('setMastoLogin true in login')
         setMastoLogin(true)
         location.href="/"
       
@@ -29,14 +28,10 @@ export async function useLogin(user: UserLogin) {
   }, [user]);
 
   if (existing !== -1) {
-    if (currentId === accounts?.[existing].account?.id) {
-      console.log('reuse login cookie')
-    }
-    else {
+    if (currentId !== accounts?.[existing].account?.id) {
       setCurrentId(user.account!.id)
     }
-    
-    console.log('login success: redirect cache')
+
     location.href="/"
 
     return true

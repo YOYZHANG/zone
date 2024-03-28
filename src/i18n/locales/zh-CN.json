@@ -24,7 +24,7 @@
   },
   "action": {
     "sign_in": "登录",
-    "compose": "编写",
+    "compose": "撰写",
     "publish": "发布"
   },
   "status": {
@@ -43,5 +43,20 @@
   },
   "placeholders": {
     "default": "在想些什么？"
+  },
+  "time_ago_options": {
+    "minute": "分钟",
+    "hour": "小时",
+    "day": "天",
+    "last_week": "上周",
+    "last_month": "上个月",
+    "last_year": "去年",
+    "next_week": "下周",
+    "next_month": "下个月",
+    "next_year": "明年",
+    "yesterday": "昨天",
+    "tomorrow": "明天",
+    "just_now": "刚刚",
+    "second": "秒"
   }
 }

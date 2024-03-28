@@ -45,5 +45,20 @@
   },
   "placeholders": {
     "default": "Was geht dir gerade durch den Kopf?"
+  },
+  "time_ago_options": {
+    "minute": "Minute",
+    "hour": "Stunde",
+    "day": "Tag",
+    "last_week": "letzte Woche",
+    "last_month": "letzten Monat",
+    "last_year": "letztes Jahr",
+    "next_week": "nächste Woche",
+    "next_month": "nächsten Monat",
+    "next_year": "nächstes Jahr",
+    "yesterday": "Gestern",
+    "tomorrow": "Morgen",
+    "just_now": "Gerade eben",
+    "second": "Sekunde"
   }
 }

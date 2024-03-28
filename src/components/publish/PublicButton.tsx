@@ -13,7 +13,7 @@ export const PublishButton: React.FC<Props> = ({handleClick}) => {
         cursor-pointer disabled:pointer-events-none
       "
     >
-      <div className="i-ri:pen"></div>
+      <div className="i-ri:pencil-line"></div>
       <span className="hidden lg:block">{t('action.compose')}</span>
     </button>
   )
