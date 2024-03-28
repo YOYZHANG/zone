@@ -13,7 +13,7 @@ export const SelectLanguage: React.FC = () => {
       <DropdownMenuContent >
         {locales.map((locale) => {
           return (
-            <DropdownMenuItem onClick={() => changeLanguage(locale.code)}>
+            <DropdownMenuItem onClick={() => changeLanguage(locale.code)} key={locale.name}>
               {locale.name}
             </DropdownMenuItem>
           )

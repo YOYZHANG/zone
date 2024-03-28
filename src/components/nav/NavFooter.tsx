@@ -1,10 +1,14 @@
+import { useSettingStore } from "../../store/setting"
 import { CommonTooltip } from "../common/CommonTooltip"
 import { SelectLanguage } from "./SelectLanguage"
 
 export const NavFooter: React.FC = () => {
+  const {setTheme} = useSettingStore()
+
   const toggleDark = () => {
     const root = document.documentElement
     root.classList.toggle("dark")
+    setTheme(root.classList.contains("dark") ? "dark" : "light")
   } 
   return (
     <footer className="p4 text-sm text-secondary-light flex flex-col">
