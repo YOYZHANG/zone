@@ -1,10 +1,10 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../drop-down/DropDown'
 import { AccountInfo } from '../account/AccountInfo'
-import { useCurrentUser } from '../../hooks/login'
 import { UserLogout } from './UserLogout'
+import { useUserStore } from '../../store/user'
 
 export const UserSwitcher: React.FC = () => {
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
 
   if (!currentUser) {
     return <></>

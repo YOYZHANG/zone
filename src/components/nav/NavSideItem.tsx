@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import { useCurrentUser } from "../../hooks/login"
 import classNames from "classnames"
+import { useUserStore } from "../../store/user"
 // import {CommonTooltip} from '../common/CommonToolTip'
 
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const NavSideItem: React.FC<Props> = ({to, icon, text, isUserOnly}) => {
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
   return (
     <div className={classNames({
       'pointer-events-none': !currentUser && isUserOnly

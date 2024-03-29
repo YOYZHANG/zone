@@ -14,14 +14,15 @@ import Follower from './pages/@user/followers';
 import Post from './pages/@user/post';
 import Notification from './pages/notification'
 import { useMastoStore } from './store/masto';
-import { useCurrentUser, useLogin } from './hooks/login';
+import { useLogin } from './hooks/login';
 import { Loading } from './components/loading/Loading';
 import './i18n/config';
 import { parseQuery } from "ufo"
+import { useUserStore } from './store/user';
 
 function App() {
   const {mastoLogged, mastoError, mastoLoggin} = useMastoStore()
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
   const location = useLocation()
   const searchParams = parseQuery(location.search);
   useLogin(searchParams as any)

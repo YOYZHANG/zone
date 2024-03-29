@@ -5,13 +5,14 @@ import { NavFooter } from './components/nav/NavFooter';
 import { SearchWidget } from './components/search/SearchWidgt';
 import { UserSignInEntry } from './components/user/UserSignInEntry';
 import { AccountInfo } from './components/account/AccountInfo';
-import { useCurrentUser } from './hooks/login';
 // import { PublishWidgetEntry } from './components/publish/PublishWidgtEntry';
 
 import { UserSwitcher } from './components/user/UserSwitcher';
+import { useUserStore } from './store/user';
 
 export const BaseLayout: React.FC = () => {
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
+
   return (
     <div className="h-full">
       <main className="w-full h-full flex mxa lg:max-w-80rem">

@@ -1,4 +1,4 @@
-import { MastoClient, login } from 'masto'
+import { MastoClient } from 'masto'
 import { create } from 'zustand'
 
 interface State {
@@ -12,13 +12,13 @@ interface Action {
   createMasto: (masto: MastoClient) => void,
   setMastoLogin: (loggin: boolean) => void,
   setMastoError: (e: Error) => void
+  setMastoLogged: (logged: boolean) => void
 }
 
 export const useMastoStore = create<State & Action>(set => ({
   masto: null,
   mastoLogged: false,
   mastoLoggin: false,
-  mastoLoging: false,
   mastoError: null,
   createMasto: (masto: MastoClient) => {
     set({masto, mastoLogged: true, mastoError: null})
@@ -28,5 +28,8 @@ export const useMastoStore = create<State & Action>(set => ({
   },
   setMastoError(e) {
     set({mastoError: e as Error})
+  },
+  setMastoLogged(logged: boolean) {
+    set({mastoLogged: logged})
   }
 }))

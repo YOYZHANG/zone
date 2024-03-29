@@ -3,14 +3,14 @@ import { ModalDialog } from "../modal/ModalDialog"
 import { useCallback, useState } from "react"
 import { PublishWidget } from "./PublishWidget"
 import classNames from "classnames"
-import { useCurrentUser } from "../../hooks/login"
+import { useUserStore } from "../../store/user"
 
 interface Props {
 
 }
 export const PublishWidgetEntry: React.FC<Props> = () => {
   const [showModal, setShowModal] = useState(false)
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
   const openPublishDialog = useCallback(() => {
       setShowModal(true)
   }, [setShowModal])

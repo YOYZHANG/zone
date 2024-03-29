@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useMastoStore } from '../../store/masto';
-import { useCurrentUser } from '../../hooks/login';
 import { ModalDialog } from '../modal/ModalDialog';
 import { UserSignIn } from '../user/UserSignIn';
+import { useUserStore } from '../../store/user';
 
 interface Props {
   status: Status
 }
 export const StatusActions: React.FC<Props> = ({status}) => {
   const [cardStatus, setCardStatus] = useState(status)
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
   const {masto} = useMastoStore()
   const [showModal, setShowModal] = useState(false)
   const navigate = useNavigate()

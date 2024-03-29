@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMastoStore } from "../../store/masto";
 import { Link } from "react-router-dom";
-import { useCurrentUser } from "../../hooks/login";
 import { AccountAvator } from "../account/AccountAvator";
 import { EditorContent, useEditor, Extension} from '@tiptap/react'
 import { getDefaultDraft, useDraft } from "../../hooks/draft";
@@ -18,6 +17,7 @@ import {fileOpen} from 'browser-fs-access'
 import { Attachment, CreateStatusParams } from "masto";
 import { PublishAttachment } from "./PublishAttachment";
 import { useTranslation } from 'react-i18next'
+import { useUserStore } from "../../store/user";
 
 
 interface Props {
@@ -44,7 +44,7 @@ export const PublishWidget: React.FC<Props> = ({
   const [isExpand, setExpand] = useState(false)
   const shouldExpand = isExpand || !isEmpty || _expand
 
-  const {currentUser} = useCurrentUser()
+  const {currentUser} = useUserStore()
 
   const [isSending, setIsSending] = useState(false)
 
