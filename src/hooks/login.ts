@@ -17,14 +17,15 @@ export async function useLogin(originUser: UserLogin) {
 
   useEffect(() => {
     (async () => {
-      const user = originUser
+      let user = originUser
 
       if (loading.current) return false
       
       if (mastoLoggin) return true
 
       if (accounts?.length && currentId) {
-        user ? user : accounts.find(u => u.account?.id === currentId)!
+        user = accounts.find(u => u.account?.id === currentId)!
+        setCurrentUser(user)
       }
 
 
@@ -43,9 +44,11 @@ export async function useLogin(originUser: UserLogin) {
         if (user?.token) {
           const me = await masto.accounts.verifyCredentials()
           user.account = me
-          setCurrentUser(user)
           setCurrentId(me.id)
-          setAccounts([...accounts!, user])
+          if (!accounts?.find(i => i.server === user.server)) {
+            setAccounts([...accounts!, user])
+          }
+
           setMastoLogin(true)
           navigate('/')
         }
