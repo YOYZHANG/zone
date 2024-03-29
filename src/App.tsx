@@ -40,7 +40,6 @@ function App() {
         {mastoLogged && (<>
           <Route path='/' element={currentUser ? <Home /> : <Public />} />
           <Route path='/public' element={<Public />} />
-          <Route path='/login/callback' element={<CallBack />} />
           <Route path='/explore' element={<Explore />} />
           <Route path='/user/:user' element={<User />} />
           <Route path='/user/:user/following' element={<Following />} />
@@ -54,6 +53,7 @@ function App() {
           </>)}
           
         </>)}
+        <Route path='/login/callback' element={<CallBack />} />
         {
           !mastoLogged && (<>
             <Route path='/' element={<Loading />} />

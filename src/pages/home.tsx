@@ -2,7 +2,7 @@ import { MainContent } from "../components/main/MainContent";
 import { TimelinePaginator } from "../components/timeline/TimelinePaginator";
 import { useMastoStore } from "../store/masto";
 import { scrollToTop } from "../utils/scroll-to-top";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PublishWidget } from "../components/publish/PublishWidget";
 import { Loading } from "../components/loading/Loading";
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 export default function Home() {
   const {masto, mastoLoggin, mastoLogged} = useMastoStore()
   const {t} = useTranslation()
+  const navigate = useNavigate();
 
   if (!mastoLogged) {
     return <></>
@@ -21,7 +22,7 @@ export default function Home() {
   const paginator = masto!.timelines.iterateHome()
 
   const handlePublish = async () => {
-      location.href ='/'
+    navigate('/')
   }
 
   return (<>

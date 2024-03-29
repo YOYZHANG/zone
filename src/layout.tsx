@@ -12,7 +12,6 @@ import { UserSwitcher } from './components/user/UserSwitcher';
 
 export const BaseLayout: React.FC = () => {
   const {currentUser} = useCurrentUser()
-
   return (
     <div className="h-full">
       <main className="w-full h-full flex mxa lg:max-w-80rem">

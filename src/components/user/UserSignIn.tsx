@@ -47,7 +47,7 @@ export const UserSignIn: FC = () => {
     <div className='dialog-main rounded shadow-lg pointer-events-auto isolate bg-base border-base border-1px border-solid w-full max-h-full of-y-auto overscroll-contain touch-pan-y touch-pan-x py4 px8 max-w-125 modal-animated'>
       <form className='text-center justify-center items-center max-w-150 py6 flex flex-col gap3' onSubmit={oauth}>
         <div className='flex items-center mb2'>
-          <img src='/vite.svg' className='w12 h12 mxa' width='48' height='48' alt='logo'/>
+          <img src='/avocado.svg' className='w12 h12 mxa' width='48' height='48' alt='logo'/>
           <div className='text-3xl ml2'>{t('action.sign_in')}</div>
         </div>
         <div>

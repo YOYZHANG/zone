@@ -95,12 +95,12 @@ export const PublishWidget: React.FC<Props> = ({
         } as CreateStatusParams
 
         await masto?.statuses.create(payload)
-        setDraft(initDraft);
       }
     }
     finally {
       handlePublishFn && handlePublishFn()
       editor?.chain().clearContent().run()
+      setDraft({...initDraft});
       setIsSending(false)
     }
   }
@@ -227,7 +227,7 @@ export const PublishWidget: React.FC<Props> = ({
           <div className="flex-auto" />
           <button
             className="btn-solid rounded-full text-sm flex gap2 text-center items-center"
-            disabled={isEmpty}
+            disabled={isEmpty || (draft.attachments.length === 0 && !draft.params.status)}
             onClick={handlePublish}
           >
             <div className={classNames({
