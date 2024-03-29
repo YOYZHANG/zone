@@ -5,6 +5,7 @@ import {useMastoStore} from '../store/masto'
 import { login } from "masto";
 import { DEFAULT_SERVER } from "../constants";
 import { useUserStore } from "../store/user";
+import { useNavigate } from "react-router-dom";
 
 export async function useLogin(originUser: UserLogin) {
   const [accounts, setAccounts] = useLocalStorage<UserLogin[]>('zone-accounts', [])
@@ -12,6 +13,7 @@ export async function useLogin(originUser: UserLogin) {
   const {createMasto, mastoLogged, mastoLoggin, setMastoLogin, setMastoError} = useMastoStore()
   const {setCurrentUser} = useUserStore()
   const loading = useRef(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     (async () => {
@@ -45,6 +47,7 @@ export async function useLogin(originUser: UserLogin) {
           setCurrentId(me.id)
           setAccounts([...accounts!, user])
           setMastoLogin(true)
+          navigate('/')
         }
       }
       catch(e) {

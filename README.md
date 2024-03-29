@@ -1,8 +1,56 @@
-# React + Vite
+# Zone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+<p align="center">
+  <a href="https://mastodon-zone.netlify.app" target="_blank" rel="noopener noreferrer">
+    <img width="180" src="https://mastodon-zone.netlify.app/avocado.svg" alt="avacado">
+  </a>
+</p>
+<br/>
+<p align="center" style="font-size: 16px">
+  A Mastodon web client  <span style="font-weight: 700">:)</span>
+</p>
+<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+# UI
+<p align="center">
+<img width="300"  src="https://mastodon-zone.netlify.app/1.png" />
+</p>
+
+# Zone is in early alpha
+
+It is already usable, but it still has a lot of work to do. I appreciate your feedback and contributions. Check out the [Open Issues](https://github.com/YOYZHANG/zone/issues) and jump in the action. 
+
+## Local Setup
+
+Clone the repository and run on the root folder:
+
+```
+pnpm i
+pnpm run server
+```
+
+
+## Testing
+
+👷 still working on it.
+
+Zone will uses [Vitest](https://vitest.dev). You can run the test suite with:
+
+```
+pnpm run test
+```
+
+# Stack
+
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [React](https://react.dev/) - The Intuitive Web Framework
+- [zustand](https://zustand-demo.pmnd.rs/) - Bear necessities for state management in React
+- [UnoCSS](https://uno.antfu.me/) - The instant on-demand atomic CSS engine
+- [Iconify](https://github.com/iconify/icon-sets#iconify-icon-sets-in-json-format) - Iconify icon sets in JSON format
+- [Masto.js](https://neet.github.io/masto.js) - Mastodon API client in TypeScript
+
+# License
+
+MIT
