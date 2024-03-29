@@ -7,15 +7,15 @@
   </a>
 </p>
 <br/>
-<p align="center" style="font-size: 16px">
-  A Mastodon web client  <span style="font-weight: 700">:)</span>
+<p align="center" style="font-size: 16px;">
+  A nimble Mastodon web client  <span>:)</span>
 </p>
 <br/>
 
 
-# UI
+## Preview
 <p align="center">
-<img width="600"  src="https://mastodon-zone.netlify.app/1.png" />
+<img width="1000"  src="https://mastodon-zone.netlify.app/1.png" />
 </p>
 
 # Zone is in early alpha
