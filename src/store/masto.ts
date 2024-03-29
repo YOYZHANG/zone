@@ -1,6 +1,5 @@
 import { MastoClient, login } from 'masto'
 import { create } from 'zustand'
-import { DEFAULT_SERVER } from '../constants';
 
 interface State {
   masto: MastoClient | null,
@@ -10,36 +9,24 @@ interface State {
 }
 
 interface Action {
-  createMasto: (server: string | undefined, token: string | undefined) => void,
-  setMastoLogin: (loggin: boolean) => void
+  createMasto: (masto: MastoClient) => void,
+  setMastoLogin: (loggin: boolean) => void,
+  setMastoError: (e: Error) => void
 }
 
 export const useMastoStore = create<State & Action>(set => ({
   masto: null,
   mastoLogged: false,
   mastoLoggin: false,
+  mastoLoging: false,
   mastoError: null,
-  createMasto: async (server, token) => {
-    // if (!token) {
-    //   return
-    // }
-     try {
-        const newmasto = await login({
-          url: `https://${server || DEFAULT_SERVER}`,
-          accessToken: token ||'',
-        })
-    
-        set({masto: newmasto, mastoLogged: true})
-
-        if (!token) {
-          set({mastoLoggin: false})
-        }
-     }
-     catch (e) {
-        set({mastoError: e as Error})
-     }
+  createMasto: (masto: MastoClient) => {
+    set({masto, mastoLogged: true, mastoError: null})
   },
   setMastoLogin: (loggin: boolean) => {
     set({mastoLoggin: loggin})
+  },
+  setMastoError(e) {
+    set({mastoError: e as Error})
   }
 }))

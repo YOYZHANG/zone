@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import { BaseLayout } from './layout';
 import Public from './pages/public';
 import 'virtual:uno.css'
@@ -13,26 +13,18 @@ import Following from './pages/@user/following';
 import Follower from './pages/@user/followers';
 import Post from './pages/@user/post';
 import Notification from './pages/notification'
-import CallBack from './pages/login/callback';
 import { useMastoStore } from './store/masto';
-import { useEffect } from 'react';
-import { useCurrentUser } from './hooks/login';
+import { useCurrentUser, useLogin } from './hooks/login';
 import { Loading } from './components/loading/Loading';
 import './i18n/config';
+import { parseQuery } from "ufo"
 
 function App() {
-  const {createMasto, mastoLogged, mastoError, setMastoLogin, mastoLoggin} = useMastoStore()
+  const {mastoLogged, mastoError, mastoLoggin} = useMastoStore()
   const {currentUser} = useCurrentUser()
-
-  useEffect(() => {
-    (async () => {
-        await createMasto(currentUser?.server, currentUser?.token);
-        if (currentUser?.token) {
-          setMastoLogin(true);
-        }
-    })();
-  }, [currentUser?.server, currentUser?.token]);
-
+  const location = useLocation()
+  const searchParams = parseQuery(location.search);
+  useLogin(searchParams as any)
 
   return (
     <Routes>
@@ -53,7 +45,6 @@ function App() {
           </>)}
           
         </>)}
-        <Route path='/login/callback' element={<CallBack />} />
         {
           !mastoLogged && (<>
             <Route path='/' element={<Loading />} />

@@ -28,7 +28,7 @@ export async function handler(event: any) {
   return {
     statusCode: 302,
     headers: {
-      Location: `${HOST_DOMAIN}/login/callback?${stringifyQuery({ server, token: result.access_token, vapid_key: app.vapid_key })}`,
+      Location: `${HOST_DOMAIN}?${stringifyQuery({ server, token: result.access_token, vapid_key: app.vapid_key })}`,
     },
     body: '',
   }
