@@ -15,7 +15,7 @@
 
 # UI
 <p align="center">
-<img width="300"  src="https://mastodon-zone.netlify.app/1.png" />
+<img width="600"  src="https://mastodon-zone.netlify.app/1.png" />
 </p>
 
 # Zone is in early alpha
