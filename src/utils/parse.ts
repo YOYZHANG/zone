@@ -15,6 +15,7 @@ export function decodeHtml(text: string) {
 
 export function treeToText(input: Node): string {
   let pre = ''
+  let post = ''
   let body = ''
 
   if (input.type === TEXT_NODE)
@@ -26,8 +27,17 @@ export function treeToText(input: Node): string {
   if (['p', 'pre'].includes(input.name))
     pre = '\n'
 
+  if (input.name === 'b' || input.name === 'strong') {
+      pre = '**'
+      post = '**'
+  }
+  if (input.name === 'i' || input.name === 'em') {
+      pre = '*'
+      post = '*'
+    }
+
   if ('children' in input)
     body = (input.children as Node[]).map(n => treeToText(n)).join('')
 
-  return pre + body
+  return pre + body + post
 }

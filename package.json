@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "netlify dev -p 55632",
-    "register": "tsc scripts/registerApp.ts"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",
@@ -58,10 +59,12 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "fs-extra": "^11.2.0",
     "i18next": "^23.10.1",
+    "jsdom": "^24.0.0",
     "netlify-cli": "^17.18.1",
     "react-i18next": "^14.1.0",
     "typescript": "^5.2.2",
     "unocss": "^0.58.5",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vitest": "^1.4.0"
   }
 }

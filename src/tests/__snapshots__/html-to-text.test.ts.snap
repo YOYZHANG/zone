@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`html-to-text > bold & italic 1`] = `"text **bold** *italic*"`;
+
+exports[`html-to-text > p & pre 1`] = `
+"text 
+code"
+`;
+
+exports[`html-to-text > p 1`] = `"text inline"`;
