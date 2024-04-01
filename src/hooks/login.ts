@@ -25,7 +25,6 @@ export async function useLogin(originUser: UserLogin) {
 
       if (accounts?.length && currentId) {
         user = accounts.find(u => u.account?.id === currentId)!
-        setCurrentUser(user)
       }
 
 
@@ -45,6 +44,7 @@ export async function useLogin(originUser: UserLogin) {
           const me = await masto.accounts.verifyCredentials()
           user.account = me
           setCurrentId(me.id)
+          setCurrentUser(user)
           if (!accounts?.find(i => i.server === user.server)) {
             setAccounts([...accounts!, user])
           }

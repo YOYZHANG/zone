@@ -1,2 +1,2 @@
-export const DEFAULT_SERVER = 'social.vivaldi.net'
+export const DEFAULT_SERVER = 'm.webtoo.ls'
 export const APP_NAME = 'zone'

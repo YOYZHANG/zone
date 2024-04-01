@@ -29,7 +29,7 @@
   status = 200
 
 [[redirects]]
-  from = "/explore"
+  from = "/local"
   to = "/"
   status = 200
 

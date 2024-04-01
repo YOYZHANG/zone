@@ -6,7 +6,7 @@ import './App.css'
 import './styles/var.css'
 import Home from './pages/home';
 import BookMarks from './pages/bookmarks';
-import Explore from './pages/explore';
+import Local from './pages/local';
 import Favorites from './pages/favorites';
 import User from './pages/@user';
 import Following from './pages/@user/following';
@@ -31,9 +31,9 @@ function App() {
     <Routes>
       <Route path='/' element={<BaseLayout/>}>
         {mastoLogged && (<>
-          <Route path='/' element={currentUser ? <Home /> : <Public />} />
+          <Route path='/' element={currentUser ? <Home /> : <Local />} />
           <Route path='/public' element={<Public />} />
-          <Route path='/explore' element={<Explore />} />
+          <Route path='/local' element={<Local />} />
           <Route path='/user/:user' element={<User />} />
           <Route path='/user/:user/following' element={<Following />} />
           <Route path='/user/:user/followers' element={<Follower />} />
