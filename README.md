@@ -34,8 +34,6 @@ pnpm run server
 
 ## Testing
 
-👷 still working on it.
-
 Zone will uses [Vitest](https://vitest.dev). You can run the test suite with:
 
 ```
